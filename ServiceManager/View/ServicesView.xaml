@@ -1,0 +1,29 @@
+﻿<Grid x:Class="Rhyous.ServiceManager.View.ServicesView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"  
+      xmlns:view="clr-namespace:Rhyous.ServiceManager.View" 
+      mc:Ignorable="d"
+      d:DesignHeight="400"
+      x:Name="ServicesGrid"
+      >
+    <Grid.RowDefinitions>
+        <RowDefinition Height="50" />
+        <RowDefinition Height="29" />
+        <RowDefinition Height="*" />
+        <RowDefinition Height="15" />
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="15" />
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="15" />
+    </Grid.ColumnDefinitions>
+    <Label Content="{Binding ServiceGroupName, FallbackValue='Your Service Collection'}" Grid.Column="1" Name="ServiceGroupNameLabel" VerticalAlignment="Center"/>
+    <WrapPanel Grid.Column="1" Grid.Row="1" >
+        <Button Content="Start All" Name="StartAllButton" Command="{Binding ServiceCollectionCommand}" CommandParameter="Start"/>
+        <Button Content="Restart All" Name="RestartAllButton" Command="{Binding ServiceCollectionCommand}" CommandParameter="Restart"/>
+        <Button Content="Stop All" Name="StopAllButton" Command="{Binding ServiceCollectionCommand}" CommandParameter="Stop"/>
+    </WrapPanel>
+    <view:ServiceGridView x:Name="ServicesDataGrid" Grid.Column="1" Grid.Row="2"/>
+</Grid>

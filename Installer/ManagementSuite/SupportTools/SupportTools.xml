@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ComputerContextMenu xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="Computer context menu">
+  <MenuItem xsi:type="MenuAction" Name="Send Message">
+    <Command>msg.exe</Command>
+    <OSType>Workstation, Server</OSType>
+    <Parameters> Console /TIME:%prompt:Time in seconds to show message on screen.:4% "%prompt:Enter Message. (Currently only one line is supported.):512%"</Parameters>
+    <MultiSelect>true</MultiSelect>
+    <ExecutionLocation>Client</ExecutionLocation>
+  </MenuItem>
+  <MenuItem xsi:type="MenuGroup" Name="Dell Warranty Tools">
+    <MenuItem xsi:type="MenuAction" Name="Get Dell Warranty Info">
+	  <Command>explorer.exe</Command>
+	  <Parameters>"http://support.dell.com/support/topics/global.aspx/support/my_systems_info/details?c=us&cs=2684&l=en&s=dhs&logout=&ServiceTag=%"Computer"."System"."Asset Tag"%"</Parameters>
+    </MenuItem>
+  </MenuItem>
+  <MenuItem xsi:type="MenuGroup" Name="LANDesk Tools">
+    <MenuItem xsi:type="MenuAction" Name="LD Ping by Name (Using Explorer)">
+      <Command>SupportTools\LANDesk.Agent.Ping.exe</Command>
+      <Parameters>%"Computer"."Network"."TCPIP"."Host Name"%</Parameters>
+    </MenuItem>
+    <MenuItem xsi:type="MenuAction" Name="LD Ping by IP (Using Explorer)">
+      <Command>SupportTools\LANDesk.Agent.Ping.exe</Command>
+      <Parameters>%"Computer"."Network"."TCPIP"."Address"%</Parameters>
+    </MenuItem>
+    <MenuItem xsi:type="MenuAction" Name="Full Sync Inventory Scan">
+      <Command>"%LDMS_LOCAL_DIR%\..\ldiscn32.exe"</Command>
+      <Parameters>/L /F /SYNC</Parameters>
+      <MultiSelect>true</MultiSelect>
+      <OSType>Workstation, Server</OSType>
+      <ExecutionLocation>Client</ExecutionLocation>
+    </MenuItem>
+    <MenuItem xsi:type="MenuAction" Name="Policy Sync">
+      <Command>"%LDMS_LOCAL_DIR%\..\Policy.Sync.exe"</Command>
+      <Parameters></Parameters>
+      <MultiSelect>true</MultiSelect>
+      <OSType>Workstation, Server</OSType>
+      <ExecutionLocation>Client</ExecutionLocation>
+    </MenuItem>
+    <MenuItem xsi:type="MenuAction" Name="SQLLite Policy Database - Recreate">
+      <Command>"%LDMS_LOCAL_DIR%\..\clientdbutil.exe"</Command>
+      <Parameters>/create</Parameters>
+      <MultiSelect>true</MultiSelect>
+      <OSType>Workstation, Server</OSType>
+      <ExecutionLocation>Client</ExecutionLocation>
+    </MenuItem>
+  </MenuItem>
+  <MenuItem xsi:type="MenuGroup" Name="Remote Control Tools">
+    <MenuItem xsi:type="MenuAction" Name="Remote Command Prompt">
+      <Command>SupportTools\RemCom.exe</Command>
+      <Parameters>\\%"Computer"."Network"."TCPIP"."Host Name"% "cmd.exe /k prompt $C%computername%$F$S$p$G"</Parameters>
+      <OSType>Workstation, Server</OSType>
+    </MenuItem>
+    <MenuItem xsi:type="MenuAction" Name="SSH (Secure Shell)">
+      <Command>SupportTools\ssh.exe</Command>
+      <Parameters>%"Computer"."Network"."TCPIP"."Address"%</Parameters>
+    </MenuItem>
+    <MenuItem xsi:type="MenuAction" Name="VNC Viewer">
+      <Command>SupportTools\vncviewer.exe</Command>
+      <Parameters>%"Computer"."Network"."TCPIP"."Address"%</Parameters>
+    </MenuItem>
+    <MenuItem xsi:type="MenuAction" Name="Remote Desktop Protocol by Name">
+      <Command>mstsc.exe</Command>
+      <Parameters>/v:%"Computer"."Network"."TCPIP"."Host Name"%</Parameters>
+      <OSType>Workstation, Server</OSType>
+    </MenuItem>
+    <MenuItem xsi:type="MenuAction" Name="Remote Desktop Protocol by IP">
+      <Command>mstsc.exe</Command>
+      <Parameters>/v:%"Computer"."Network"."TCPIP"."Address"%</Parameters>
+      <OSType>Workstation, Server</OSType>
+    </MenuItem>
+    <MenuItem xsi:type="MenuAction" Name="Secure Copy (WinSCP)">
+      <Command>SupportTools\winscp.exe</Command>
+      <Parameters>%"Computer"."Network"."TCPIP"."Address"%</Parameters>
+    </MenuItem>
+  </MenuItem>
+  <MenuItem xsi:type="MenuGroup" Name="Windows Tools">
+    <MenuItem xsi:type="MenuAction" Name="Browse File System (Using the C$ share)">
+      <Command>cmd.exe</Command>
+      <Parameters>/c start "c$" \\%"Computer"."Network"."TCPIP"."Host Name"%\c$</Parameters>
+    </MenuItem>
+    <MenuItem xsi:type="MenuAction" Name="Computer Management">
+      <Command>mmc.exe</Command>
+      <Parameters>Compmgmt.msc /computer:"%"Computer"."Network"."TCPIP"."Host Name"%"</Parameters>
+    </MenuItem>
+    <MenuItem xsi:type="MenuAction" Name="Defrag C: Drive">
+      <Command>defrag.exe</Command>
+      <Parameters>c: -f</Parameters>
+      <ExecutionLocation>Client</ExecutionLocation>
+    </MenuItem>
+    <MenuItem xsi:type="MenuAction" Name="ICMP Ping by Name">
+      <Command>cmd.exe</Command>
+      <Parameters>/K "ping %"Computer"."Network"."TCPIP"."Host Name"% -t"</Parameters>
+    </MenuItem>
+    <MenuItem xsi:type="MenuAction" Name="ICMP Ping by IP Address">
+      <Command>cmd.exe</Command>
+      <Parameters>/K "ping %"Computer"."Network"."TCPIP"."Address"% -t"</Parameters>
+    </MenuItem>
+    <MenuItem xsi:type="MenuAction" Name="Remote Desktop Protocol by Name">
+      <Command>mstsc.exe</Command>
+      <Parameters>/v:%"Computer"."Network"."TCPIP"."Host Name"%</Parameters>
+    </MenuItem>
+    <MenuItem xsi:type="MenuAction" Name="Remote Desktop Protocol by IP">
+      <Command>mstsc.exe</Command>
+      <Parameters>/v:%"Computer"."Network"."TCPIP"."Address"%</Parameters>
+    </MenuItem>
+    <MenuItem xsi:type="MenuAction" Name="Remote Regedit by Name">
+      <Command>SupportTools\RemoteRegedit.exe</Command>
+      <Parameters>%"Computer"."Network"."TCPIP"."Host Name"%</Parameters>
+    </MenuItem>
+    <MenuItem xsi:type="MenuAction" Name="Remote Regedit by IP">
+      <Command>SupportTools\RemoteRegedit.exe</Command>
+      <Parameters>%"Computer"."Network"."TCPIP"."Address"%</Parameters>
+    </MenuItem>
+    <MenuItem xsi:type="MenuAction" Name="Task List">
+      <Command>cmd.exe</Command>
+      <Parameters>/K "tasklist /S %"Computer"."Network"."TCPIP"."Host Name"% | Sort"</Parameters>
+    </MenuItem>
+    <MenuItem xsi:type="MenuAction" Name="Tracert by name">
+      <Command>cmd.exe</Command>
+      <Parameters>/K "tracert %"Computer"."Network"."TCPIP"."Host Name"%"</Parameters>
+    </MenuItem>
+    <MenuItem xsi:type="MenuAction" Name="Tracert by IP">
+      <Command>cmd.exe</Command>
+      <Parameters>/K "tracert %"Computer"."Network"."TCPIP"."Address"%"</Parameters>
+    </MenuItem>
+    <MenuItem xsi:type="MenuAction" Name="Who is logged in? (Use host name)">
+      <Command>SupportTools\who.vbs</Command>
+      <Parameters>/S:%"Computer"."Network"."TCPIP"."Host Name"%"</Parameters>
+    </MenuItem>
+    <MenuItem xsi:type="MenuAction" Name="Who is logged in? (Use IP)">
+      <Command>SupportTools\who.vbs</Command>
+      <Parameters>/S:%"Computer"."Network"."TCPIP"."Address"%"</Parameters>
+    </MenuItem>
+    <MenuItem xsi:type="MenuAction" Name="Windows Vista/7/2008 - Enable RPC">
+      <Command>netsh.exe</Command>
+      <Parameters>advfirewall firewall set rule name="Remote Scheduled Tasks Management (RPC)" new enable=yes</Parameters>
+      <MultiSelect>true</MultiSelect>
+      <OSType>Workstation, 2008</OSType>
+      <ExecutionLocation>Client</ExecutionLocation>
+    </MenuItem>
+  </MenuItem>
+</ComputerContextMenu>

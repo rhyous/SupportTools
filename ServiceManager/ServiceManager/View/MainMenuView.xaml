@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="Rhyous.ServiceManager.View.MainMenuView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:sing="clr-namespace:Rhyous.ServiceManager.Singletons">
+    <Menu>
+        <MenuItem Name="FileMenuItem" Header="_File">
+            <MenuItem Name="FileOpenMenuItem" Header="_Open" Click="OpenClick"/>
+            <!--<MenuItem Name="FileSaveMenuItem" Header="_Save" />
+                    <MenuItem Name="FileSaveAsMenuItem" Header="Save As…" />-->
+            <MenuItem Name="FileExitMenuItem" Header="E_xit" Click="ExitClick" />
+        </MenuItem>
+        <MenuItem Name="OptionsMenuItem" Header="_Options">
+            <MenuItem Name="ColumnSettingsMenuItem" Header="_Visible Columns">
+                <MenuItem IsCheckable="true" Header="Display Name" IsChecked="{Binding Source={x:Static sing:ColumnSettings.Instance}, Path=ShowDisplayNameColumn}" />
+                <MenuItem IsCheckable="true" Header="Service Name" IsChecked="{Binding Source={x:Static sing:ColumnSettings.Instance}, Path=ShowServiceNameColumn}" />
+                <MenuItem IsCheckable="true" Header="Description" IsChecked="{Binding Source={x:Static sing:ColumnSettings.Instance}, Path=ShowDescriptionColumn}" />
+                <MenuItem IsCheckable="true" Header="Status" IsChecked="{Binding Source={x:Static sing:ColumnSettings.Instance}, Path=ShowStatusColumn}" />
+                <MenuItem IsCheckable="true" Header="Is Installed" IsChecked="{Binding Source={x:Static sing:ColumnSettings.Instance}, Path=ShowIsInstalledColumn}" />
+                <MenuItem IsCheckable="true" Header="Startup Type" IsChecked="{Binding Source={x:Static sing:ColumnSettings.Instance}, Path=ShowStartupTypeColumn}" />
+            </MenuItem>
+        </MenuItem>
+    </Menu>
+</UserControl>

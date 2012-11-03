@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ToolInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <_toolBoxText>Support Tools</_toolBoxText>
+      <_className>SupportTools.SupportTools</_className>
+      <_assemblyPath>SupportTools</_assemblyPath>
+      <_bitmapPath>resources\tools\bmps\script.bmp</_bitmapPath>
+      <_showInToolsMenu>false</_showInToolsMenu>
+      <_showInToolBox>false</_showInToolBox>
+      <_extendComputerContextMenu>true</_extendComputerContextMenu>
+</ToolInfo>

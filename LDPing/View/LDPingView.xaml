@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="LANDesk.Agent.Ping.View.LDPingView" 
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:LANDesk_Agent_Ping="clr-namespace:LANDesk.Agent.Ping" 
+             xmlns:conv="clr-namespace:LANDesk.Agent.Ping.Converters"
+             xmlns:view="clr-namespace:LANDesk.Agent.Ping.View"
+             mc:Ignorable="d"
+             d:DesignHeight="300"
+             d:DesignWidth="500">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Grid.Resources>
+            <conv:StringToBoolConverter x:Key="Str2Bool" />
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="79*" />
+        </Grid.RowDefinitions>
+        <Grid Margin="20" Grid.ColumnSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Label Content="Hostname, FQDN, or IP Address" Grid.Column="0" Margin="3" HorizontalAlignment="Right"/>
+            <TextBox Grid.Column="1" x:Name="TextBoxIPAddress" Text="{Binding IPAddress, UpdateSourceTrigger=PropertyChanged}" Margin="3" AcceptsReturn="False"/>
+            <Button Name="ButtonStartAgentPing" Content="Start Agent Ping" Grid.Column="2" Margin="3" d:LayoutOverrides="Height" Command="{Binding Path=PingCommand}" IsDefault="True"/>
+            <!--IsEnabled="{Binding ElementName=TextBoxIPAddress, Path=Text, Converter={StaticResource Str2Bool}}"/>-->
+            <Label Grid.Row="1" Grid.ColumnSpan="3" Name="LabelResult">
+                <Label.Content>
+                    <TextBlock>
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="Connection Result: {0}">
+                                <Binding Path="ConnectionResult" />
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </Label.Content>
+            </Label>
+        </Grid>
+        <LANDesk_Agent_Ping:LDPingResultsControl DataContext="{Binding LDPing}" Grid.Row="1" />
+        <view:Spinner IsStarted="{Binding Path=IsPinging}" Height="128" Width="128" Grid.Row="1" Grid.Column="1"/>
+    </Grid>
+</UserControl>

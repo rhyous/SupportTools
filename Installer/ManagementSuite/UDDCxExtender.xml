@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<Menus>
+	<Menu>			
+		<Text>Add to Managed Devices</Text>
+		<Command>UnmanagedToManaged.exe</Command>
+		<Parameter>ip=%IPADDRESS% name=%NAME% mac=%PHYSADDRESS%</Parameter>
+	</Menu>
+	<Menu>			
+		<Text>Browse File System (Using the C$ share)</Text>
+		<Command>explorer.exe</Command>
+		<Parameter>\\%NAME%\c$</Parameter>
+	</Menu>
+	<Menu>			
+		<Text>Computer Management</Text>
+		<Command>mmc.exe</Command>
+		<Parameter>Compmgmt.msc /computer:"%NAME%"</Parameter>
+	</Menu>
+	<Menu>			
+		<Text>ICMP Ping</Text>
+		<Command>cmd.exe</Command>
+		<Parameter>/K "ping %NAME% -t"</Parameter>
+	</Menu>
+	<Menu>			
+		<Text>LD Ping</Text>
+		<Command>SupportTools\LANDesk.Agent.Ping.exe</Command>
+		<Parameter>%"Computer"."Network"."TCPIP"."Address"%</Parameter>
+	</Menu>	
+	<Menu>			
+		<Text>Remote Command Prompt</Text>
+		<Command>SupportTools\RemCom.exe</Command>
+		<Parameter>\\%NAME% cmd.exe</Parameter>
+	</Menu>	
+	<Menu>			
+		<Text>Who is logged in?</Text>
+		<Command>SupportTools\who.vbs</Command>
+		<Parameter>/S:%"%NAME%"</Parameter>
+	</Menu>	
+	<Menu>			
+		<Text>SSH</Text>
+		<Command>SupportTools\ssh.exe</Command>
+		<Parameter>%NAME%</Parameter>
+	</Menu>	
+	<Menu>			
+		<Text>Task List</Text>
+		<Command>cmd.exe</Command>
+		<Parameter>/K "tasklist /S %NAME% | Sort"</Parameter>
+	</Menu>
+	<Menu>			
+		<Text>Tracert</Text>
+		<Command>cmd.exe</Command>
+		<Parameter>/K "tracert %NAME%"</Parameter>
+	</Menu>	
+	<Menu>			
+		<Text>Remote Desktop</Text>
+		<Command>mstsc.exe</Command>
+		<Parameter> /v:"%NAME%" /console</Parameter>
+	</Menu>		
+	<Menu>			
+		<Text>Telnet</Text>
+		<Command>cmd.exe</Command>
+		<Parameter>/K "telnet %IPADDRESS%"</Parameter>
+	</Menu>	
+	<Menu>
+		<Text>OS Detection with nmap (Requires Nmap installation)</Text>
+		<Command>cmd.exe</Command>
+		<Parameter>/k nmap.exe -PE -PA21,23,80,3389 -A -v -T4 %IPADDRESS%</Parameter>
+	</Menu>
+		<Menu>			
+		<Text>VNC Viewer</Text>
+		<Command>SupportTools\vncviewer.exe</Command>
+		<Parameter>%IPADDRESS%</Parameter>
+	</Menu>	
+</Menus>

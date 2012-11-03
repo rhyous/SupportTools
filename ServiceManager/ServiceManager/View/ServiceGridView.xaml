@@ -1,0 +1,58 @@
+﻿<UserControl x:Class="Rhyous.ServiceManager.View.ServiceGridView"
+          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+          xmlns:conv="clr-namespace:Rhyous.ServiceManager.Converters"
+          xmlns:sing="clr-namespace:Rhyous.ServiceManager.Singletons">
+    <DataGrid x:Name="ServicesDataGrid" Grid.Column="1" Grid.Row="2" HeadersVisibility="Column" 
+          CanUserAddRows="False" CanUserDeleteRows="False" GridLinesVisibility="None" BorderThickness="0"
+          ItemsSource="{Binding Services}" SelectedItem="{Binding SelectedService}" 
+          IsReadOnly="True" AutoGenerateColumns="False">
+        <DataGrid.Resources>
+            <conv:ServiceStatusToStartStopStringConverter x:Key="ServiceStatusToStartStopStringConverter" />
+            <conv:ServiceAndActionConverter x:Key="ServiceAndActionConverter" />
+            <conv:MultipleBoolsConverter x:Key="MultipleBoolsConverter" />
+            <BooleanToVisibilityConverter x:Key="B2V" />
+        </DataGrid.Resources>
+        <DataGrid.Columns>
+            <DataGridTextColumn Header="Status"       Binding="{Binding Status}" Visibility="{Binding Source={x:Static sing:ColumnSettings.Instance}, Path=ShowStatusColumn, Converter={StaticResource B2V}}"
+                                DisplayIndex="{Binding Source={x:Static sing:ColumnSettings.Instance}, Path=StatusColumnIndex, Mode=TwoWay, FallbackValue=0}"/>
+            <DataGridTextColumn Header="Display Name" Binding="{Binding DisplayName}" Visibility="{Binding Source={x:Static sing:ColumnSettings.Instance}, Path=ShowDisplayNameColumn, Converter={StaticResource B2V}}"
+                                DisplayIndex="{Binding Source={x:Static sing:ColumnSettings.Instance}, Path=DisplayNameColumnIndex, Mode=TwoWay, FallbackValue=1}"/>
+            <DataGridTextColumn Header="Service Name" Binding="{Binding ServiceName}" Visibility="{Binding Source={x:Static sing:ColumnSettings.Instance}, Path=ShowServiceNameColumn, Converter={StaticResource B2V}}"
+                                DisplayIndex="{Binding Source={x:Static sing:ColumnSettings.Instance}, Path=ServiceNameColumnIndex, Mode=TwoWay, FallbackValue=2}"/>
+            <DataGridTemplateColumn Header="Description" Width="300" Visibility="{Binding Source={x:Static sing:ColumnSettings.Instance}, Path=ShowDescriptionColumn, Converter={StaticResource B2V}}" 
+                                    DisplayIndex="{Binding Source={x:Static sing:ColumnSettings.Instance}, Path=DescriptionColumnIndex, Mode=TwoWay, FallbackValue=3}">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <TextBlock TextWrapping="Wrap" Text="{Binding Description}" />
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+            <DataGridTextColumn Header="Is Installed" Binding="{Binding IsInstalled}" Visibility="{Binding Source={x:Static sing:ColumnSettings.Instance}, Path=ShowIsInstalledColumn, Converter={StaticResource B2V}}"
+                                DisplayIndex="{Binding Source={x:Static sing:ColumnSettings.Instance}, Path=IsInstalledColumnIndex, Mode=TwoWay, FallbackValue=4}"/>
+            <DataGridTextColumn Header="Startup Type" Binding="{Binding StartupType}" Visibility="{Binding Source={x:Static sing:ColumnSettings.Instance}, Path=ShowStartupTypeColumn, Converter={StaticResource B2V}}"
+                                DisplayIndex="{Binding Source={x:Static sing:ColumnSettings.Instance}, Path=StartupTypeColumnIndex, Mode=TwoWay, FallbackValue=5}"/>
+            <DataGridTemplateColumn Header="Start / Stop" CanUserSort="True" SortDirection="{x:Null}" DisplayIndex="{Binding Source={x:Static sing:ColumnSettings.Instance}, Path=StartStopButtonColumnIndex, Mode=TwoWay, FallbackValue=6}">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <Button Content="{Binding Status, Converter={StaticResource ServiceStatusToStartStopStringConverter}}" VerticalAlignment="Top"
+                                Command="{Binding Path=DataContext.StartStopServiceCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}}" >
+                            <Button.CommandParameter>
+                                <MultiBinding Converter="{StaticResource ServiceAndActionConverter}">
+                                    <Binding RelativeSource="{RelativeSource Self}" Path="DataContext"/>
+                                    <Binding RelativeSource="{RelativeSource Self}" Path="Content"/>
+                                </MultiBinding>
+                            </Button.CommandParameter>
+                            <Button.IsEnabled>
+                                <MultiBinding Converter="{StaticResource MultipleBoolsConverter}">
+                                    <Binding Path="IsInstalled" />
+                                    <Binding Path="StartupType" />
+                                </MultiBinding>
+                            </Button.IsEnabled>
+                        </Button>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+        </DataGrid.Columns>
+    </DataGrid>
+</UserControl>

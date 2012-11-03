@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ComputerContextMenu xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="Computer context menu">
+  <MenuItem xsi:type="MenuGroup" Name="Group 1">
+    <MenuItem xsi:type="MenuAction" Name="Action 2">
+      <Filter>
+        <InventoryProperty>Type</InventoryProperty>
+        <AllowedValue>Workstation</AllowedValue>
+        <AllowedValue>Server</AllowedValue>
+      </Filter>
+      <Command>some2.exe</Command>
+      <Parameters>param1 param2</Parameters>
+      <ExecutionLocation>Client</ExecutionLocation>
+      <MultiSelect>true</MultiSelect>
+    </MenuItem>
+    <MenuItem xsi:type="MenuAction" Name="Open Notepad">
+      <Command>notepad.exe</Command>
+      <Parameters>c:\test.txt</Parameters>
+      <ExecutionLocation>Client</ExecutionLocation>
+      <MultiSelect>true</MultiSelect>
+    </MenuItem>
+  </MenuItem>
+  <MenuItem xsi:type="MenuAction" Name="Action 1">
+    <Filter>
+      <InventoryProperty>Type</InventoryProperty>
+      <AllowedValue>Workstation</AllowedValue>
+      <AllowedValue>Server</AllowedValue>
+    </Filter>
+    <Command>some1.exe</Command>
+    <Parameters>param1 param2</Parameters>
+    <ExecutionLocation />
+    <MultiSelect>true</MultiSelect>
+  </MenuItem>
+</ComputerContextMenu>
