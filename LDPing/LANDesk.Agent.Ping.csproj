@@ -8,8 +8,8 @@
     <ProjectGuid>{91962F55-2BD3-4D69-80A0-15D1C1F0202E}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LANDesk.Agent.Ping</RootNamespace>
-    <AssemblyName>LANDesk.Agent.Ping</AssemblyName>
+    <RootNamespace>Rhyous.Agent.Ping</RootNamespace>
+    <AssemblyName>Rhyous.Agent.Ping</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
