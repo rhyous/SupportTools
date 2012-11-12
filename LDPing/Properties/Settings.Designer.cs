@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LANDesk.Agent.Ping.Properties {
+namespace Rhyous.Agent.Ping.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
