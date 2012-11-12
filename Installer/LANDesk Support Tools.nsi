@@ -1,15 +1,15 @@
-; ProjName "LANDesk Support Tools"
-Name "LANDesk Support Tools"
+; ProjName "Support Tools for LDMS"
+Name "Support Tools for LDMS"
 
 RequestExecutionLevel admin
 
 SetCompressor lzma
 
 # General Symbol Definitions
-!define ProjName "LANDesk Support Tools"
-!define ProjVersion "Beta_9.0.3"
+!define ProjName "Support Tools for LDMS"
+!define ProjVersion "Beta_9.5.0"
 !define REGKEY "SOFTWARE\${ProjName}"
-!define VERSION 9.0.3
+!define VERSION 9.5.0
 !define COMPANY "Jared Barneck"
 !define URL "http://www.rhyous.com/programming-development/landesk-add-ons/landesk-support-tools/"
 
@@ -19,7 +19,7 @@ VAR /GLOBAL PrevVersion
 
 ;MUI Header Configuration
 !define MUI_HEADERIMAGE
-!define MUI_HEADERIMAGE_BITMAP "LANDesk MUI2 Logo.bmp"
+!define MUI_HEADERIMAGE_BITMAP "Rhyous MUI2 Logo.bmp"
 !define MUI_ABORTWARNING
 
 # MUI Symbol Definitions
@@ -109,7 +109,6 @@ Section "Support Tools" SEC0001
     File ManagementSuite\Tools\LDGatherLogs.xml
     File ManagementSuite\Tools\LDSelfServicePortal.xml
     File ManagementSuite\Tools\LDSupportGatewayRC.xml
-    File ManagementSuite\Tools\LDValidate.xml
     File ManagementSuite\Tools\Zenmap.xml
 
     WriteRegStr HKLM "${REGKEY}\Components" "Support Tools" 1
