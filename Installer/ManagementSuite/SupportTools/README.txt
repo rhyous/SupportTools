@@ -5,6 +5,13 @@ Created by Jared Barneck
 Though I didn't create all the tools, only some, I am putting them all in one installer and making them accessible from one Core Server.
 So many poeple have helped me it is difficult to thank them all.
 
+Version 9.5.0
+1. Updated Solutions to .NET 4.5
+2. Separated the NSIS installer to its own empty project.
+3. Added Service Manager.
+4. Some rebranding...
+
+
 Version: 9.0.3.1 
 ( 9.0.x.x Matches our current release of LDMS, though this is not really version dependent.)
 

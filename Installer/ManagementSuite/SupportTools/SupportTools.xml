@@ -55,7 +55,7 @@
       <Parameters>%"Computer"."Network"."TCPIP"."Address"%</Parameters>
     </MenuItem>
     <MenuItem xsi:type="MenuAction" Name="VNC Viewer">
-      <Command>SupportTools\vncviewer.exe</Command>
+      <Command>SupportTools\TightVNC\vncviewer.exe</Command>
       <Parameters>%"Computer"."Network"."TCPIP"."Address"%</Parameters>
     </MenuItem>
     <MenuItem xsi:type="MenuAction" Name="Remote Desktop Protocol by Name">
