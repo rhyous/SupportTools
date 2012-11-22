@@ -46,8 +46,8 @@
   </MenuItem>
   <MenuItem xsi:type="MenuGroup" Name="Remote Control Tools">
     <MenuItem xsi:type="MenuAction" Name="Remote Command Prompt">
-      <Command>SupportTools\RemCom.exe</Command>
-      <Parameters>\\%"Computer"."Network"."TCPIP"."Host Name"% "cmd.exe /k prompt $C%computername%$F$S$p$G"</Parameters>
+      <Command>SupportTools\PAExec.exe</Command>
+      <Parameters>\\%"Computer"."Network"."TCPIP"."Host Name"% cmd.exe /k prompt $C%computername%$F$S$p$G</Parameters>
       <OSType>Workstation, Server</OSType>
     </MenuItem>
     <MenuItem xsi:type="MenuAction" Name="SSH (Secure Shell)">
