@@ -132,7 +132,7 @@ Section "Device Support Tools" SEC0002
     File ManagementSuite\SupportTools\LDDebugLogEnabler.exe
     File ManagementSuite\SupportTools\LDErrorTranslator.exe
     File ManagementSuite\SupportTools\ldmg.landesk.com.exe
-    File ManagementSuite\SupportTools\RemCom.exe
+    File ManagementSuite\SupportTools\PAExec.exe
     File ManagementSuite\SupportTools\RemoteRegedit.exe
     File ManagementSuite\SupportTools\ssh.exe
     File ManagementSuite\SupportTools\who.vbs
@@ -203,7 +203,7 @@ Section /o "-un.Device Support Tools" UNSEC0002
     Delete /REBOOTOK $INSTDIR\SupportTools\LDDebugLogEnabler.exe
     Delete /REBOOTOK $INSTDIR\SupportTools\LDErrorTranslator.exe
     Delete /REBOOTOK $INSTDIR\SupportTools\ldmg.landesk.com.exe
-    Delete /REBOOTOK $INSTDIR\SupportTools\RemCom.exe
+    Delete /REBOOTOK $INSTDIR\SupportTools\PAExec.exe
     Delete /REBOOTOK $INSTDIR\SupportTools\RemoteRegedit.exe
     Delete /REBOOTOK $INSTDIR\SupportTools\ssh.exe
     Delete /REBOOTOK $INSTDIR\SupportTools\who.vbs
