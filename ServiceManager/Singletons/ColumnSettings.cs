@@ -23,6 +23,11 @@ namespace Rhyous.ServiceManager.Singletons
     {
         private static bool IsInstanceLoaded;
 
+
+        static ColumnSettings()
+        {
+
+        }
         public ColumnSettings()
         {
         }
@@ -36,7 +41,7 @@ namespace Rhyous.ServiceManager.Singletons
         public bool IsLoaded
         {
             get { return Instance != null; }
-        } 
+        }
 
         public bool ShowDisplayNameColumn { get; set; }
 

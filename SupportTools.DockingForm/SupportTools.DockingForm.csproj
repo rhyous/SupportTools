@@ -79,6 +79,7 @@
   <ItemGroup>
     <Reference Include="LANDesk.ManagementSuite.WinConsole, Version=9.0.3.76, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(LDMS_HOME)\LANDesk.ManagementSuite.WinConsole.dll</HintPath>
       <HintPath>..\Dependencies\LANDesk.ManagementSuite.WinConsole.dll</HintPath>
     </Reference>
     <Reference Include="System" />

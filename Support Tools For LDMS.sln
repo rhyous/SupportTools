@@ -8,7 +8,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SupportTools", "SupportTool
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SupportTools.DockingForm", "SupportTools.DockingForm\SupportTools.DockingForm.csproj", "{9D828670-EEFA-4BCD-8B3C-8B61B51CEE8A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LANDesk.Agent.Ping", "LDPing\LANDesk.Agent.Ping.csproj", "{91962F55-2BD3-4D69-80A0-15D1C1F0202E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LANDesk.Agent.Ping", "Agent.Ping\Agent.Ping.csproj", "{91962F55-2BD3-4D69-80A0-15D1C1F0202E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnmanagedToManaged", "UnmanagedToManaged\UnmanagedToManaged.csproj", "{71030FB9-AD61-4EE7-AD24-D6192A80353A}"
 EndProject

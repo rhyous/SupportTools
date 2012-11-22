@@ -6,7 +6,7 @@ using LANDesk.ManagementSuite.WinConsole;
 
 namespace UnmanagedToManaged
 {
-    public abstract class BasicNode 
+    public abstract class BasicNode
     {
         protected String mDeviceName = "",
                        mIPAddress = "",
@@ -48,7 +48,7 @@ namespace UnmanagedToManaged
             set { this.mIPAddressPadded = value; }
         }
 
-        new public string SubnetMask
+        public string SubnetMask
         {
             get { return this.mSubnetMask; }
             set { this.mSubnetMask = value; }

@@ -93,7 +93,7 @@ namespace UnmanagedToManaged
 	    	}
         }
 
-        new public void DeleteFromDB()
+        public void DeleteFromDB()
         {
             LanDeskDatabase database = LanDeskDatabase.Get();
             try

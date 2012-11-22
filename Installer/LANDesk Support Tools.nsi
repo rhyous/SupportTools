@@ -91,8 +91,8 @@ Section -Main SEC0000
 
     SetOutPath $INSTDIR\SupportTools\Images
     SetOverwrite on
-	File ManagementSuite\SupportTools\Images\SupportTools.png
-	File ManagementSuite\SupportTools\Images\Folder.png
+    File ManagementSuite\SupportTools\Images\SupportTools.png
+    File ManagementSuite\SupportTools\Images\Folder.png
 
     WriteRegStr HKLM "${REGKEY}\Components" "Main" 1
     WriteRegStr HKLM SOFTWARE\LANDesk\ManagementSuite\Setup\Version\Patches "LANDesk Support Tools" "${VERSION}"
@@ -107,8 +107,8 @@ Section "Support Tools" SEC0001
     File ManagementSuite\Tools\LDDiscover.xml
     File ManagementSuite\Tools\LDErrorTranslator.xml
     File ManagementSuite\Tools\LDGatherLogs.xml
-    File ManagementSuite\Tools\LDSelfServicePortal.xml
     File ManagementSuite\Tools\LDSupportGatewayRC.xml
+    File ManagementSuite\Tools\SupportToolsServiceManager.xml
     File ManagementSuite\Tools\Zenmap.xml
 
     WriteRegStr HKLM "${REGKEY}\Components" "Support Tools" 1
@@ -127,20 +127,25 @@ Section "Device Support Tools" SEC0002
 
     SetOutPath $INSTDIR\SupportTools
     SetOverwrite on
-	# Exes
+    # Exes
     File ManagementSuite\SupportTools\LANDesk.Agent.Ping.exe
     File ManagementSuite\SupportTools\LDDebugLogEnabler.exe
     File ManagementSuite\SupportTools\LDErrorTranslator.exe
     File ManagementSuite\SupportTools\ldmg.landesk.com.exe
     File ManagementSuite\SupportTools\RemCom.exe
     File ManagementSuite\SupportTools\RemoteRegedit.exe
-	File ManagementSuite\SupportTools\ssh.exe
-    File ManagementSuite\SupportTools\vncviewer.exe
+    File ManagementSuite\SupportTools\ssh.exe
     File ManagementSuite\SupportTools\who.vbs
     File ManagementSuite\SupportTools\winscp.exe
-	
-	# Other
+    
+    # Other
     File ManagementSuite\SupportTools\SupportTools.xml
+    
+    SetOutPath $INSTDIR\SupportTools\TightVNC
+    SetOverwrite on
+    File ManagementSuite\SupportTools\TightVNC\LICENSE.txt
+    File ManagementSuite\SupportTools\TightVNC\tvnviewer.exe
+
     
     WriteRegStr HKLM "${REGKEY}\Components" "Device Support Tools" 1
 SectionEnd
@@ -189,25 +194,28 @@ SectionEnd
 
 Section /o "-un.Device Support Tools" UNSEC0002
     
-	# Exes
+    Delete /REBOOTOK $INSTDIR\SupportTools\TightVNC\LICENSE.txt
+    Delete /REBOOTOK $INSTDIR\SupportTools\TightVNC\tvnviewer.exe
+    RmDir $INSTDIR\SupportTools\TightVNC
+    
+    # Exes
     Delete /REBOOTOK $INSTDIR\SupportTools\LANDesk.Agent.Ping.exe
     Delete /REBOOTOK $INSTDIR\SupportTools\LDDebugLogEnabler.exe
     Delete /REBOOTOK $INSTDIR\SupportTools\LDErrorTranslator.exe
-	Delete /REBOOTOK $INSTDIR\SupportTools\ldmg.landesk.com.exe
+    Delete /REBOOTOK $INSTDIR\SupportTools\ldmg.landesk.com.exe
     Delete /REBOOTOK $INSTDIR\SupportTools\RemCom.exe
     Delete /REBOOTOK $INSTDIR\SupportTools\RemoteRegedit.exe
     Delete /REBOOTOK $INSTDIR\SupportTools\ssh.exe
-    Delete /REBOOTOK $INSTDIR\SupportTools\vncviewer.exe
     Delete /REBOOTOK $INSTDIR\SupportTools\who.vbs
     Delete /REBOOTOK $INSTDIR\SupportTools\winscp.exe
-	
+    
     Delete /REBOOTOK $INSTDIR\SupportTools\SupportTools.xml
-	
+    
     Delete /REBOOTOK $INSTDIR\Tools\SupportToolsAddon.xml
     Delete /REBOOTOK $INSTDIR\Tools\SupportToolsDockingForm.xml
 
     Delete /REBOOTOK $INSTDIR\SupportTools.dll
-	Delete /REBOOTOK $INSTDIR\SupportTools.DockingForm.dll
+    Delete /REBOOTOK $INSTDIR\SupportTools.DockingForm.dll
    
     DeleteRegValue HKLM "${REGKEY}\Components" "Device Support Tools"
 SectionEnd
@@ -216,6 +224,7 @@ Section /o "-un.Support Tools" UNSEC0001
     Delete /REBOOTOK $INSTDIR\Tools\Zenmap.xml
     Delete /REBOOTOK $INSTDIR\Tools\LDValidate.xml
     Delete /REBOOTOK $INSTDIR\Tools\LDSupportGatewayRC.xml
+    Delete /REBOOTOK $INSTDIR\Tools\SupportToolsServiceManager.xml
     Delete /REBOOTOK $INSTDIR\Tools\LDSelfServicePortal.xml
     Delete /REBOOTOK $INSTDIR\Tools\LDGatherLogs.xml
     Delete /REBOOTOK $INSTDIR\Tools\LDErrorTranslator.xml
@@ -233,9 +242,9 @@ Section /o -un.Main UNSEC0000
     ;Delete /REBOOTOK $INSTDIR\Utilities\GatherLogs\GatherLogs.cfg
     Delete /REBOOTOK $INSTDIR\SupportTools\README.txt
     Delete /REBOOTOK $INSTDIR\SupportTools\LICENSE.txt
-	Delete /REBOOTOK  $INSTDIR\SupportTools\Images\Folder.png
-	Delete /REBOOTOK  $INSTDIR\SupportTools\Images\SupportTools.png
-	RmDir /REBOOTOK $INSTDIR\SupportTools
+    Delete /REBOOTOK  $INSTDIR\SupportTools\Images\Folder.png
+    Delete /REBOOTOK  $INSTDIR\SupportTools\Images\SupportTools.png
+    RmDir /REBOOTOK $INSTDIR\SupportTools
 
     DeleteRegValue HKLM "${REGKEY}\Components" "Support Tools"
     DeleteRegValue HKLM SOFTWARE\LANDesk\ManagementSuite\Setup\Version\Patches "LANDesk Support Tools"

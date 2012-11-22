@@ -96,12 +96,15 @@
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
     <Reference Include="LANDesk.ManagementSuite.Database">
+      <HintPath>$(LDMS_HOME)\LANDesk.ManagementSuite.Database.dll</HintPath>
       <HintPath>..\Dependencies\LANDesk.ManagementSuite.Database.dll</HintPath>
     </Reference>
     <Reference Include="LANDesk.ManagementSuite.RBA">
+      <HintPath>$(LDMS_HOME)\LANDesk.ManagementSuite.RBA.dll</HintPath>
       <HintPath>..\Dependencies\LANDesk.ManagementSuite.RBA.dll</HintPath>
     </Reference>
     <Reference Include="LANDesk.ManagementSuite.WinConsole">
+      <HintPath>$(LDMS_HOME)\LANDesk.ManagementSuite.WinConsole.dll</HintPath>
       <HintPath>..\Dependencies\LANDesk.ManagementSuite.WinConsole.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -121,11 +124,13 @@
     <Reference Include="System.Xml" />
     <Reference Include="UserManagement.Business, Version=9.0.2.84, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\LANDesk\ManagementSuite\UserManagement.Business.dll</HintPath>
+      <HintPath>$(LDMS_HOME)\UserManagement.Business.dll</HintPath>
+      <HintPath>..\Dependencies\UserManagement.Business.dll</HintPath>
     </Reference>
     <Reference Include="UserManagement.Common, Version=9.0.2.39, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\LANDesk\ManagementSuite\UserManagement.Common.dll</HintPath>
+      <HintPath>$(LDMS_HOME)\UserManagement.Common.dll</HintPath>
+      <HintPath>..\Dependencies\UserManagement.Common.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -165,7 +170,6 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>copy "$(TargetPath)" "$(SolutionDir)Installer\ManagementSuite"
-"C:\Program Files (x86)\NSIS\makensis.exe"  "$(SolutionDir)Installer\LANDesk Support Tools.nsi"</PostBuildEvent>
+    <PostBuildEvent>copy "$(TargetPath)" "$(SolutionDir)Installer\ManagementSuite"</PostBuildEvent>
   </PropertyGroup>
 </Project>

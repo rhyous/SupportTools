@@ -43,7 +43,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -100,17 +100,17 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="LANDesk.ManagementSuite.Database">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\LANDesk\ManagementSuite\LANDesk.ManagementSuite.Database.dll</HintPath>
+      <HintPath>$(LDMS_HOME)\LANDesk.ManagementSuite.Database.dll</HintPath>
       <HintPath>..\Dependencies\LANDesk.ManagementSuite.Database.dll</HintPath>
     </Reference>
     <Reference Include="LANDesk.ManagementSuite.Information, Version=9.0.0.473, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\LANDesk\ManagementSuite\LANDesk.ManagementSuite.Information.dll</HintPath>
+      <HintPath>$(LDMS_HOME)\LANDesk.ManagementSuite.Information.dll</HintPath>
       <HintPath>..\Dependencies\LANDesk.ManagementSuite.Information.dll</HintPath>
     </Reference>
     <Reference Include="LANDesk.ManagementSuite.WinConsole, Version=9.0.1.1, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\LANDesk\ManagementSuite\LANDesk.ManagementSuite.WinConsole.dll</HintPath>
+      <HintPath>$(LDMS_HOME)\LANDesk.ManagementSuite.WinConsole.dll</HintPath>
       <HintPath>..\Dependencies\LANDesk.ManagementSuite.WinConsole.dll</HintPath>
     </Reference>
     <Reference Include="System" />
