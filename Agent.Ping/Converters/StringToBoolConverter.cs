@@ -25,7 +25,7 @@
 using System;
 using System.Windows.Data;
 
-namespace LANDesk.Agent.Ping.Converters
+namespace Rhyous.Agent.Ping.Converters
 {
     class StringToBoolConverter : IValueConverter
     {

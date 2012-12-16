@@ -28,7 +28,7 @@ using System.Threading;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace LANDesk.Agent.Ping.Business
+namespace Rhyous.Agent.Ping.Business
 {
     public static class Serializer
     {

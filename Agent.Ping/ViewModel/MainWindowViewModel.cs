@@ -23,42 +23,26 @@
  */
 
 using System.Collections.Generic;
-using MVVM;
+using AspectMVVM;
+using System.ComponentModel;
 
-namespace LANDesk.Agent.Ping.ViewModel
+namespace Rhyous.Agent.Ping.ViewModel
 {
-    class MainWindowViewModel : ViewModelBase
+    [NotifyPropertyChangedClass]
+    public class MainWindowViewModel
     {
-        #region Member Variables
-        private List<ViewModelBase> _ViewModels;
-        #endregion
-
         #region Constructors
         /// <summary>
         /// The default constructor
         /// </summary>
         public MainWindowViewModel()
         {
-            ViewModels.Add(new LDPingViewModel());
+            ViewModel = new LDPingViewModel();
         }
         #endregion
 
         #region Properties
-        public List<ViewModelBase> ViewModels
-        {
-            get
-            {
-                if (_ViewModels == null)
-                    _ViewModels = new List<ViewModelBase>();
-                return _ViewModels;
-            }
-        }
-        #endregion
-
-        #region Functions
-        #endregion
-
-        #region Enums
+        public LDPingViewModel ViewModel { get; set; }
         #endregion
     }
 }

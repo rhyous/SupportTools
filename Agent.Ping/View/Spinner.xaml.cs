@@ -26,7 +26,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
 
-namespace LANDesk.Agent.Ping.View
+namespace Rhyous.Agent.Ping.View
 {
     /// <summary>
     /// Interaction logic for Spinner.xaml

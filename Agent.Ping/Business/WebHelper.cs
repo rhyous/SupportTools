@@ -6,7 +6,7 @@ using System;
 using System.IO;
 using System.Net;
 
-namespace LANDesk.Agent.Ping.Business
+namespace Rhyous.Agent.Ping.Business
 {
     class WebHelper
     {

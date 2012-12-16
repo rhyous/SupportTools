@@ -25,15 +25,16 @@
 using System;
 using System.ComponentModel;
 using System.Windows.Input;
-using LANDesk.Agent.Ping.Business;
-using LANDesk.Agent.Ping.Model;
-using MVVM;
+using Rhyous.Agent.Ping.Business;
+using Rhyous.Agent.Ping.Model;
+using AspectMVVM;
 using System.Threading;
 using System.Diagnostics;
 
-namespace LANDesk.Agent.Ping.ViewModel
+namespace Rhyous.Agent.Ping.ViewModel
 {
-    class LDPingViewModel : ViewModelBase
+    [NotifyPropertyChangedClass]
+    public class LDPingViewModel
     {
         #region Constructors
         /// <summary>
@@ -46,57 +47,32 @@ namespace LANDesk.Agent.Ping.ViewModel
                 IPAddress = App.Args[0];
                 Ping();
             }
+
+
+            var npc = this as INotifyPropertyChangedWithMethod;
+			if (npc != null)
+                npc.PropertyChanged += OnIPAddressChanged;
         }
         #endregion
 
         #region Properties
-        public LDPing LDPing
-        {
-            get { return _LDPing; }
-            set
-            {
-                _LDPing = value;
-                NotifyPropertyChanged("LDPing");
-            }
-        } private LDPing _LDPing;
 
-        public String IPAddress
-        {
-            get { return _IPAddress; }
-            set
-            {
-                _IPAddress = value;
-                NotifyPropertyChanged("IPAddress");
-                ClearPingResults();
-            }
-        } private String _IPAddress;
+        [NotifyPropertyChanged]
+        public LDPing LDPing { get; set; }
 
-        public string ConnectionResult
-        {
-            get { return _ConnectionResult; }
-            set
-            {
-                _ConnectionResult = value;
-                NotifyPropertyChanged("ConnectionResult");
-            }
-        } private string _ConnectionResult;
+        [NotifyPropertyChanged]
+        public String IPAddress { get; set; }
+
+        [NotifyPropertyChanged]
+        public string ConnectionResult { get; set; }
 
         public bool CanPing
         {
             get { return !String.IsNullOrEmpty(IPAddress) && !IsPinging; }
         }
 
-        public bool IsPinging
-        {
-            get { return _IsPinging; }
-            set
-            {
-                _IsPinging = value;
-                NotifyPropertyChanged("CanPing");
-                NotifyPropertyChanged("PingCommand");
-                NotifyPropertyChanged("IsPinging");
-            }
-        } private bool _IsPinging;
+        [NotifyPropertyChanged("CanPing", "PingCommand", "IsPinging")]
+        public bool IsPinging { get; set; }
 
         public ICommand PingCommand
         {
@@ -160,13 +136,21 @@ namespace LANDesk.Agent.Ping.ViewModel
             // Essentially, this makes the button enable when pinging is done.
             CommandManager.InvalidateRequerySuggested();
         }
+        
+        void OnIPAddressChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == IPAddress)
+                ClearPingResults();
+        }
 
         private void ClearPingResults()
         {
             LDPing = null;
             ConnectionResult = string.Empty;
-            NotifyPropertyChanged("CanPing");
-            NotifyPropertyChanged("PingCommand");
+
+            INotifyPropertyChangedWithMethod me = this as INotifyPropertyChangedWithMethod;
+            me.NotifyPropertyChanged("CanPing");
+            me.NotifyPropertyChanged("PingCommand");
         }
         #endregion
     }

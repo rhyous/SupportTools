@@ -22,14 +22,12 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-using System.Windows;
-
-namespace LANDesk.Agent.Ping.View
+namespace Rhyous.Agent.Ping.View
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
         public MainWindow()
         {

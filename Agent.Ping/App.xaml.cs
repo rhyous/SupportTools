@@ -24,10 +24,10 @@
 
 using System;
 using System.Windows;
-using LANDesk.Agent.Ping.View;
-using LANDesk.Agent.Ping.ViewModel;
+using Rhyous.Agent.Ping.View;
+using Rhyous.Agent.Ping.ViewModel;
 
-namespace LANDesk.Agent.Ping
+namespace Rhyous.Agent.Ping
 {
     /// <summary>
     /// Interaction logic for App.xaml

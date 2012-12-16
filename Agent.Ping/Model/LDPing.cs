@@ -35,7 +35,7 @@
 using System;
 using System.Xml.Serialization;
 
-namespace LANDesk.Agent.Ping.Model
+namespace Rhyous.Agent.Ping.Model
 {
     [XmlRoot("pong")]
     public class LDPing

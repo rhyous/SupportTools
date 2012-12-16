@@ -7,11 +7,11 @@ using System.Windows;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("LANDesk Agent Ping")]
+[assembly: AssemblyTitle("Rhyous Agent Ping")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Rhyous")]
-[assembly: AssemblyProduct("LANDesk Agent Ping")]
+[assembly: AssemblyProduct("Rhyous Agent Ping")]
 [assembly: AssemblyCopyright("Copyright © Rhyous 2011")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

@@ -23,9 +23,9 @@
  */
 
 using System;
-using LANDesk.Agent.Ping.Model;
+using Rhyous.Agent.Ping.Model;
 
-namespace LANDesk.Agent.Ping.Business
+namespace Rhyous.Agent.Ping.Business
 {
     class LDPingAction
     {

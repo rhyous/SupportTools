@@ -24,7 +24,7 @@
 
 using System.Windows.Controls;
 
-namespace LANDesk.Agent.Ping
+namespace Rhyous.Agent.Ping
 {
 	/// <summary>
 	/// Interaction logic for LDPingResultsControl.xaml

@@ -24,7 +24,7 @@
 
 using System.ComponentModel;
 
-namespace LANDesk.Agent.Ping.Business
+namespace Rhyous.Agent.Ping.Business
 {
     class PingWorker : BackgroundWorker
     {
