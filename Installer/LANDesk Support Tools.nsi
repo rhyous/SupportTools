@@ -101,11 +101,11 @@ SectionEnd
 Section "Support Tools" SEC0001
     SetOutPath $INSTDIR\Tools
     SetOverwrite on
+    File ManagementSuite\Tools\DebugLogEnabler.xml
+    File ManagementSuite\Tools\ErrorTranslator.xml
     File ManagementSuite\Tools\LDBKMs.xml
     File ManagementSuite\Tools\LDCommunity.xml
-    File ManagementSuite\Tools\LDDebugLogEnabler.xml
     File ManagementSuite\Tools\LDDiscover.xml
-    File ManagementSuite\Tools\LDErrorTranslator.xml
     File ManagementSuite\Tools\LDGatherLogs.xml
     File ManagementSuite\Tools\LDSupportGatewayRC.xml
     File ManagementSuite\Tools\SupportToolsServiceManager.xml
@@ -128,17 +128,23 @@ Section "Device Support Tools" SEC0002
     SetOutPath $INSTDIR\SupportTools
     SetOverwrite on
     # Exes
-    File ManagementSuite\SupportTools\LANDesk.Agent.Ping.exe
     File ManagementSuite\SupportTools\LDDebugLogEnabler.exe
     File ManagementSuite\SupportTools\LDErrorTranslator.exe
     File ManagementSuite\SupportTools\ldmg.landesk.com.exe
     File ManagementSuite\SupportTools\PAExec.exe
     File ManagementSuite\SupportTools\RemoteRegedit.exe
+    File ManagementSuite\SupportTools\Rhyous.Agent.Ping.exe
+    File ManagementSuite\SupportTools\Rhyous.ServiceManager.exe
     File ManagementSuite\SupportTools\ssh.exe
     File ManagementSuite\SupportTools\who.vbs
     File ManagementSuite\SupportTools\winscp.exe
     
+    # Dlls
+    File ManagementSuite\SupportTools\AspectMVVM.dll
+    File ManagementSuite\SupportTools\PostSharp.dll
+    
     # Other
+    File ManagementSuite\SupportTools\Services.xml
     File ManagementSuite\SupportTools\SupportTools.xml
     
     SetOutPath $INSTDIR\SupportTools\TightVNC
@@ -199,16 +205,23 @@ Section /o "-un.Device Support Tools" UNSEC0002
     RmDir $INSTDIR\SupportTools\TightVNC
     
     # Exes
-    Delete /REBOOTOK $INSTDIR\SupportTools\LANDesk.Agent.Ping.exe
     Delete /REBOOTOK $INSTDIR\SupportTools\LDDebugLogEnabler.exe
     Delete /REBOOTOK $INSTDIR\SupportTools\LDErrorTranslator.exe
     Delete /REBOOTOK $INSTDIR\SupportTools\ldmg.landesk.com.exe
     Delete /REBOOTOK $INSTDIR\SupportTools\PAExec.exe
     Delete /REBOOTOK $INSTDIR\SupportTools\RemoteRegedit.exe
+    Delete /REBOOTOK $INSTDIR\SupportTools\Rhyous.Agent.Ping.exe
+    Delete /REBOOTOK $INSTDIR\SupportTools\Rhyous.ServiceManager.exe
     Delete /REBOOTOK $INSTDIR\SupportTools\ssh.exe
     Delete /REBOOTOK $INSTDIR\SupportTools\who.vbs
     Delete /REBOOTOK $INSTDIR\SupportTools\winscp.exe
-    
+    # Dlls
+	
+	# Dlls
+	Delete /REBOOTOK $INSTDIR\SupportTools\AspectMVVM.dll
+	Delete /REBOOTOK $INSTDIR\SupportTools\PostSharp.dll
+
+    Delete /REBOOTOK $INSTDIR\SupportTools\Services.xml
     Delete /REBOOTOK $INSTDIR\SupportTools\SupportTools.xml
     
     Delete /REBOOTOK $INSTDIR\Tools\SupportToolsAddon.xml
@@ -227,11 +240,11 @@ Section /o "-un.Support Tools" UNSEC0001
     Delete /REBOOTOK $INSTDIR\Tools\SupportToolsServiceManager.xml
     Delete /REBOOTOK $INSTDIR\Tools\LDSelfServicePortal.xml
     Delete /REBOOTOK $INSTDIR\Tools\LDGatherLogs.xml
-    Delete /REBOOTOK $INSTDIR\Tools\LDErrorTranslator.xml
     Delete /REBOOTOK $INSTDIR\Tools\LDDiscover.xml
-    Delete /REBOOTOK $INSTDIR\Tools\LDDebugLogEnabler.xml
     Delete /REBOOTOK $INSTDIR\Tools\LDCommunity.xml
     Delete /REBOOTOK $INSTDIR\Tools\LDBKMs.xml
+    Delete /REBOOTOK $INSTDIR\Tools\ErrorTranslator.xml
+    Delete /REBOOTOK $INSTDIR\Tools\DebugLogEnabler.xml
     RmDir $INSTDIR\Tools
     
     DeleteRegValue HKLM "${REGKEY}\Components" "Support Tools"
@@ -244,6 +257,8 @@ Section /o -un.Main UNSEC0000
     Delete /REBOOTOK $INSTDIR\SupportTools\LICENSE.txt
     Delete /REBOOTOK  $INSTDIR\SupportTools\Images\Folder.png
     Delete /REBOOTOK  $INSTDIR\SupportTools\Images\SupportTools.png
+	
+    RmDir /REBOOTOK $INSTDIR\SupportTools\Images
     RmDir /REBOOTOK $INSTDIR\SupportTools
 
     DeleteRegValue HKLM "${REGKEY}\Components" "Support Tools"
