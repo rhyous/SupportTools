@@ -217,9 +217,9 @@ Section /o "-un.Device Support Tools" UNSEC0002
     Delete /REBOOTOK $INSTDIR\SupportTools\winscp.exe
     # Dlls
 	
-	# Dlls
-	Delete /REBOOTOK $INSTDIR\SupportTools\AspectMVVM.dll
-	Delete /REBOOTOK $INSTDIR\SupportTools\PostSharp.dll
+    # Dlls
+    Delete /REBOOTOK $INSTDIR\SupportTools\AspectMVVM.dll
+    Delete /REBOOTOK $INSTDIR\SupportTools\PostSharp.dll
 
     Delete /REBOOTOK $INSTDIR\SupportTools\Services.xml
     Delete /REBOOTOK $INSTDIR\SupportTools\SupportTools.xml
