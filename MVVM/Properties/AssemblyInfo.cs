@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("MVVM")]
+[assembly: AssemblyTitle("AspectMVVM")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Rhyous")]
-[assembly: AssemblyProduct("MVVM")]
+[assembly: AssemblyProduct("AspectMVVM")]
 [assembly: AssemblyCopyright("Copyright © Rhyous 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

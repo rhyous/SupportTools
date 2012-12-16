@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Windows.Input;
 
-namespace Rhyous.MVVM
+namespace AspectMVVM
 {
     /// <summary>
     /// A command whose sole purpose is to 

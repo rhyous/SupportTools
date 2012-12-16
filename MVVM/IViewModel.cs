@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Rhyous.MVVM
+namespace AspectMVVM
 {
     public interface IViewModel
     {
