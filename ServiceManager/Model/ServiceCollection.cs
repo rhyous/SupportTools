@@ -8,5 +8,7 @@ namespace Rhyous.ServiceManager.Model
     [XmlRoot("Services")]
     public class ServiceCollection : ObservableCollection<Service>
     {
+        [XmlAttribute]
+        public string Name { get; set; }
     }
 }

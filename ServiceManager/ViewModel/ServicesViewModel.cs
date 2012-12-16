@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
-using Rhyous.MVVM;
+using AspectMVVM;
 using Rhyous.ServiceManager.Aspects;
 using Rhyous.ServiceManager.Business;
 using Rhyous.ServiceManager.Model;
@@ -8,7 +8,7 @@ using Rhyous.ServiceManager.Singletons;
 
 namespace Rhyous.ServiceManager.ViewModel
 {
-    [NotifyPropertyChanged]
+    [NotifyPropertyChangedClass]
     class ServicesViewModel
     {
         #region Constructors
@@ -26,18 +26,23 @@ namespace Rhyous.ServiceManager.ViewModel
 
         #region Properties
 
+        [NotifyPropertyChanged]
         public ServiceCollection Services
         {
             get { return ServiceStore.Instance.Services; }
             set { ServiceStore.Instance.Services = value; }
         }
 
+        [NotifyPropertyChanged]
         public Service SelectedService { get; set; }
 
+        [NotifyPropertyChanged]
         public ICommand StartStopServiceCommand { get; set; }
 
+        [NotifyPropertyChanged]
         public ICommand ServiceCollectionCommand { get; set; }
 
+        [NotifyPropertyChanged]
         public bool IsWorking { get; set; }
 
         #endregion

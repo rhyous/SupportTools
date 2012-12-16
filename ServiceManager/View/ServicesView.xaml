@@ -19,7 +19,7 @@
         <ColumnDefinition Width="Auto" />
         <ColumnDefinition Width="15" />
     </Grid.ColumnDefinitions>
-    <Label Content="{Binding ServiceGroupName, FallbackValue='Your Service Collection'}" Grid.Column="1" Name="ServiceGroupNameLabel" VerticalAlignment="Center"/>
+    <Label Content="{Binding Services.Name, FallbackValue='Your Service Collection'}" Grid.Column="1" Name="ServiceGroupNameLabel" VerticalAlignment="Center"/>
     <WrapPanel Grid.Column="1" Grid.Row="1" >
         <Button Content="Start All" Name="StartAllButton" Command="{Binding ServiceCollectionCommand}" CommandParameter="Start"/>
         <Button Content="Restart All" Name="RestartAllButton" Command="{Binding ServiceCollectionCommand}" CommandParameter="Restart"/>

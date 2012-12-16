@@ -1,10 +1,13 @@
 ﻿using System;
 using PostSharp.Aspects;
 using Rhyous.ServiceManager.Singletons;
+using PostSharp.Aspects.Dependencies;
 
 namespace Rhyous.ServiceManager.Aspects
 {
     [Serializable]
+    [AspectTypeDependency(AspectDependencyAction.Commute, typeof(ExceptionAspect))]
+    [ProvideAspectRole(StandardRoles.ExceptionHandling)]
     public class ExceptionAspect : OnExceptionAspect
     {
         public String Message { get; set; }

@@ -6,12 +6,19 @@
     <DataGrid x:Name="ServicesDataGrid" Grid.Column="1" Grid.Row="2" HeadersVisibility="Column" 
           CanUserAddRows="False" CanUserDeleteRows="False" GridLinesVisibility="None" BorderThickness="0"
           ItemsSource="{Binding Services}" SelectedItem="{Binding SelectedService}" 
-          IsReadOnly="True" AutoGenerateColumns="False">
+          IsReadOnly="True" AutoGenerateColumns="False" AlternationCount="2">
         <DataGrid.Resources>
             <conv:ServiceStatusToStartStopStringConverter x:Key="ServiceStatusToStartStopStringConverter" />
             <conv:ServiceAndActionConverter x:Key="ServiceAndActionConverter" />
             <conv:MultipleBoolsConverter x:Key="MultipleBoolsConverter" />
             <BooleanToVisibilityConverter x:Key="B2V" />
+            <Style TargetType="{x:Type DataGridRow}">
+                <Style.Triggers>
+                    <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                        <Setter Property="Background" Value="LightGray" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
         </DataGrid.Resources>
         <DataGrid.Columns>
             <DataGridTextColumn Header="Status"       Binding="{Binding Status}" Visibility="{Binding Source={x:Static sing:ColumnSettings.Instance}, Path=ShowStatusColumn, Converter={StaticResource B2V}}"

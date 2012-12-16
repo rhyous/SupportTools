@@ -1,6 +1,6 @@
 ﻿using System;
 using System.IO;
-using Rhyous.MVVM;
+using AspectMVVM;
 using Rhyous.ServiceManager.Aspects;
 using Rhyous.ServiceManager.Model;
 using Rhyous.ServiceManager.Business;
@@ -10,11 +10,16 @@ namespace Rhyous.ServiceManager.Singletons
     [NotifyPropertyChanged]
     public class ServiceStore : IPersist
     {
-        public ServiceStore()
+        internal ServiceStore()
         {
+            //#if DEBUG
+            //if (Services == null)
+            //    CreateSampleData();
+            //Save();
+            //#endif
         }
 
-        // TODO: Figure out how to lazy load the Instance of a singleton,
+        // TODO: Figure out how to lazy load the Instance of a singleton with PostSharp,
         // because it fails due to the private constructor
         public static ServiceStore Instance
         {

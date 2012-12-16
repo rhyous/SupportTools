@@ -126,7 +126,6 @@
     <Compile Include="Aspects\PersistOnSetAspect.cs" />
     <Compile Include="Aspects\DefaultValueAspect.cs" />
     <Compile Include="Aspects\ExceptionAspect.cs" />
-    <Compile Include="Aspects\LazyPropertyAspect.cs" />
     <Compile Include="Aspects\RunOnGuiThreadAspect.cs" />
     <Compile Include="Business\ServiceCollectionManager.cs" />
     <Compile Include="Business\ServiceRefresher.cs" />
@@ -221,14 +220,14 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MVVM\MVVM.csproj">
+    <ProjectReference Include="..\AspectMVVM\AspectMVVM.csproj">
       <Project>{CAA5479F-AB69-4672-A1C3-08E35B8E983D}</Project>
-      <Name>MVVM</Name>
+      <Name>AspectMVVM</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy "$(TargetPath)" "$(SolutionDir)Installer\ManagementSuite\SupportTools\Services Manager"
+    <PostBuildEvent>copy "$(TargetPath)" "$(SolutionDir)Installer\ManagementSuite\SupportTools\"
 </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -32,7 +32,7 @@ namespace Rhyous.ServiceManager.Business
             if (!File.Exists(outFileName))
             {
                 String dir = Path.GetDirectoryName(outFileName);
-                if (!Directory.Exists(dir))
+                if (!Directory.Exists(dir) && !string.IsNullOrWhiteSpace(dir))
                     Directory.CreateDirectory(dir);
             }
 
