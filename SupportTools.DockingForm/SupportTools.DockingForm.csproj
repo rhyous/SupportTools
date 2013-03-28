@@ -176,7 +176,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy "$(TargetPath)" "$(SolutionDir)Installer\ManagementSuite"
+    <PostBuildEvent>copy /Y "$(TargetPath)" "$(SolutionDir)Installer\ManagementSuite"
 </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
