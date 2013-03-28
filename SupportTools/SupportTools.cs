@@ -35,6 +35,7 @@ using LANDesk.ManagementSuite.Database;
 using LANDesk.ManagementSuite.UserManagement.Business;
 using LANDesk.ManagementSuite.WinConsole;
 using SupportTools.ContextMenuXml;
+using System.Web;
 
 namespace SupportTools
 {
@@ -76,7 +77,7 @@ namespace SupportTools
         {
             bool bRet = false;
             try
-            {                
+            {
                 if (Global.MainForm.NTUser.CheckRights(LDMSRights.ExecuteProgramsEdit))
                 {
                     Trace.WriteLine(System.Diagnostics.Process.GetCurrentProcess().StartInfo.UserName + "has RC Rights");
@@ -127,7 +128,7 @@ namespace SupportTools
 
                         MessageBox.Show("You must have 'Remote Control' rights to execute commands remotely on this device.\n\n"
                                         + "User logged into console: "
-                                        + UserLoggedIntoTheConsole); 
+                                        + UserLoggedIntoTheConsole);
                     }
                 }
             }
@@ -180,7 +181,7 @@ namespace SupportTools
             {
                 return;
             }
-            ExecuteItem(resolveCommandPathVars(inMenuItem.Command), ResolveBNF(parameters, inComputer.ID));
+            ExecuteItem(ResolveBNF(resolveCommandPathVars(inMenuItem.Command), inComputer.ID), ResolveBNF(parameters, inComputer.ID));
         }
 
 
@@ -238,18 +239,21 @@ namespace SupportTools
                 myForm.ShowDialog();
                 List<string> tempStrList = myForm.getMessageText();
 
-                foreach (string s in tempStrList)
+                if (tempStrList != null)
                 {
-                    if (String.IsNullOrEmpty(s))
+                    foreach (string s in tempStrList)
                     {
-                        return "Cancel action!";
+                        if (String.IsNullOrEmpty(s))
+                        {
+                            return "Cancel action!";
+                        }
                     }
                 }
-                //TODO: Replace each prompt in the parameter with the userinput value.
+                //Replace each prompt in the parameter with the userinput value.
                 string szNewParameter = inParameter;
                 for (int i = 0; i < allPrompts.Count; i++)
                 {
-                    szNewParameter = szNewParameter.Replace(mc[i].Value, tempStrList[i]);
+                    szNewParameter = szNewParameter.Replace(mc[i].Value, "\"" + HttpUtility.HtmlEncode(tempStrList[i]) + "\"");
                 }
                 return szNewParameter;
             }
