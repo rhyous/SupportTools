@@ -28,6 +28,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NSIS", "NSIS\NSIS.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SupportToolsTests", "SupportToolsTests\SupportToolsTests.csproj", "{A8FBD864-DD67-410A-891F-6C242B5424E6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessagePresenter", "MessagePresenter\MessagePresenter.csproj", "{FE79B3C7-3FA6-4107-801A-64B501D41D74}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -131,6 +133,16 @@ Global
 		{A8FBD864-DD67-410A-891F-6C242B5424E6}.Release|x64.Build.0 = Release|x64
 		{A8FBD864-DD67-410A-891F-6C242B5424E6}.Release|x86.ActiveCfg = Release|x86
 		{A8FBD864-DD67-410A-891F-6C242B5424E6}.Release|x86.Build.0 = Release|x86
+		{FE79B3C7-3FA6-4107-801A-64B501D41D74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE79B3C7-3FA6-4107-801A-64B501D41D74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE79B3C7-3FA6-4107-801A-64B501D41D74}.Debug|x64.ActiveCfg = Debug|x64
+		{FE79B3C7-3FA6-4107-801A-64B501D41D74}.Debug|x64.Build.0 = Debug|x64
+		{FE79B3C7-3FA6-4107-801A-64B501D41D74}.Debug|x86.ActiveCfg = Debug|x86
+		{FE79B3C7-3FA6-4107-801A-64B501D41D74}.Debug|x86.Build.0 = Debug|x86
+		{FE79B3C7-3FA6-4107-801A-64B501D41D74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE79B3C7-3FA6-4107-801A-64B501D41D74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE79B3C7-3FA6-4107-801A-64B501D41D74}.Release|x64.ActiveCfg = Release|Any CPU
+		{FE79B3C7-3FA6-4107-801A-64B501D41D74}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

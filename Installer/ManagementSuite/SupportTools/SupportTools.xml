@@ -1,9 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ComputerContextMenu xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="Computer context menu">
   <MenuItem xsi:type="MenuAction" Name="Send Message">
-    <Command>msg.exe</Command>
+    <Command>"%"Computer"."OS"."NT Info"."System Root"%\sysnative\msg.exe</Command>
     <OSType>Workstation, Server</OSType>
-    <Parameters> Console /TIME:%prompt:Time in seconds to show message on screen.:4% "%prompt:Enter Message. (Currently only one line is supported.):512%"</Parameters>
+    <Parameters>* /TIME:%prompt:Time in seconds to show message on screen.:4% "%prompt:Enter Message. (Currently only one line is supported.):512%"</Parameters>
+    <MultiSelect>true</MultiSelect>
+    <ExecutionLocation>Client</ExecutionLocation>
+  </MenuItem>
+  <MenuItem xsi:type="MenuAction" Name="Present Message">
+    <Command>startasuser.exe</Command>
+    <OSType>Workstation, Server</OSType>
+    <Parameters>MessagePresenter.exe TIMEOUT=%prompt:Time in seconds to show message on screen.:4% html=%prompt:Enter Message in html.:1024% from=%prompt:Who is the message from:128%</Parameters>
     <MultiSelect>true</MultiSelect>
     <ExecutionLocation>Client</ExecutionLocation>
   </MenuItem>

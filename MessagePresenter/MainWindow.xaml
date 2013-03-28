@@ -1,0 +1,21 @@
+﻿<Window x:Class="MessagePresenter.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:loc="clr-namespace:MessagePresenter"
+        Title="Message Presenter" 
+        Height="350" Width="525">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <GroupBox Name="GroupBoxFrom" Header="From: " Padding="0,5,0,5">
+            <TextBlock Name="TextBlockFrom" />
+        </GroupBox>
+        <GroupBox Name="GroupBoxHtml" Header="Message: " Grid.Row="1" >
+            <WebBrowser Name="WebBrowserMessage" Loaded="MessageLoaded"/>
+        </GroupBox>
+        <Button Name="ButtonDismiss" Content="Dismiss" Height="30" Grid.Row="2" Margin="5" Click="Button_Click_1" />
+    </Grid>
+</Window>
