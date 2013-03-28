@@ -9,8 +9,8 @@
   </MenuItem>
   <MenuItem xsi:type="MenuGroup" Name="Dell Warranty Tools">
     <MenuItem xsi:type="MenuAction" Name="Get Dell Warranty Info">
-	  <Command>explorer.exe</Command>
-	  <Parameters>"http://support.dell.com/support/topics/global.aspx/support/my_systems_info/details?c=us&cs=2684&l=en&s=dhs&logout=&ServiceTag=%"Computer"."System"."Asset Tag"%"</Parameters>
+      <Command>explorer.exe</Command>
+      <Parameters>"http://support.dell.com/support/topics/global.aspx/support/my_systems_info/details?c=us&amp;cs=2684&amp;l=en&amp;s=dhs&amp;logout=&amp;ServiceTag=%"Computer"."System"."Asset Tag"%"</Parameters>
     </MenuItem>
   </MenuItem>
   <MenuItem xsi:type="MenuGroup" Name="LANDesk Tools">
@@ -110,6 +110,18 @@
     <MenuItem xsi:type="MenuAction" Name="Remote Regedit by IP">
       <Command>SupportTools\RemoteRegedit.exe</Command>
       <Parameters>%"Computer"."Network"."TCPIP"."Address"%</Parameters>
+    </MenuItem>
+    <MenuItem xsi:type="MenuAction" Name="Start a Service">
+      <Command>sc.exe</Command>
+      <Parameters>stop %prompt:Enter the name of the service to start.:128%"</Parameters>
+      <OSType>Workstation, Server</OSType>
+      <ExecutionLocation>Client</ExecutionLocation>
+    </MenuItem>
+    <MenuItem xsi:type="MenuAction" Name="Stop a Service">
+      <Command>sc.exe</Command>
+      <Parameters>start %prompt:Enter the name of the service to stop.:128%"</Parameters>
+      <OSType>Workstation, Server</OSType>
+      <ExecutionLocation>Client</ExecutionLocation>
     </MenuItem>
     <MenuItem xsi:type="MenuAction" Name="Task List">
       <Command>cmd.exe</Command>
