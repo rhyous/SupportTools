@@ -169,6 +169,6 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>copy "$(TargetPath)" "$(SolutionDir)Installer\ManagementSuite"</PostBuildEvent>
+    <PostBuildEvent>copy /Y "$(TargetPath)" "$(SolutionDir)Installer\ManagementSuite"
   </PropertyGroup>
 </Project>
