@@ -125,7 +125,11 @@ Section "Device Support Tools" SEC0002
     File ManagementSuite\Tools\SupportToolsAddon.xml  
     File ManagementSuite\Tools\SupportToolsDockingForm.xml 
 
-    SetOutPath $INSTDIR\SupportTools
+    #
+    # LDMain/SupportTools - Todo: Move it all to LDLogon eventually
+    #
+	
+	SetOutPath $INSTDIR\SupportTools
     SetOverwrite on
     # Exes
     File ManagementSuite\SupportTools\LDDebugLogEnabler.exe
@@ -152,6 +156,22 @@ Section "Device Support Tools" SEC0002
     File ManagementSuite\SupportTools\TightVNC\LICENSE.txt
     File ManagementSuite\SupportTools\TightVNC\tvnviewer.exe
 
+    #
+    # LDLogon/SupportTools
+    #
+    SetOutPath $INSTDIR\LDLogon\SupportTools
+    SetOverwrite on
+    # Exes
+    File ManagementSuite\LDLogon\SupportTools\MessagePresenter.exe
+
+    #
+    # Scripts
+    #
+    SetOutPath $INSTDIR\Scripts
+    SetOverwrite on
+    # Exes
+    File ManagementSuite\Scripts\MessagePresenter.ini
+    
     
     WriteRegStr HKLM "${REGKEY}\Components" "Device Support Tools" 1
 SectionEnd
@@ -176,6 +196,19 @@ Section -post SEC0004
     WriteRegStr HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(^Name)" QuietUninstallString "$INSTDIR\SupportTools\uninstall.exe /S"
     WriteRegDWORD HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(^Name)" NoModify 1
     WriteRegDWORD HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(^Name)" NoRepair 1
+SectionEnd
+
+Section /o "Agent ini" SEC0005
+    #
+    # LDLogon
+    #
+    SetOutPath $INSTDIR\LDLogon
+    SetOverwrite on
+    # Agent Ini
+    File ManagementSuite\LDLogon\SupportTools.ini
+    
+    WriteRegStr HKLM "SOFTWARE\LANDESK\ManagementSuite\Stamping\Files" SupportTools '"$INSTDIR\SupportTools.ini"'
+    ExecWait "$INSTDIR\stamper.exe"
 SectionEnd
 
 # Macro for selecting uninstaller sections
@@ -204,6 +237,13 @@ Section /o "-un.Device Support Tools" UNSEC0002
     Delete /REBOOTOK $INSTDIR\SupportTools\TightVNC\tvnviewer.exe
     RmDir $INSTDIR\SupportTools\TightVNC
     
+    # Scripts
+    Delete /REBOOTOK $INSTDIR\Scripts\MessagePresenter.ini
+    
+    # LDLogon
+    Delete /REBOOTOK $INSTDIR\LDLogon\SupportTools\MessagePresenter.exe    
+    RmDir $INSTDIR\LDLogon\SupportTools
+    
     # Exes
     Delete /REBOOTOK $INSTDIR\SupportTools\LDDebugLogEnabler.exe
     Delete /REBOOTOK $INSTDIR\SupportTools\LDErrorTranslator.exe
@@ -216,7 +256,7 @@ Section /o "-un.Device Support Tools" UNSEC0002
     Delete /REBOOTOK $INSTDIR\SupportTools\who.vbs
     Delete /REBOOTOK $INSTDIR\SupportTools\winscp.exe
     # Dlls
-	
+    
     # Dlls
     Delete /REBOOTOK $INSTDIR\SupportTools\AspectMVVM.dll
     Delete /REBOOTOK $INSTDIR\SupportTools\PostSharp.dll
@@ -257,7 +297,7 @@ Section /o -un.Main UNSEC0000
     Delete /REBOOTOK $INSTDIR\SupportTools\LICENSE.txt
     Delete /REBOOTOK  $INSTDIR\SupportTools\Images\Folder.png
     Delete /REBOOTOK  $INSTDIR\SupportTools\Images\SupportTools.png
-	
+    
     RmDir /REBOOTOK $INSTDIR\SupportTools\Images
     RmDir /REBOOTOK $INSTDIR\SupportTools
 
@@ -273,6 +313,11 @@ Section -un.post UNSEC0004
     DeleteRegKey /IfEmpty HKLM "${REGKEY}"
     RmDir /REBOOTOK $INSTDIR\SupportTools
     RmDir /REBOOTOK $INSTDIR\Tools
+SectionEnd
+
+Section -un.post UNSEC0005
+    Delete /REBOOTOK $INSTDIR\LDLogon\SupportTools.ini
+    DeleteRegValue HKLM "SOFTWARE\LANDESK\ManagementSuite\Stamping\Files" "SupportTools"
 SectionEnd
 
 # Installer functions
