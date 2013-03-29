@@ -12,8 +12,19 @@ namespace MessagePresenter
         public MainWindow()
         {
             InitializeComponent();
-            
-            WebBrowserMessage.NavigateToString(System.Net.WebUtility.HtmlDecode(ArgsHandler.Instance["html"]));
+            InitializeMessage();
+        }
+
+        private void InitializeMessage()
+        {
+            if (ArgsHandler.Instance["html"].StartsWith("http://") || ArgsHandler.Instance["html"].StartsWith("https://"))
+            {
+                WebBrowserMessage.Navigate(ArgsHandler.Instance["html"]);
+            }
+            else
+            {
+                WebBrowserMessage.NavigateToString(System.Net.WebUtility.HtmlDecode(ArgsHandler.Instance["html"]));
+            }
 
             if (!string.IsNullOrEmpty(ArgsHandler.Instance["title"]))
                 Title = ArgsHandler.Instance["title"];
