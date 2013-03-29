@@ -7,9 +7,9 @@ SetCompressor lzma
 
 # General Symbol Definitions
 !define ProjName "Support Tools for LDMS"
-!define ProjVersion "Beta_9.5.0"
+!define ProjVersion "Beta_9.5.1"
 !define REGKEY "SOFTWARE\${ProjName}"
-!define VERSION 9.5.0
+!define VERSION 9.5.1
 !define COMPANY "Jared Barneck"
 !define URL "http://www.rhyous.com/programming-development/landesk-add-ons/landesk-support-tools/"
 
@@ -108,6 +108,7 @@ Section "Support Tools" SEC0001
     File ManagementSuite\Tools\LDDiscover.xml
     File ManagementSuite\Tools\LDGatherLogs.xml
     File ManagementSuite\Tools\LDSupportGatewayRC.xml
+    File ManagementSuite\Tools\LocalSystemCommandPrompt.xml
     File ManagementSuite\Tools\SupportToolsServiceManager.xml
     File ManagementSuite\Tools\Zenmap.xml
 
@@ -277,6 +278,7 @@ Section /o "-un.Support Tools" UNSEC0001
     Delete /REBOOTOK $INSTDIR\Tools\Zenmap.xml
     Delete /REBOOTOK $INSTDIR\Tools\LDValidate.xml
     Delete /REBOOTOK $INSTDIR\Tools\LDSupportGatewayRC.xml
+    Delete /REBOOTOK $INSTDIR\Tools\LocalSystemCommandPrompt
     Delete /REBOOTOK $INSTDIR\Tools\SupportToolsServiceManager.xml
     Delete /REBOOTOK $INSTDIR\Tools\LDSelfServicePortal.xml
     Delete /REBOOTOK $INSTDIR\Tools\LDGatherLogs.xml
