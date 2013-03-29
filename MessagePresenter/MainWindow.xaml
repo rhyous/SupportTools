@@ -3,7 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:loc="clr-namespace:MessagePresenter"
         Title="Message Presenter" 
-        Height="350" Width="525" Icon="Message.ico">
+        Height="350" Width="525" 
+        Icon="Message.ico" 
+        WindowStartupLocation="CenterScreen" 
+        Topmost="True"
+        >
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
