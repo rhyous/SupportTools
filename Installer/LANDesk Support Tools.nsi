@@ -207,7 +207,7 @@ Section /o "Agent ini" SEC0005
     # Agent Ini
     File ManagementSuite\LDLogon\SupportTools.ini
     
-    WriteRegStr HKLM "SOFTWARE\LANDESK\ManagementSuite\Stamping\Files" SupportTools '"$INSTDIR\SupportTools.ini"'
+    WriteRegStr HKLM "SOFTWARE\LANDESK\ManagementSuite\Stamping\Files" SupportTools '"$INSTDIR\LDLogon\SupportTools.ini"'
     ExecWait "$INSTDIR\stamper.exe"
 SectionEnd
 
