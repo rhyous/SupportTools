@@ -4,12 +4,17 @@ using AspectMVVM;
 using Rhyous.ServiceManager.Aspects;
 using Rhyous.ServiceManager.Model;
 using Rhyous.ServiceManager.Business;
+using System.Reflection;
+using System.Xml.Serialization;
 
 namespace Rhyous.ServiceManager.Singletons
 {
-    [NotifyPropertyChanged]
+    [NotifyPropertyChangedClass]
     public class ServiceStore : IPersist
     {
+        public const string DEFAULT_FILE = "Services.xml";
+        const int REFRESH_TIME = 2000;
+
         internal ServiceStore()
         {
             //#if DEBUG
@@ -26,7 +31,12 @@ namespace Rhyous.ServiceManager.Singletons
             get { return _Instance ?? (_Instance = new ServiceStore()); }
         } private static ServiceStore _Instance;
 
+        [NotifyPropertyChanged]
         public ServiceCollection Services { get; set; }
+
+        [NotifyPropertyChanged]
+        [XmlAttribute]
+        public string Name { get; set; }
 
         public void CreateSampleData()
         {
@@ -36,23 +46,21 @@ namespace Rhyous.ServiceManager.Singletons
         public void StartContinualRefresh()
         {
             var refresher = new ServiceRefresher();
-            refresher.EnableRefreshing(Services, 1000);
+            refresher.EnableRefreshing(Services, REFRESH_TIME);
         }
 
         #region IPersist Members
-        public static void CreateInstanceFromXml()
+        public static void CreateInstanceFromXml(string inXmlFile)
         {
-            if (File.Exists("Services.xml"))
-            {
-                _Instance = Serializer.DeserializeFromXML<ServiceStore>("Services.xml");
-                _Instance.StartContinualRefresh();
-            }
+            if (Load(inXmlFile)
+             || Load(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), inXmlFile)))
+                Instance.StartContinualRefresh();
         }
 
         [BackgroundWorkerAspect]
         public void Save()
         {
-            Serializer.SerializeToXML(_Instance, "Services.xml");
+            Serializer.SerializeToXML(Instance, DEFAULT_FILE);
         }
 
         public void Load()
@@ -60,9 +68,26 @@ namespace Rhyous.ServiceManager.Singletons
             throw new System.NotImplementedException();
         }
 
+        private static bool Load(String path)
+        {
+            if (File.Exists(path))
+            {
+                ServiceStore temp = Serializer.DeserializeFromXML<ServiceStore>(path);
+                if (_Instance == null)
+                { _Instance = temp; }
+                else
+                {
+                    _Instance.Services = temp.Services;
+                    _Instance.Name = temp.Name; 
+                }
+                return true;
+            }
+            return false;
+        }
+
         public bool IsLoaded
         {
-            get { return _Instance != null; }
+            get { return Instance != null; }
         }
 
         #endregion

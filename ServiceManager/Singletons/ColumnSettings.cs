@@ -53,31 +53,31 @@ namespace Rhyous.ServiceManager.Singletons
         public bool ShowStartupTypeColumn { get; set; }
 
         [NotifyPropertyChanged]
-        [DefaultValueAspect(DefaultValue = ServiceColumn.Status, EmptyValue = 0)]
+        [DefaultValueAspect(DefaultValue = ServiceColumn.Status)]
         public int StatusColumnIndex { get; set; }
 
         [NotifyPropertyChanged]
-        [DefaultValueAspect(DefaultValue = ServiceColumn.DisplayName, EmptyValue = 0)]
+        [DefaultValueAspect(DefaultValue = ServiceColumn.DisplayName)]
         public int DisplayNameColumnIndex { get; set; }
 
         [NotifyPropertyChanged]
-        [DefaultValueAspect(DefaultValue = ServiceColumn.ServiceName, EmptyValue = 0)]
+        [DefaultValueAspect(DefaultValue = ServiceColumn.ServiceName)]
         public int ServiceNameColumnIndex { get; set; }
 
         [NotifyPropertyChanged]
-        [DefaultValueAspect(DefaultValue = ServiceColumn.Description, EmptyValue = 0)]
+        [DefaultValueAspect(DefaultValue = ServiceColumn.Description)]
         public int DescriptionColumnIndex { get; set; }
 
         [NotifyPropertyChanged]
-        [DefaultValueAspect(DefaultValue = ServiceColumn.IsInstalled, EmptyValue = 0)]
+        [DefaultValueAspect(DefaultValue = ServiceColumn.IsInstalled)]
         public int IsInstalledColumnIndex { get; set; }
 
         [NotifyPropertyChanged]
-        [DefaultValueAspect(DefaultValue = ServiceColumn.StartupType, EmptyValue = 0)]
+        [DefaultValueAspect(DefaultValue = ServiceColumn.StartupType)]
         public int StartupTypeColumnIndex { get; set; }
 
         [NotifyPropertyChanged]
-        [DefaultValueAspect(DefaultValue = ServiceColumn.StartStopButton, EmptyValue = 0)]
+        [DefaultValueAspect(DefaultValue = ServiceColumn.StartStopButton)]
         public int StartStopButtonColumnIndex { get; set; }
 
         public void Load()

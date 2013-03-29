@@ -16,7 +16,7 @@ namespace Rhyous.ServiceManager
         {
             Instance = this;
             ColumnSettings.CreateInstanceFromXml();
-            ServiceStore.CreateInstanceFromXml();
+            ServiceStore.CreateInstanceFromXml(ServiceStore.DEFAULT_FILE);
 
             base.OnStartup(e);
             MainWindow main = new MainWindow();

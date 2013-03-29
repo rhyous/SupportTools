@@ -9,7 +9,6 @@ namespace Rhyous.ServiceManager.Business
         public ExampleData()
         {
             Services = new ServiceCollection();
-            Services.Name = "MS SQL Express Services";
             Service s1 = new Service()
             {
                 DisplayName = "SQL Active Directory Helper Service",

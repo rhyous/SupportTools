@@ -26,6 +26,7 @@ namespace Rhyous.ServiceManager.ViewModel
 
         #region Properties
 
+        // Bind directly to the ServiceStore.Instance.Services object
         [NotifyPropertyChanged]
         public ServiceCollection Services
         {

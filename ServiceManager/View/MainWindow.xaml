@@ -5,15 +5,11 @@
         xmlns:MVVM="clr-namespace:AspectMVVM;assembly=AspectMVVM"
         xmlns:Singletons="clr-namespace:Rhyous.ServiceManager.Singletons"
         Title="{Binding WindowName, FallbackValue='Service Manager'}" 
-        SizeToContent="WidthAndHeight" MinWidth="400" MinHeight="200">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <view:MainMenuView />
-        <ItemsControl ItemsSource="{Binding ViewModels}" Grid.Row="1"/>
-        <view:ServicesView Grid.Row="1" x:Name="ServicesView" DataContext="{x:Static Singletons:ServiceStore.Instance}"/>
-    </Grid>
+        SizeToContent="WidthAndHeight" 
+        MinWidth="400" MinHeight="200" 
+        Icon="/Rhyous.ServiceManager;component/Services.ico">
+    <DockPanel>
+        <view:MainMenuView DockPanel.Dock="Top"/>
+        <view:ServicesView x:Name="ServicesView" DataContext="{x:Static Singletons:ServiceStore.Instance}"/>
+    </DockPanel>
 </Window>

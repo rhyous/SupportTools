@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using Rhyous.ServiceManager.Aspects;
 using Rhyous.ServiceManager.Business;
 using Rhyous.ServiceManager.Model;
 using Rhyous.ServiceManager.Singletons;
@@ -21,6 +22,7 @@ namespace Rhyous.ServiceManager.View
             App.Instance.Shutdown(0);
         }
 
+        [ExceptionAspect]
         private void OpenClick(object sender, System.Windows.RoutedEventArgs e)
         {
             OpenFileDialog dlg = new OpenFileDialog();
@@ -34,7 +36,7 @@ namespace Rhyous.ServiceManager.View
             if (result == true)
             {
                 // Open document
-                ServiceStore.Instance.Services = Serializer.DeserializeFromXML<ServiceCollection>(dlg.FileName);
+                ServiceStore.CreateInstanceFromXml(dlg.FileName);
             }
         }
     }
