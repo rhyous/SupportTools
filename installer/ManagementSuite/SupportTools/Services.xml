@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ServiceStore>
+<ServiceStore Name="LANDesk and Related Services">
   <Services>
     <Service>
       <ServiceName>MSSQLServerADHelper100</ServiceName>
     </Service>
     <Service>
-      <ServiceName>MSSQL$SQLEXPRESS</ServiceName>
+      <ServiceName>MSSQL$LDMSDATA</ServiceName>
     </Service>
     <Service>
-      <ServiceName>SQLAgent$SQLEXPRESS</ServiceName>
+      <ServiceName>SQLAgent$LDMSDATA</ServiceName>
     </Service>
     <Service>
       <ServiceName>SQLBrowser</ServiceName>
@@ -57,9 +57,6 @@
     </Service>
     <Service>
       <ServiceName>LSM_SNMP</ServiceName>
-    </Service>
-    <Service>
-      <ServiceName>MSSQL$LDMSDATA</ServiceName>
     </Service>
     <Service>
       <ServiceName>W3SVC</ServiceName>
