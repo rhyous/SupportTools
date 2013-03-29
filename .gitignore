@@ -1,0 +1,17 @@
+/Agent.Ping/bin
+/Agent.Ping/obj
+/AspectMVVM/bin
+/AspectMVVM/obj
+/MessagePresenter/bin
+/MessagePresenter/obj
+/NSIS/obj
+/ServiceManager/bin
+/ServiceManager/obj
+/SupportTools/bin
+/SupportTools/obj
+/SupportTools.DockingForm/bin
+/SupportTools.DockingForm/obj
+/SupportToolsTests/bin
+/SupportToolsTests/obj
+/UnmanagedToManaged/bin
+/UnmanagedToManaged/obj
