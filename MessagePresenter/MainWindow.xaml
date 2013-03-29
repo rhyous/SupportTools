@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:loc="clr-namespace:MessagePresenter"
         Title="Message Presenter" 
-        Height="350" Width="525">
+        Height="350" Width="525" Icon="Message.ico">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -16,6 +16,6 @@
         <GroupBox Name="GroupBoxHtml" Header="Message: " Grid.Row="1" >
             <WebBrowser Name="WebBrowserMessage" Loaded="MessageLoaded"/>
         </GroupBox>
-        <Button Name="ButtonDismiss" Content="Dismiss" Height="30" Grid.Row="2" Margin="5" Click="Button_Click_1" />
+        <Button Name="ButtonDismiss" Content="Dismiss" Height="30" Grid.Row="2" Margin="5" Click="Button_Click" />
     </Grid>
 </Window>
