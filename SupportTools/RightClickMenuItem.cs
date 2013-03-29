@@ -50,7 +50,12 @@ namespace SupportTools
         #endregion
 
         #region Properties
-        public String Command 
+        /// <summary>
+        /// Track if this was executed already as sometimes right-click tries to execute more than once.
+        /// </summary>
+        public bool HasExecuted { get; set; }
+
+        public String Command
         {
             get
             {
@@ -75,14 +80,20 @@ namespace SupportTools
                     MenuAction action = (MenuAction)_MenuItem;
                     return action.Parameters;
                 }
-                else
+                return null;
+            }
+            set
+            {
+                if (_MenuItem is MenuAction)
                 {
-                    return null;
+                    MenuAction action = (MenuAction)_MenuItem;
+                    action.Parameters = value;
                 }
             }
+
         }
 
-       
+
         public String ExecutionLocation
         {
             get

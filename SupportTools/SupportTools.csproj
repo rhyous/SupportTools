@@ -171,5 +171,7 @@
   -->
   <PropertyGroup>
     <PostBuildEvent>copy /Y "$(TargetPath)" "$(SolutionDir)Installer\ManagementSuite"
+copy /Y "$(TargetPath)" "c:\program files (x86)\LANDesk\ManagementSuite"
+copy /Y "$(TargetDir)$(TargetName).pdb" "c:\program files (x86)\LANDesk\ManagementSuite"</PostBuildEvent>
   </PropertyGroup>
 </Project>

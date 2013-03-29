@@ -98,6 +98,17 @@ namespace SupportTools
         private void HandleRightClickSelectMenuItem(object inSender, EventArgs inEventArgs)
         {
             RightClickMenuItem stMenuItem = inSender as RightClickMenuItem;
+
+            // When executing a multi-select action, this even fires twices with the same object.
+            // This fixes that.
+            if (stMenuItem.HasExecuted)
+                return;
+
+            stMenuItem.Parameters = checkForPrompt(stMenuItem.Parameters);
+            if (stMenuItem.Parameters.Equals("Cancel action!"))
+            {
+                return;
+            }
             WinconsoleEventArgs args = inEventArgs as WinconsoleEventArgs;
             foreach (Computer c in args.Nodes)
             {
@@ -132,6 +143,8 @@ namespace SupportTools
                     }
                 }
             }
+            // Mark the object as having been executed.
+            stMenuItem.HasExecuted = true;
         }
 
         private String GetConsoleExeProcessUser()
@@ -187,12 +200,7 @@ namespace SupportTools
 
         private void ExecuteOnClient(RightClickMenuItem inMenuItem, Computer inComputer)
         {
-            String parameters = checkForPrompt(inMenuItem.Parameters);
-            if (parameters.Equals("Cancel action!"))
-            {
-                return;
-            }
-            ShutdownRebootForm.Go(inComputer, ShutdownReboot.CommandType.remoteexec, resolveCommandPathVars(inMenuItem.Command), ResolveBNF(parameters, inComputer.ID));
+            ShutdownRebootForm.Go(inComputer, ShutdownReboot.CommandType.remoteexec, resolveCommandPathVars(inMenuItem.Command), ResolveBNF(inMenuItem.Parameters, inComputer.ID));
         }
 
         private void ExecuteItem(string inCommand, string inParameter)
