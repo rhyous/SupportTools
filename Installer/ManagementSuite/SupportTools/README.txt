@@ -6,10 +6,14 @@ Though I didn't create all the tools, only some, I am putting them all in one in
 So many poeple have helped me it is difficult to thank them all.
 
 Version 9.5.0
-1. Updated Solutions to .NET 4.5
-2. Separated the NSIS installer to its own empty project.
-3. Added Service Manager.
-4. Some rebranding...
+1. Separated the NSIS installer to its own empty project.
+2. Added Service Manager.
+3. Some rebranding...
+4. Added Message Presenter.
+5. Fixed Multi-select items.
+6. Fixed %Prompt% to only prompt once when doing multi-select.
+7. Versioned all the files.
+8. Added Right-click stop service %Prompt% when you can stop or start a service.
 
 
 Version: 9.0.3.1 
