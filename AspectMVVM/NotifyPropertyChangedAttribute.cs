@@ -1,16 +1,15 @@
 ﻿using System;
 using PostSharp.Aspects;
-using PostSharp.Aspects.Dependencies;
 
 namespace AspectMVVM
 {
     [Serializable]
-    [ProvideAspectRole(StandardRoles.DataBinding)]
     public class NotifyPropertyChanged : LocationInterceptionAspect
     {
         public NotifyPropertyChanged()
             : this(true, null)
         {
+            AspectPriority = 100;
         }
 
         public NotifyPropertyChanged(params string[] inProperty)
@@ -41,14 +40,14 @@ namespace AspectMVVM
 
                 // Notify for current property
                 if (_NotifyCurrentProperty)
-                    npc.NotifyPropertyChanged(args.Location.PropertyInfo.Name);
+                    npc.OnPropertyChanged(args.Location.PropertyInfo.Name);
 
                 // Notify for other properties
                 if (_OtherProperties != null)
                 {
                     foreach (string otherProperty in _OtherProperties)
                     {
-                        npc.NotifyPropertyChanged(otherProperty);
+                        npc.OnPropertyChanged(otherProperty);
                     }
                 }
             }

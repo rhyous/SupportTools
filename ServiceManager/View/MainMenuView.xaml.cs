@@ -1,7 +1,5 @@
 ﻿using Microsoft.Win32;
 using Rhyous.ServiceManager.Aspects;
-using Rhyous.ServiceManager.Business;
-using Rhyous.ServiceManager.Model;
 using Rhyous.ServiceManager.Singletons;
 
 namespace Rhyous.ServiceManager.View
@@ -14,7 +12,6 @@ namespace Rhyous.ServiceManager.View
         public MainMenuView()
         {
             InitializeComponent();
-
         }
 
         private void ExitClick(object sender, System.Windows.RoutedEventArgs e)
@@ -25,12 +22,10 @@ namespace Rhyous.ServiceManager.View
         [ExceptionAspect]
         private void OpenClick(object sender, System.Windows.RoutedEventArgs e)
         {
-            OpenFileDialog dlg = new OpenFileDialog();
-            dlg.DefaultExt = ".xml"; // Default file extension
-            dlg.Filter = "XML |*.xml"; // Filter files by extension
+            var dlg = new OpenFileDialog { DefaultExt = ".xml", Filter = "XML |*.xml" };
 
             // Show open file dialog box
-            bool? result = dlg.ShowDialog();
+            var result = dlg.ShowDialog();
 
             // Process open file dialog box results
             if (result == true)

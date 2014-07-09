@@ -1,0 +1,11 @@
+C:\Users\jbarneck\Documents\Projects\GIT\ldmsplugins\AspectMVVMTests\bin\Release\AspectMVVMTests.dll
+C:\Users\jbarneck\Documents\Projects\GIT\ldmsplugins\AspectMVVMTests\bin\Release\AspectMVVMTests.pdb
+C:\Users\jbarneck\Documents\Projects\GIT\ldmsplugins\AspectMVVMTests\bin\Release\AspectMVVM.dll
+C:\Users\jbarneck\Documents\Projects\GIT\ldmsplugins\AspectMVVMTests\bin\Release\PostSharp.dll
+C:\Users\jbarneck\Documents\Projects\GIT\ldmsplugins\AspectMVVMTests\bin\Release\AspectMVVM.pdb
+C:\Users\jbarneck\Documents\Projects\GIT\ldmsplugins\AspectMVVMTests\bin\Release\PostSharp.xml
+C:\Users\jbarneck\Documents\Projects\GIT\ldmsplugins\AspectMVVMTests\obj\Release\AspectMVVMTests.csprojResolveAssemblyReference.cache
+C:\Users\jbarneck\Documents\Projects\GIT\ldmsplugins\AspectMVVMTests\obj\Release\AspectMVVMTests.dll
+C:\Users\jbarneck\Documents\Projects\GIT\ldmsplugins\AspectMVVMTests\obj\Release\AspectMVVMTests.pdb
+C:\Users\jbarneck\Documents\Projects\GIT\ldmsplugins\AspectMVVMTests\bin\Release\AspectMVVMTests.pssym
+C:\Users\jbarneck\Documents\Projects\GIT\ldmsplugins\AspectMVVMTests\obj\Release\AspectMVVMTests.dll.postsharp

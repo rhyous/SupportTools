@@ -25,13 +25,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Data;
 using System.Diagnostics;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using LANDesk.ManagementSuite.WinConsole.Tools;
 using Microsoft.Win32;
 
-using LANDesk.ManagementSuite.Database;
 using LANDesk.ManagementSuite.UserManagement.Business;
 using LANDesk.ManagementSuite.WinConsole;
 using SupportTools.ContextMenuXml;
@@ -39,13 +39,13 @@ using System.Web;
 
 namespace SupportTools
 {
-    public class SupportTools : LANDesk.ManagementSuite.WinConsole.Tools.ToolForm
+    public class SupportTools : ToolForm
     {
-        static bool _IsHandlerAdded = false;
-        WinConsoleMenuItem[] _MenuItems;
-        String _LDMainPath;
-        String _XmlFileName;
-        EventHandler _EventHandler;
+        static bool _IsHandlerAdded;
+        RightClickMenuItem[] _MenuItems;
+        readonly String _LDMainPath;
+        readonly String _XmlFileName;
+        readonly EventHandler _EventHandler;
 
         public SupportTools()
         {
@@ -53,21 +53,28 @@ namespace SupportTools
             _XmlFileName = _LDMainPath + @"SupportTools\SupportTools.xml";
             if (_IsHandlerAdded == false)
             {
-                Computer.AddingContextMenus += new LANDesk.ManagementSuite.WinConsole.Computer.AddContextMenusHandler(Computer_AddSupportToolsMenuHandler);
+                Computer.AddingContextMenus += Computer_AddSupportToolsMenuHandler;
                 _IsHandlerAdded = true;
             }
-            _EventHandler = new EventHandler(HandleRightClickSelectMenuItem);
+            _EventHandler = HandleRightClickSelectMenuItem;
         }
+
+        public BnfResolver BnfResolver
+        {
+            get { return _BnfResolver ?? (_BnfResolver = new BnfResolver()); }
+            set { _BnfResolver = value; }
+        } private BnfResolver _BnfResolver;
+
 
         private void Computer_AddSupportToolsMenuHandler(object inSender, WinConsoleContextMenu inMenu)
         {
-            ComputerContextMenu contextMenu = Serializer.DeserializeFromXML<ComputerContextMenu>(_XmlFileName);
-            MenuItemList MILFX = new MenuItemList(contextMenu, (Computer)inSender, _EventHandler);
-            _MenuItems = MILFX.GetSupportToolsMenuItemArray();
-            for (int i = 0; i < _MenuItems.Length; i++)
+            var contextMenu = Serializer.DeserializeFromXML<ComputerContextMenu>(_XmlFileName);
+            var milfx = new MenuItemList(contextMenu, (Computer)inSender, _EventHandler);
+            _MenuItems = milfx.GetSupportToolsMenuItemArray();
+            foreach (var t in _MenuItems)
             {
                 inMenu.Add(WinConsoleMenuItem.Separator);
-                inMenu.Add(_MenuItems[i]);
+                inMenu.Add(t);
             }
             inMenu.Add(WinConsoleMenuItem.Separator);
 
@@ -75,12 +82,12 @@ namespace SupportTools
 
         private bool UserHasRemoteControlRights()
         {
-            bool bRet = false;
+            var bRet = false;
             try
             {
                 if (Global.MainForm.NTUser.CheckRights(LDMSRights.ExecuteProgramsEdit))
                 {
-                    Trace.WriteLine(System.Diagnostics.Process.GetCurrentProcess().StartInfo.UserName + "has RC Rights");
+                    Trace.WriteLine(Process.GetCurrentProcess().StartInfo.UserName + "has RC Rights");
                     bRet = true;
                 }
             }
@@ -90,26 +97,28 @@ namespace SupportTools
                 bRet = false;
             }
 
-            Trace.WriteLine("GetUserRights Return " + bRet.ToString() + " for " + System.Diagnostics.Process.GetCurrentProcess().StartInfo.UserName);
+            Trace.WriteLine("GetUserRights Return " + bRet + " for " + Process.GetCurrentProcess().StartInfo.UserName);
             return bRet;
 
         }
 
         private void HandleRightClickSelectMenuItem(object inSender, EventArgs inEventArgs)
         {
-            RightClickMenuItem stMenuItem = inSender as RightClickMenuItem;
+            var stMenuItem = inSender as RightClickMenuItem;
+            if (stMenuItem == null) return;
 
             // When executing a multi-select action, this even fires twices with the same object.
             // This fixes that.
             if (stMenuItem.HasExecuted)
                 return;
 
-            stMenuItem.Parameters = checkForPrompt(stMenuItem.Parameters);
+            stMenuItem.Parameters = CheckForPrompt(stMenuItem.Parameters);
             if (stMenuItem.Parameters.Equals("Cancel action!"))
             {
                 return;
             }
-            WinconsoleEventArgs args = inEventArgs as WinconsoleEventArgs;
+            var args = inEventArgs as WinconsoleEventArgs;
+            if (args == null) return;
             foreach (Computer c in args.Nodes)
             {
                 if (stMenuItem.ExecutionLocation.ToLower().Equals("core"))
@@ -117,7 +126,7 @@ namespace SupportTools
                     // Should always execute on the Core server, even if launched from a
                     // Remote Console, but it is not implemented yet.
                     // Currently this value acts the same as console.
-                    ExecuteOnConsole(stMenuItem, c);
+                    ExecuteOnCore(stMenuItem, c);
                 }
                 else if (stMenuItem.ExecutionLocation.ToLower().Equals("console"))
                 {
@@ -134,12 +143,14 @@ namespace SupportTools
                     }
                     else
                     {
-                        String UserLoggedIntoTheConsole = Global.MainForm.User.UserName; ;
-                        String ConsoleProcessUser = GetConsoleExeProcessUser();
+                        var userLoggedIntoTheConsole = Global.MainForm.User.UserName;
+                        var consoleProcessUser = GetConsoleExeProcessUser();
 
-                        MessageBox.Show("You must have 'Remote Control' rights to execute commands remotely on this device.\n\n"
-                                        + "User logged into console: "
-                                        + UserLoggedIntoTheConsole);
+                        MessageBox.Show(@"You must have 'Remote Control' rights to execute commands remotely on this device."
+                                            + Environment.NewLine + Environment.NewLine
+                                            + @"User logged into console: " + userLoggedIntoTheConsole
+                                            + Environment.NewLine
+                                            + @"User running the console.exe process: " + consoleProcessUser);
                     }
                 }
             }
@@ -149,9 +160,9 @@ namespace SupportTools
 
         private String GetConsoleExeProcessUser()
         {
-            String username = "";
-            String userdomain = "";
-            System.Collections.Specialized.StringDictionary sd = Process.GetCurrentProcess().StartInfo.EnvironmentVariables;
+            var username = "";
+            var userdomain = "";
+            var sd = Process.GetCurrentProcess().StartInfo.EnvironmentVariables;
             foreach (DictionaryEntry de in sd)
             {
                 if (de.Key.ToString().ToLower().Equals("username"))
@@ -167,18 +178,25 @@ namespace SupportTools
             {
                 return username;
             }
-            else
-            {
-                return userdomain + @"\" + username;
-            }
-
+            return userdomain + @"\" + username;
         }
 
         private String GetLDMainPathFromReg()
         {
-            string FilePath = @"C:\Program Files\LANDesk\ManagementSuite\";
-            RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\LANDesk\ManagementSuite\Setup");
-            return key.GetValue("LdmainPath", FilePath).ToString();
+            const string defaultFilePath = @"C:\Program Files\LANDesk\ManagementSuite\";
+
+            // Try 32 bit registry
+            var key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\LANDesk\ManagementSuite\Setup");
+            if (key != null)
+                return key.GetValue("LdmainPath", defaultFilePath).ToString();
+
+            // Try 64 bit registry
+            var localKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64);
+            key = localKey.OpenSubKey(@"SOFTWARE\LANDesk\ManagementSuite\Setup");
+            if (key != null)
+                return key.GetValue("LdmainPath", defaultFilePath).ToString();
+
+            return defaultFilePath;
         }
 
         private void ExecuteOnCore(RightClickMenuItem inMenuItem, Computer inComputer)
@@ -189,34 +207,35 @@ namespace SupportTools
 
         private void ExecuteOnConsole(RightClickMenuItem inMenuItem, Computer inComputer)
         {
-            String parameters = checkForPrompt(inMenuItem.Parameters);
+            var parameters = CheckForPrompt(inMenuItem.Parameters);
             if (parameters.Equals("Cancel action!"))
             {
                 return;
             }
-            ExecuteItem(ResolveBNF(resolveCommandPathVars(inMenuItem.Command), inComputer.ID), ResolveBNF(parameters, inComputer.ID));
+            ExecuteItem(BnfResolver.ResolveBnf(ResolveCommandPathVars(inMenuItem.Command), inComputer.ID), BnfResolver.ResolveBnf(parameters, inComputer.ID));
         }
 
 
         private void ExecuteOnClient(RightClickMenuItem inMenuItem, Computer inComputer)
         {
-            ShutdownRebootForm.Go(inComputer, ShutdownReboot.CommandType.remoteexec, resolveCommandPathVars(inMenuItem.Command), ResolveBNF(inMenuItem.Parameters, inComputer.ID));
+            ShutdownRebootForm.Go(inComputer, ShutdownReboot.CommandType.remoteexec, ResolveCommandPathVars(inMenuItem.Command), BnfResolver.ResolveBnf(inMenuItem.Parameters, inComputer.ID));
         }
 
         private void ExecuteItem(string inCommand, string inParameter)
         {
-            ProcessStartInfo startInfo = new ProcessStartInfo(inCommand, inParameter);
-            startInfo.WorkingDirectory = _LDMainPath;
-            startInfo.CreateNoWindow = true;
+            var startInfo = new ProcessStartInfo(inCommand, inParameter)
+            {
+                WorkingDirectory = _LDMainPath,
+                CreateNoWindow = true
+            };
             Process.Start(startInfo);
             //Process.Start(command, parameter);
-            return;
         }
 
-        private string checkForPrompt(String inParameter)
+        private string CheckForPrompt(String inParameter)
         {
             if (String.IsNullOrEmpty(inParameter))
-                return inParameter;
+                return string.Empty;
 
             if (inParameter.ToLower().Contains("%prompt"))
             {
@@ -224,18 +243,17 @@ namespace SupportTools
                 // or lower case.  We do this by remove %Promp% and in any case and replacing
                 // it with %prompt% all lowercase, without affecting the case of other parameters,
                 // because some commands have case sensitive parameters.
-                MatchCollection mc;
-                List<string> allPrompts = new List<string>();
-                List<int> matchposition = new List<int>();
+                var allPrompts = new List<string>();
+                var matchposition = new List<int>();
 
 
                 // Create a new Regex object and define the regular expression.
-                Regex r = new Regex("%prompt:([^%]*%)");
+                var r = new Regex("%prompt:([^%]*%)");
                 // Use the Matches method to find all matches in the input string.
-                mc = r.Matches(inParameter);
+                var mc = r.Matches(inParameter);
                 // Loop through the match collection to retrieve all 
                 // matches and positions.
-                for (int i = 0; i < mc.Count; i++)
+                for (var i = 0; i < mc.Count; i++)
                 {
                     // Add the match string to the string array.   
                     allPrompts.Add(mc[i].Value.Substring("%prompt:".Length, mc[i].Length - "%prompt:".Length - 1));
@@ -243,36 +261,33 @@ namespace SupportTools
                     matchposition.Add(mc[i].Index);
 
                 }
-                DataPrompt myForm = new DataPrompt(allPrompts);
+                var myForm = new DataPrompt(allPrompts);
                 myForm.ShowDialog();
-                List<string> tempStrList = myForm.getMessageText();
+                var tempStrList = myForm.getMessageText();
 
                 if (tempStrList != null)
                 {
-                    foreach (string s in tempStrList)
+                    if (tempStrList.Any(String.IsNullOrEmpty))
                     {
-                        if (String.IsNullOrEmpty(s))
-                        {
-                            return "Cancel action!";
-                        }
+                        return "Cancel action!";
                     }
+                    //Replace each prompt in the parameter with the userinput value.
+                    var szNewParameter = inParameter;
+                    for (var i = 0; i < allPrompts.Count; i++)
+                    {
+                        szNewParameter = szNewParameter.Replace(mc[i].Value, "\"" + HttpUtility.HtmlEncode(tempStrList[i]) + "\"");
+                    }
+                    return szNewParameter;
                 }
-                //Replace each prompt in the parameter with the userinput value.
-                string szNewParameter = inParameter;
-                for (int i = 0; i < allPrompts.Count; i++)
-                {
-                    szNewParameter = szNewParameter.Replace(mc[i].Value, "\"" + HttpUtility.HtmlEncode(tempStrList[i]) + "\"");
-                }
-                return szNewParameter;
             }
             return inParameter;
         }
 
         /*
- *  This is not for environment variables, this is for special variables such as
- *  %DTMDIR% or %ldmain%, which both should resolve to the ManagementSuite directory.
- */
-        private string resolveCommandPathVars(String inCommand)
+         *  This is not for environment variables, this is for special variables such as
+         *  %DTMDIR% or %ldmain%, which both should resolve to the ManagementSuite directory.
+         */
+        private string ResolveCommandPathVars(String inCommand)
         {
             // Make it all lowercase cause I don't want to worry about case
             // when checking if the command path contains these variables.
@@ -293,142 +308,5 @@ namespace SupportTools
             }
             return inCommand;
         }
-
-        private string ResolveBNF(string inParameter, int inID)
-        {
-            int startLoc = 0, loc1, loc2;
-            ArrayList bnflist = new ArrayList();
-
-            try
-            {
-                if ((loc1 = inParameter.IndexOf('%')) == -1)
-                {
-                    return inParameter;
-                }
-                if ((loc2 = inParameter.IndexOf('%', loc1 + 1)) == -1)
-                {
-                    return inParameter;
-                }
-            }
-            catch
-            {
-                return inParameter;
-            }
-
-            bool isBNF = true;
-            string temp = inParameter;
-            string ret = inParameter;
-            string bnf = "";
-            int i = 0;
-
-            // Since we have already checked loc1 and loc2, we will always do this one,
-            // so we will use 'do' iterator.
-            do
-            {
-                if (temp.Substring(loc1, (loc2 - loc1)).Contains("."))
-                {
-                    isBNF = true;
-                    bnf = temp.Substring(loc1 + 1, loc2 - loc1 - 1);
-                    bnflist.Add(bnf);
-                    ret = temp.Substring(0, loc1);
-                    ret += string.Format("{{{0}}}", i.ToString());
-                    ret += temp.Substring(loc2 + 1);
-                    temp = ret;
-                    startLoc = temp.IndexOf("{" + i++ + "}") + 3;
-
-                }
-                else
-                {
-                    isBNF = false;
-                }
-                try
-                {
-                    if (isBNF)
-                    {
-                        loc1 = temp.IndexOf('%', startLoc);
-                    }
-                    else
-                    {
-                        loc1 = temp.IndexOf('%', (startLoc = (loc2 + 1)));
-                    }
-                    loc2 = temp.IndexOf('%', loc1 + 1);
-                }
-                catch
-                {
-                    break;
-                }
-            } while ((loc1 != -1) && (loc2 != -1));
-
-            ret = GetBNFValue(bnflist, ret, inID);
-            return ret;
-        }
-
-        private string GetBNFValue(ArrayList inBNFList, string inCommand, int inID)
-        {
-            object sort = new string[] { "" };
-            object group = new string[] { "" };
-            inBNFList.TrimToSize();
-            object columns = inBNFList.ToArray();
-            string Filter = "Computer.ID = ";
-            Filter += inID.ToString();
-
-            try
-            {
-                LanDeskDatabase _database = LanDeskDatabase.Get();
-
-                string sql = _database.IDal.GetSQL(_database.ConnectionString, Filter, ref sort, ref group, ref columns, 0);
-                DataRow row = _database.ExecuteRow(sql);
-                if (row != null)
-                {
-                    string val = "";
-                    string[] strret = new string[row.ItemArray.Length];
-                    for (int k = 0; k < row.ItemArray.Length; k++)
-                    {
-                        val = row.ItemArray[k].ToString().Trim();
-                        val = FixIpAddress(val);
-                        strret[k] = val;
-                    }
-
-                    inCommand = string.Format(inCommand, strret);
-                }
-            }
-            catch (Exception ex)
-            {
-                Trace.WriteLine(ex.Message);
-            }
-            return inCommand;
-        }
-
-        private string FixIpAddress(string inIpAddress)
-        {
-            string tempString = "";
-            string[] bytes = inIpAddress.Split('.');
-            if (bytes.Length == 4)
-            {
-                try
-                {
-                    for (int i = 0; i < bytes.Length; i++)
-                    {
-                        byte u = Convert.ToByte(bytes[i]);
-                        bytes[i] = u.ToString();
-                    }
-                    for (int i = 0; i < bytes.Length; i++)
-                    {
-                        tempString += bytes[i];
-                        if (i < bytes.Length - 1)
-                            tempString += ".";
-                    }
-                }
-                catch (Exception)
-                {
-                    tempString = inIpAddress;
-                }
-            }
-            else
-                tempString = inIpAddress;
-            return tempString;
-        }
-
-
     }
 }

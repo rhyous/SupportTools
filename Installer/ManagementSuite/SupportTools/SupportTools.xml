@@ -1,16 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ComputerContextMenu xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="Computer context menu">
   <MenuItem xsi:type="MenuAction" Name="Send Message">
-    <Command>"%"Computer"."OS"."NT Info"."System Root"%\sysnative\msg.exe</Command>
-    <OSType>Workstation, Server</OSType>
-    <Parameters>* /TIME:%prompt:Time in seconds to show message on screen.:4% "%prompt:Enter Message. (Currently only one line is supported.):512%"</Parameters>
-    <MultiSelect>true</MultiSelect>
+    <Command>StartAsUser.exe</Command>
+    <Parameters>%"Computer"."OS"."NT Info"."System Root"%\sysnative\msg.exe * /TIME:%prompt:Time in seconds to show message on screen.:4% "%prompt:Enter Message. (Currently only one line is supported.):512%"</Parameters>
     <ExecutionLocation>Client</ExecutionLocation>
+    <MultiSelect>true</MultiSelect>
   </MenuItem>
-  <MenuItem xsi:type="MenuAction" Name="Present Message">
+  <MenuItem xsi:type="MenuAction" Name="Send HTML Message">
     <Command>startasuser.exe</Command>
     <OSType>Workstation, Server</OSType>
-    <Parameters>MessagePresenter.exe TIMEOUT=%prompt:Time in seconds to show message on screen.:4% html=%prompt:Enter Message in html.:1024% from=%prompt:Who is the message from:128%</Parameters>
+    <Parameters>MessagePresenter.exe TIMEOUT=%prompt:Time in seconds to show message on screen.:4% html=%prompt:Enter Message in html or provide URL.:1024% from=%prompt:Who is the message from:128%</Parameters>
     <MultiSelect>true</MultiSelect>
     <ExecutionLocation>Client</ExecutionLocation>
   </MenuItem>
@@ -22,29 +21,29 @@
   </MenuItem>
   <MenuItem xsi:type="MenuGroup" Name="LANDesk Tools">
     <MenuItem xsi:type="MenuAction" Name="LD Ping by Name (Using Explorer)">
-      <Command>SupportTools\LANDesk.Agent.Ping.exe</Command>
+      <Command>SupportTools\Rhyous.Agent.Ping.exe</Command>
       <Parameters>%"Computer"."Network"."TCPIP"."Host Name"%</Parameters>
     </MenuItem>
     <MenuItem xsi:type="MenuAction" Name="LD Ping by IP (Using Explorer)">
-      <Command>SupportTools\LANDesk.Agent.Ping.exe</Command>
+      <Command>SupportTools\Rhyous.Agent.Ping.exe</Command>
       <Parameters>%"Computer"."Network"."TCPIP"."Address"%</Parameters>
     </MenuItem>
     <MenuItem xsi:type="MenuAction" Name="Full Sync Inventory Scan">
-      <Command>"%LDMS_LOCAL_DIR%\..\ldiscn32.exe"</Command>
+      <Command>ldiscn32.exe</Command>
       <Parameters>/L /F /SYNC</Parameters>
       <MultiSelect>true</MultiSelect>
       <OSType>Workstation, Server</OSType>
       <ExecutionLocation>Client</ExecutionLocation>
     </MenuItem>
     <MenuItem xsi:type="MenuAction" Name="Policy Sync">
-      <Command>"%LDMS_LOCAL_DIR%\..\Policy.Sync.exe"</Command>
+      <Command>Policy.Sync.exe</Command>
       <Parameters></Parameters>
       <MultiSelect>true</MultiSelect>
       <OSType>Workstation, Server</OSType>
       <ExecutionLocation>Client</ExecutionLocation>
     </MenuItem>
     <MenuItem xsi:type="MenuAction" Name="SQLLite Policy Database - Recreate">
-      <Command>"%LDMS_LOCAL_DIR%\..\clientdbutil.exe"</Command>
+      <Command>clientdbutil.exe</Command>
       <Parameters>/create</Parameters>
       <MultiSelect>true</MultiSelect>
       <OSType>Workstation, Server</OSType>

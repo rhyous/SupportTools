@@ -27,7 +27,11 @@ namespace Rhyous.ServiceManager.Singletons
         }
 
         [PersistOnSetAspect(AttributeExclude = true)]
-        public static ColumnSettings Instance { get; private set; }
+        public static ColumnSettings Instance
+        {
+            get { return _Instance; }
+            private set { _Instance = value; }
+        } private static ColumnSettings _Instance;
 
         public bool IsLoaded
         {
@@ -95,14 +99,7 @@ namespace Rhyous.ServiceManager.Singletons
         public static void CreateInstanceFromXml()
         {
             String fullpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "Service Manager", "Settings", "ColumnSettings.xml");
-            if (File.Exists(fullpath))
-            {
-                Instance = Serializer.DeserializeFromXML<ColumnSettings>(fullpath);
-            }
-            else
-            {
-                Instance = new ColumnSettings();
-            }
+            Instance = File.Exists(fullpath) ? Serializer.DeserializeFromXML<ColumnSettings>(fullpath) : new ColumnSettings();
         }
     }
 }

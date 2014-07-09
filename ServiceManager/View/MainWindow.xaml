@@ -2,14 +2,14 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:view="clr-namespace:Rhyous.ServiceManager.View"
-        xmlns:MVVM="clr-namespace:AspectMVVM;assembly=AspectMVVM"
-        xmlns:Singletons="clr-namespace:Rhyous.ServiceManager.Singletons"
+        xmlns:singletons="clr-namespace:Rhyous.ServiceManager.Singletons"
         Title="{Binding WindowName, FallbackValue='Service Manager'}" 
-        SizeToContent="WidthAndHeight" 
         MinWidth="400" MinHeight="200" 
+        WindowStartupLocation="CenterOwner"
         Icon="/Rhyous.ServiceManager;component/Services.ico">
     <DockPanel>
         <view:MainMenuView DockPanel.Dock="Top"/>
-        <view:ServicesView x:Name="ServicesView" DataContext="{x:Static Singletons:ServiceStore.Instance}"/>
+        <StatusBar DockPanel.Dock="Bottom" Height="20"/>
+        <view:ServicesView x:Name="ServicesView" DataContext="{x:Static singletons:ServiceStore.Instance}"/>
     </DockPanel>
 </Window>

@@ -7,10 +7,10 @@ SetCompressor lzma
 
 # General Symbol Definitions
 !define ProjName "Support Tools for LDMS"
-!define ProjVersion "Beta_9.5.1"
+!define ProjVersion "Beta_9.6.0"
 !define REGKEY "SOFTWARE\${ProjName}"
-!define VERSION 9.5.1
-!define COMPANY "Jared Barneck"
+!define VERSION 9.6.0
+!define COMPANY "Rhyous (Jared Barneck)"
 !define URL "http://www.rhyous.com/programming-development/landesk-add-ons/landesk-support-tools/"
 
 # Global Variables
@@ -85,10 +85,6 @@ Section -Main SEC0000
     File ManagementSuite\SupportTools\LICENSE.txt
     File ManagementSuite\SupportTools\README.txt
 
-    SetOutPath $INSTDIR\Utilities\GatherLogs
-    SetOverwrite on
-    File ManagementSuite\Utilities\GatherLogs\GatherLogs.cfg
-
     SetOutPath $INSTDIR\SupportTools\Images
     SetOverwrite on
     File ManagementSuite\SupportTools\Images\SupportTools.png
@@ -103,7 +99,6 @@ Section "Support Tools" SEC0001
     SetOverwrite on
     File ManagementSuite\Tools\DebugLogEnabler.xml
     File ManagementSuite\Tools\ErrorTranslator.xml
-    File ManagementSuite\Tools\LDBKMs.xml
     File ManagementSuite\Tools\LDCommunity.xml
     File ManagementSuite\Tools\LDDiscover.xml
     File ManagementSuite\Tools\LDGatherLogs.xml
@@ -210,6 +205,7 @@ Section /o "Agent ini" SEC0005
     
     WriteRegStr HKLM "SOFTWARE\LANDESK\ManagementSuite\Stamping\Files" SupportTools '"$INSTDIR\LDLogon\SupportTools.ini"'
     ExecWait "$INSTDIR\stamper.exe"
+    ExecWait '"$INSTDIR\CreateClientConfiguration.exe" /rebuild'
 SectionEnd
 
 # Macro for selecting uninstaller sections
@@ -284,7 +280,6 @@ Section /o "-un.Support Tools" UNSEC0001
     Delete /REBOOTOK $INSTDIR\Tools\LDGatherLogs.xml
     Delete /REBOOTOK $INSTDIR\Tools\LDDiscover.xml
     Delete /REBOOTOK $INSTDIR\Tools\LDCommunity.xml
-    Delete /REBOOTOK $INSTDIR\Tools\LDBKMs.xml
     Delete /REBOOTOK $INSTDIR\Tools\ErrorTranslator.xml
     Delete /REBOOTOK $INSTDIR\Tools\DebugLogEnabler.xml
     RmDir $INSTDIR\Tools
@@ -326,10 +321,11 @@ SectionEnd
 Function .onInit
     InitPluginsDir
     !insertmacro MUI_LANGDLL_DISPLAY
+    SetRegView 64
     ReadRegStr $LDMAIN HKLM SOFTWARE\LANDesk\ManagementSuite\Setup "LDMainPath"
     StrCmp $LDMAIN "" 0 defaultdir
         MessageBox MB_YESNO $(NoCoreConsole) /SD IDYES IDNO donotinstall
-            StrCpy $LDMAIN "$PROGRAMFILES\LANDesk\Managementsuite"
+            StrCpy $LDMAIN "$PROGRAMFILES64\LANDesk\Managementsuite"
             Goto next
         donotinstall:
             Quit

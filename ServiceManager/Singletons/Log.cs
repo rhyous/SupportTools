@@ -14,6 +14,7 @@ namespace Rhyous.ServiceManager.Singletons
 
         private Log()
         {
+            FilePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             FileName = Path.GetFileName(Assembly.GetExecutingAssembly().Location);
             Extension = ".log";
         }
@@ -25,7 +26,7 @@ namespace Rhyous.ServiceManager.Singletons
                 if (_LogId > -1)
                     return _FileName + "." + _LogId + Extension;
 
-                return _FileName + Extension;
+                return FilePath + _FileName + Extension;
             }
 
             // The root file name, without the extension
@@ -36,6 +37,8 @@ namespace Rhyous.ServiceManager.Singletons
                     _LogId++;
             }
         } private String _FileName;
+
+        public String FilePath { get; set; }
 
         public String Extension { get; set; }
 

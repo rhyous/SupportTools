@@ -11,8 +11,7 @@ namespace Rhyous.ServiceManager.Aspects
     [ProvideAspectRole(StandardRoles.Threading)]
     public class RunOnGuiThreadAspect : MethodInterceptionAspect
     {
-        public override void OnInvoke(
-            MethodInterceptionArgs eventArgs)
+        public override void OnInvoke(MethodInterceptionArgs eventArgs)
         {
             if (Application.Current.Dispatcher.CheckAccess())
             {

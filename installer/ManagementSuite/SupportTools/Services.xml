@@ -2,13 +2,7 @@
 <ServiceStore Name="LANDesk and Related Services">
   <Services>
     <Service>
-      <ServiceName>MSSQLServerADHelper100</ServiceName>
-    </Service>
-    <Service>
       <ServiceName>MSSQL$LDMSDATA</ServiceName>
-    </Service>
-    <Service>
-      <ServiceName>SQLAgent$LDMSDATA</ServiceName>
     </Service>
     <Service>
       <ServiceName>SQLBrowser</ServiceName>
@@ -20,16 +14,19 @@
       <ServiceName>Intel PDS</ServiceName>
     </Service>
     <Service>
+      <ServiceName>LDCsaSocksSvc</ServiceName>
+    </Service>
+    <Service>
       <ServiceName>LANDesk Inventory Server</ServiceName>
+    </Service>
+    <Service>
+      <ServiceName>LANDesk InventorySync Service</ServiceName>
     </Service>
     <Service>
       <ServiceName>ApmTcs</ServiceName>
     </Service>
     <Service>
       <ServiceName>Intel Scheduler</ServiceName>
-    </Service>
-    <Service>
-      <ServiceName>LANDeskTIM</ServiceName>
     </Service>
     <Service>
       <ServiceName>LANDesk(r) Usage Service</ServiceName>
@@ -41,10 +38,10 @@
       <ServiceName>CBA8Alert</ServiceName>
     </Service>
     <Service>
-      <ServiceName>LANDesk(R) AMT Notification Service</ServiceName>
+      <ServiceName>ASFProxyService</ServiceName>
     </Service>
     <Service>
-      <ServiceName>ASFProxyService</ServiceName>
+      <ServiceName>MobilityCommandsService</ServiceName>
     </Service>
     <Service>
       <ServiceName>IPMI_Redirection</ServiceName>
@@ -56,7 +53,25 @@
       <ServiceName>CBA8</ServiceName>
     </Service>
     <Service>
+      <ServiceName>LDGSB</ServiceName>
+    </Service>
+    <Service>
       <ServiceName>LSM_SNMP</ServiceName>
+    </Service>
+    <Service>
+      <ServiceName>Managed Planet Barcode Core</ServiceName>
+    </Service>
+    <Service>
+      <ServiceName>Managed Planet Discovery Core</ServiceName>
+    </Service>
+    <Service>
+      <ServiceName>Managed Planet Rapid Deployment</ServiceName>
+    </Service>
+    <Service>
+      <ServiceName>Managed Planet Software Manager</ServiceName>
+    </Service>
+    <Service>
+      <ServiceName>MPCore</ServiceName>
     </Service>
     <Service>
       <ServiceName>W3SVC</ServiceName>

@@ -8,7 +8,7 @@ namespace Rhyous.ServiceManager
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
-    public partial class App : Application
+    public partial class App
     {
         public static App Instance;
 
@@ -19,7 +19,7 @@ namespace Rhyous.ServiceManager
             ServiceStore.CreateInstanceFromXml(ServiceStore.DEFAULT_FILE);
 
             base.OnStartup(e);
-            MainWindow main = new MainWindow();
+            var main = new MainWindow();
             main.ServicesView.DataContext = new ServicesViewModel();
             main.Show();
         }

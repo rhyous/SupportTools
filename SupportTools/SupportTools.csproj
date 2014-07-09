@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SupportTools</RootNamespace>
     <AssemblyName>SupportTools</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -134,6 +134,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BnfResolver.cs" />
     <Compile Include="DataPrompt.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -171,7 +172,7 @@
   -->
   <PropertyGroup>
     <PostBuildEvent>copy /Y "$(TargetPath)" "$(SolutionDir)Installer\ManagementSuite"
-copy /Y "$(TargetPath)" "c:\program files (x86)\LANDesk\ManagementSuite"
-copy /Y "$(TargetDir)$(TargetName).pdb" "c:\program files (x86)\LANDesk\ManagementSuite"</PostBuildEvent>
+REM copy /Y "$(TargetPath)" "c:\program files (x86)\LANDesk\ManagementSuite"
+REM copy /Y "$(TargetDir)$(TargetName).pdb" "c:\program files (x86)\LANDesk\ManagementSuite"</PostBuildEvent>
   </PropertyGroup>
 </Project>

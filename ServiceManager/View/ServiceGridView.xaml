@@ -12,7 +12,7 @@
           SelectedItem="{Binding SelectedService}" 
           IsReadOnly="True" 
           AutoGenerateColumns="False" 
-          AlternationCount="2"  >
+          AlternationCount="2">
     <DataGrid.Resources>
         <conv:ServiceStatusToStartStopStringConverter x:Key="ServiceStatusToStartStopStringConverter" />
         <conv:ServiceAndActionConverter x:Key="ServiceAndActionConverter" />
@@ -25,27 +25,31 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        <Style TargetType="{x:Type TextBlock}" x:Key="PaddedHeaderStyle">
+            <Setter Property="Margin" Value="0,0,15,0" />
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
     </DataGrid.Resources>
     <DataGrid.Columns>
-        <DataGridTextColumn Header="Status"       Binding="{Binding Status}" Visibility="{Binding Source={x:Static sing:ColumnSettings.Instance}, Path=ShowStatusColumn, Converter={StaticResource B2V}}"
-                                DisplayIndex="{Binding Source={x:Static sing:ColumnSettings.Instance}, Path=StatusColumnIndex, Mode=TwoWay, FallbackValue=0}"/>
+        <DataGridTextColumn Header="Status" Binding="{Binding Status}" Visibility="{Binding Source={x:Static sing:ColumnSettings.Instance}, Path=ShowStatusColumn, Converter={StaticResource B2V}}"
+                            DisplayIndex="{Binding Source={x:Static sing:ColumnSettings.Instance}, Path=StatusColumnIndex, Mode=TwoWay, FallbackValue=0}"
+                            ElementStyle="{StaticResource PaddedHeaderStyle}"/>
         <DataGridTextColumn Header="Display Name" Binding="{Binding DisplayName}" Visibility="{Binding Source={x:Static sing:ColumnSettings.Instance}, Path=ShowDisplayNameColumn, Converter={StaticResource B2V}}"
-                                DisplayIndex="{Binding Source={x:Static sing:ColumnSettings.Instance}, Path=DisplayNameColumnIndex, Mode=TwoWay, FallbackValue=1}"/>
+                            DisplayIndex="{Binding Source={x:Static sing:ColumnSettings.Instance}, Path=DisplayNameColumnIndex, Mode=TwoWay, FallbackValue=1}"
+                            ElementStyle="{StaticResource PaddedHeaderStyle}" MinWidth="200"/>
         <DataGridTextColumn Header="Service Name" Binding="{Binding ServiceName}" Visibility="{Binding Source={x:Static sing:ColumnSettings.Instance}, Path=ShowServiceNameColumn, Converter={StaticResource B2V}}"
-                                DisplayIndex="{Binding Source={x:Static sing:ColumnSettings.Instance}, Path=ServiceNameColumnIndex, Mode=TwoWay, FallbackValue=2}"/>
-        <DataGridTemplateColumn Header="Description" Width="300" Visibility="{Binding Source={x:Static sing:ColumnSettings.Instance}, Path=ShowDescriptionColumn, Converter={StaticResource B2V}}" 
-                                DisplayIndex="{Binding Source={x:Static sing:ColumnSettings.Instance}, Path=DescriptionColumnIndex, Mode=TwoWay, FallbackValue=3}">
-            <DataGridTemplateColumn.CellTemplate>
-                <DataTemplate>
-                    <TextBlock TextWrapping="Wrap" Text="{Binding Description}" />
-                </DataTemplate>
-            </DataGridTemplateColumn.CellTemplate>
-        </DataGridTemplateColumn>
+                            DisplayIndex="{Binding Source={x:Static sing:ColumnSettings.Instance}, Path=ServiceNameColumnIndex, Mode=TwoWay, FallbackValue=2}"
+                            ElementStyle="{StaticResource PaddedHeaderStyle}" MinWidth="200"/>
+        <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="*" Visibility="{Binding Source={x:Static sing:ColumnSettings.Instance}, Path=ShowDescriptionColumn, Converter={StaticResource B2V}}" 
+                            DisplayIndex="{Binding Source={x:Static sing:ColumnSettings.Instance}, Path=DescriptionColumnIndex, Mode=TwoWay, FallbackValue=3}"
+                            ElementStyle="{StaticResource PaddedHeaderStyle}"/>
         <DataGridTextColumn Header="Is Installed" Binding="{Binding IsInstalled}" Visibility="{Binding Source={x:Static sing:ColumnSettings.Instance}, Path=ShowIsInstalledColumn, Converter={StaticResource B2V}}"
-                                DisplayIndex="{Binding Source={x:Static sing:ColumnSettings.Instance}, Path=IsInstalledColumnIndex, Mode=TwoWay, FallbackValue=4}"/>
+                            DisplayIndex="{Binding Source={x:Static sing:ColumnSettings.Instance}, Path=IsInstalledColumnIndex, Mode=TwoWay, FallbackValue=4}"
+                            ElementStyle="{StaticResource PaddedHeaderStyle}"/>
         <DataGridTextColumn Header="Startup Type" Binding="{Binding StartupType}" 
                             Visibility="{Binding Source={x:Static sing:ColumnSettings.Instance}, Path=ShowStartupTypeColumn, Converter={StaticResource B2V}}"
-                                DisplayIndex="{Binding Source={x:Static sing:ColumnSettings.Instance}, Path=StartupTypeColumnIndex, Mode=TwoWay, FallbackValue=5}"/>
+                            DisplayIndex="{Binding Source={x:Static sing:ColumnSettings.Instance}, Path=StartupTypeColumnIndex, Mode=TwoWay, FallbackValue=5}"
+                            ElementStyle="{StaticResource PaddedHeaderStyle}"/>
         <DataGridTemplateColumn Header="Start / Stop"
                                 DisplayIndex="{Binding Source={x:Static sing:ColumnSettings.Instance}, Path=StartStopButtonColumnIndex, Mode=TwoWay, FallbackValue=6}">
             <DataGridTemplateColumn.CellTemplate>

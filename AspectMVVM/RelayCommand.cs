@@ -14,8 +14,8 @@ namespace AspectMVVM
     public class RelayCommand : ICommand
     {
         #region Fields
-        readonly Action<object> _execute;
-        readonly Predicate<object> _canExecute;
+        readonly Action<object> _Execute;
+        readonly Predicate<object> _CanExecute;
         #endregion // Fields
 
         #region Constructors
@@ -38,8 +38,8 @@ namespace AspectMVVM
             if (execute == null)
                 throw new ArgumentNullException("execute");
 
-            _execute = execute;
-            _canExecute = canExecute;
+            _Execute = execute;
+            _CanExecute = canExecute;
         }
         #endregion // Constructors
 
@@ -47,7 +47,7 @@ namespace AspectMVVM
         [DebuggerStepThrough]
         public bool CanExecute(object parameter)
         {
-            return _canExecute == null ? true : _canExecute(parameter);
+            return _CanExecute == null || _CanExecute(parameter);
         }
 
         public event EventHandler CanExecuteChanged
@@ -58,7 +58,7 @@ namespace AspectMVVM
 
         public void Execute(object parameter)
         {
-            _execute(parameter);
+            _Execute(parameter);
         }
         #endregion // ICommand Members
     }

@@ -12,7 +12,7 @@
       >
     <Label Content="{Binding Source={x:Static sing:ServiceStore.Instance}, Path=Name, FallbackValue='Your Service Collection'}" 
           DockPanel.Dock="Top" Name="ServiceGroupNameLabel" Foreground="Black" Margin="0,10,0,5"/>
-    <StackPanel Grid.Column="1" DockPanel.Dock="Top"  Orientation="Horizontal">
+    <StackPanel DockPanel.Dock="Top"  Orientation="Horizontal">
         <Button Content="Start All" Name="StartAllButton" Command="{Binding ServiceCollectionCommand}" CommandParameter="Start" Margin="0,3"/>
         <Button Content="Restart All" Name="RestartAllButton" Command="{Binding ServiceCollectionCommand}" CommandParameter="Restart" />
         <Button Content="Stop All" Name="StopAllButton" Command="{Binding ServiceCollectionCommand}" CommandParameter="Stop" />

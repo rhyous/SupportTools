@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30110.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SupportTools", "SupportTools\SupportTools.csproj", "{56E80BF4-4B04-4D46-BB51-E49EC4B1533D}"
 	ProjectSection(ProjectDependencies) = postProject
 		{9D828670-EEFA-4BCD-8B3C-8B61B51CEE8A} = {9D828670-EEFA-4BCD-8B3C-8B61B51CEE8A}
@@ -30,6 +32,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SupportToolsTests", "SupportToolsTests\SupportToolsTests.csproj", "{A8FBD864-DD67-410A-891F-6C242B5424E6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessagePresenter", "MessagePresenter\MessagePresenter.csproj", "{FE79B3C7-3FA6-4107-801A-64B501D41D74}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspectMVVMTests", "AspectMVVMTests\AspectMVVMTests.csproj", "{6F6675B4-6C07-483D-849A-E2681441A910}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -146,6 +150,18 @@ Global
 		{FE79B3C7-3FA6-4107-801A-64B501D41D74}.Release|x64.Build.0 = Release|x64
 		{FE79B3C7-3FA6-4107-801A-64B501D41D74}.Release|x86.ActiveCfg = Release|x86
 		{FE79B3C7-3FA6-4107-801A-64B501D41D74}.Release|x86.Build.0 = Release|x86
+		{6F6675B4-6C07-483D-849A-E2681441A910}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F6675B4-6C07-483D-849A-E2681441A910}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F6675B4-6C07-483D-849A-E2681441A910}.Debug|x64.ActiveCfg = Debug|x64
+		{6F6675B4-6C07-483D-849A-E2681441A910}.Debug|x64.Build.0 = Debug|x64
+		{6F6675B4-6C07-483D-849A-E2681441A910}.Debug|x86.ActiveCfg = Debug|x86
+		{6F6675B4-6C07-483D-849A-E2681441A910}.Debug|x86.Build.0 = Debug|x86
+		{6F6675B4-6C07-483D-849A-E2681441A910}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F6675B4-6C07-483D-849A-E2681441A910}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F6675B4-6C07-483D-849A-E2681441A910}.Release|x64.ActiveCfg = Release|x64
+		{6F6675B4-6C07-483D-849A-E2681441A910}.Release|x64.Build.0 = Release|x64
+		{6F6675B4-6C07-483D-849A-E2681441A910}.Release|x86.ActiveCfg = Release|x86
+		{6F6675B4-6C07-483D-849A-E2681441A910}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

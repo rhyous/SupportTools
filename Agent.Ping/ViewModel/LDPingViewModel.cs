@@ -50,7 +50,7 @@ namespace Rhyous.Agent.Ping.ViewModel
 
 
             var npc = this as INotifyPropertyChangedWithMethod;
-			if (npc != null)
+            if (npc != null)
                 npc.PropertyChanged += OnIPAddressChanged;
         }
         #endregion
@@ -76,12 +76,7 @@ namespace Rhyous.Agent.Ping.ViewModel
 
         public ICommand PingCommand
         {
-            get
-            {
-                if (_PingCommand == null)
-                    _PingCommand = new RelayCommand(param => Ping(), param => CanPing);
-                return _PingCommand;
-            }
+            get { return _PingCommand ?? (_PingCommand = new RelayCommand(param => Ping(), param => CanPing)); }
         } private RelayCommand _PingCommand;
         #endregion
 
@@ -96,28 +91,26 @@ namespace Rhyous.Agent.Ping.ViewModel
             IsPinging = true;
             ClearPingResults();
 
-            PingWorker worker = new PingWorker();
-            worker.DoWork += new DoWorkEventHandler(worker_DoPing);
-            worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(worker_PingCompleted);
+            var worker = new PingWorker();
+            worker.DoWork += worker_DoPing;
+            worker.RunWorkerCompleted += worker_PingCompleted;
             worker.RunWorkerAsync();
         }
 
         void worker_DoPing(object sender, DoWorkEventArgs e)
         {
-            Stopwatch timer = new Stopwatch();
+            var timer = new Stopwatch();
             timer.Start();
 
             // Now lets ping
-            PingWorker worker = sender as PingWorker;
-            LDPing tmpLDPing = LDPingAction.AgentPing(IPAddress);
-            if (tmpLDPing == null)
-                worker.PingSucceeded = false;
-            else
-                worker.PingSucceeded = true;
+            var worker = sender as PingWorker;
+            if (worker == null) return;
+            var tmpLDPing = LDPingAction.AgentPing(IPAddress);
+            worker.PingSucceeded = tmpLDPing != null;
             timer.Stop();
 
             // Lets make sure the GUI spinner has at least a little spin
-            int i = 1200 - (int)timer.ElapsedMilliseconds;
+            var i = 1200 - (int)timer.ElapsedMilliseconds;
             if (i > 0)
                 Thread.Sleep(i);
             LDPing = tmpLDPing;
@@ -126,17 +119,15 @@ namespace Rhyous.Agent.Ping.ViewModel
         void worker_PingCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             IsPinging = false;
-            PingWorker worker = sender as PingWorker;
-            if (worker.PingSucceeded)
-                ConnectionResult = "Ping Successful.";
-            else
-                ConnectionResult = "Ping failed.";
+            var worker = sender as PingWorker;
+            if (worker == null) return;
+            ConnectionResult = worker.PingSucceeded ? "Ping Successful." : "Ping failed.";
 
             // This makes the UI refresh against the RelayCommand.CanExecute() function.
             // Essentially, this makes the button enable when pinging is done.
             CommandManager.InvalidateRequerySuggested();
         }
-        
+
         void OnIPAddressChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == IPAddress)
@@ -148,9 +139,10 @@ namespace Rhyous.Agent.Ping.ViewModel
             LDPing = null;
             ConnectionResult = string.Empty;
 
-            INotifyPropertyChangedWithMethod me = this as INotifyPropertyChangedWithMethod;
-            me.NotifyPropertyChanged("CanPing");
-            me.NotifyPropertyChanged("PingCommand");
+            var me = this as INotifyPropertyChangedWithMethod;
+            if (me == null) return;
+            me.OnPropertyChanged("CanPing");
+            me.OnPropertyChanged("PingCommand");
         }
         #endregion
     }

@@ -4,6 +4,6 @@ namespace AspectMVVM
 {
     public interface INotifyPropertyChangedWithMethod : INotifyPropertyChanged
     {
-        void NotifyPropertyChanged(string propertyName);
+        void OnPropertyChanged(string propertyName);
     }
 }

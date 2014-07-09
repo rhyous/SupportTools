@@ -11,7 +11,7 @@ namespace Rhyous.ServiceManager.Aspects
         {
             if (args.Value == args.GetCurrentValue())
                 return;
-            IPersist persistentOjbect = args.Instance as IPersist;
+            var persistentOjbect = args.Instance as IPersist;
             // Ignore sets during load
             if (persistentOjbect != null && persistentOjbect.IsLoaded)
                 persistentOjbect.Save();

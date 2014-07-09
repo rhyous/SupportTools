@@ -27,7 +27,7 @@ namespace Rhyous.ServiceManager.Aspects
             {
                 _FirstAccess = false;
                 object value = args.GetCurrentValue();
-                if (value.Equals(EmptyValue) && args.Value.Equals(EmptyValue) && !args.Value.Equals(DefaultValue))
+                if (value.Equals(EmptyValue) || args.Value.Equals(EmptyValue) || !args.Value.Equals(DefaultValue))
                 {
                     args.Value = DefaultValue;
                     args.ProceedSetValue();
