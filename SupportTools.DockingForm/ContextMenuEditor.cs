@@ -108,9 +108,9 @@ namespace SupportTools.DockingForm
 
         private string GetLDMainPathFromReg()
         {
-            var FilePath = @"C:\Program Files\LANDesk\ManagementSuite\";
+            const string filePath = @"C:\Program Files\LANDesk\ManagementSuite\";
             var key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\LANDesk\ManagementSuite\Setup");
-            return key.GetValue("LdmainPath", FilePath).ToString();
+            return key.GetValue("LdmainPath", filePath).ToString();
         }
         #endregion
 
