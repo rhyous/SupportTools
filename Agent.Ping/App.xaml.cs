@@ -22,7 +22,6 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-using System;
 using System.Windows;
 using Rhyous.Agent.Ping.View;
 using Rhyous.Agent.Ping.ViewModel;
@@ -32,7 +31,7 @@ namespace Rhyous.Agent.Ping
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
-    public partial class App : Application
+    public partial class App
     {
         public static string[] Args;
 
@@ -41,8 +40,7 @@ namespace Rhyous.Agent.Ping
             Args = e.Args;
             base.OnStartup(e);
             var viewmodel = new MainWindowViewModel();
-            var main = new MainWindow();
-            main.DataContext = viewmodel;
+            var main = new MainWindow { DataContext = viewmodel };
             main.Show();
         }
     }

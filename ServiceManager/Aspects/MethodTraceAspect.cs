@@ -3,7 +3,7 @@ using PostSharp.Aspects;
 using PostSharp.Aspects.Dependencies;
 using Rhyous.ServiceManager.Singletons;
 
-namespace Common.Aspects
+namespace Rhyous.ServiceManager.Aspects
 {
     [Serializable]
     [ProvideAspectRole(StandardRoles.Tracing)]

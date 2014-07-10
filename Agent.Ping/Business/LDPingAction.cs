@@ -30,18 +30,20 @@ namespace Rhyous.Agent.Ping.Business
     class LDPingAction
     {
         #region Member Variables
-        static string _LDPingTemplatePath = "http://{0}:9595/allowed/ldping";
+
+        private const string LDPingTemplatePath = "http://{0}:9595/allowed/ldping";
+
         #endregion
 
         #region Functions
         public static LDPing AgentPing(string inIPAddress)
         {
-            var AgentPath = string.Format(_LDPingTemplatePath, inIPAddress);
-            var xml = string.Empty;
+            var agentPath = string.Format(LDPingTemplatePath, inIPAddress);
+            string xml;
 
             try
             {
-                xml = WebHelper.GetPageAsString(new Uri(AgentPath));
+                xml = WebHelper.GetPageAsString(new Uri(agentPath));
             }
             catch (Exception)
             {
@@ -56,7 +58,7 @@ namespace Rhyous.Agent.Ping.Business
 
             try
             {
-                return Serializer.DeserializeFromXML<LDPing>(ref xml);
+                return Serializer.DeserializeFromXml<LDPing>(ref xml);
             }
             catch (Exception)
             {

@@ -4,7 +4,7 @@
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	mc:Ignorable="d"
-	x:Class="Rhyous.Agent.Ping.LDPingResultsControl"
+	x:Class="Rhyous.Agent.Ping.View.LDPingResultsControl"
 	x:Name="UserControl"
 	d:DesignWidth="425" d:DesignHeight="200"
     HorizontalAlignment="Stretch">
@@ -40,7 +40,7 @@
 			<TextBox Grid.Row="1" Grid.Column="1" x:Name="TextBlockOSVersion" Text="{Binding OSVersion.Platform}" d:LayoutOverrides="GridBox" />
 
 			<Label Content="Inventory ID or Guid:" Grid.Column="0" Grid.Row="2" Margin="0,3,6,3" VerticalAlignment="Center" HorizontalAlignment="Right" Height="25.96" Width="120.14" d:LayoutOverrides="GridBox" />
-			<TextBox Grid.Row="2" Grid.Column="1" x:Name="TextBlockGUID" Text="{Binding Guid}" d:LayoutOverrides="GridBox" />
+			<TextBox Grid.Row="2" Grid.Column="1" x:Name="TextBlockGuid" Text="{Binding Guid}" d:LayoutOverrides="GridBox" />
 		</Grid>
 	</GroupBox>
 </UserControl>

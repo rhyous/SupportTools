@@ -74,28 +74,28 @@ namespace SupportTools
         #endregion
         private void CustomInitComponents()
         {
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this._FlowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
 
-            this.PromptValueName = new List<System.Windows.Forms.Label>();
-            this.ValueDataTextBox = new List<System.Windows.Forms.TextBox>();
+            this._PromptValueName = new List<System.Windows.Forms.Label>();
+            this._ValueDataTextBox = new List<System.Windows.Forms.TextBox>();
             this.SuspendLayout();
             // 
             // flowLayoutPanel1
             // 
 
-            this.flowLayoutPanel1.AutoSize = true;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(12, 12);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(458, 69);
-            this.flowLayoutPanel1.TabIndex = promptList.Count+2;
+            this._FlowLayoutPanel1.AutoSize = true;
+            this._FlowLayoutPanel1.Location = new System.Drawing.Point(12, 12);
+            this._FlowLayoutPanel1.Name = "flowLayoutPanel1";
+            this._FlowLayoutPanel1.Size = new System.Drawing.Size(458, 69);
+            this._FlowLayoutPanel1.TabIndex = _PromptList.Count+2;
 
-            for (int i = 0; i < promptList.Count; i++)
+            for (int i = 0; i < _PromptList.Count; i++)
             {
                 string[] strArray;
 
                 char[] delmin = { ':' };
 
-                strArray = promptList[i].Split(delmin);
+                strArray = _PromptList[i].Split(delmin);
                 string strPromptValueName = strArray[0].Trim();
                 int valueLength;
                 try
@@ -109,42 +109,42 @@ namespace SupportTools
                 // 
                 // PromptValueName
                 //             
-                this.PromptValueName.Add(new System.Windows.Forms.Label());
-                this.PromptValueName[i].AutoSize = true;
-                this.PromptValueName[i].Location = new System.Drawing.Point(3, 0);
-                this.PromptValueName[i].Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                this.PromptValueName[i].Name = "PromptValueName";
-                this.PromptValueName[i].Size = new System.Drawing.Size(strPromptValueName.Length * (int)PromptValueName[i].Font.SizeInPoints, 20);
-                this.PromptValueName[i].Text = strPromptValueName;
-                this.flowLayoutPanel1.Controls.Add(PromptValueName[i]);
+                this._PromptValueName.Add(new System.Windows.Forms.Label());
+                this._PromptValueName[i].AutoSize = true;
+                this._PromptValueName[i].Location = new System.Drawing.Point(3, 0);
+                this._PromptValueName[i].Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                this._PromptValueName[i].Name = "PromptValueName";
+                this._PromptValueName[i].Size = new System.Drawing.Size(strPromptValueName.Length * (int)_PromptValueName[i].Font.SizeInPoints, 20);
+                this._PromptValueName[i].Text = strPromptValueName;
+                this._FlowLayoutPanel1.Controls.Add(_PromptValueName[i]);
                 // 
                 // ValueDataTextBox
                 // 
-                this.ValueDataTextBox.Add(new System.Windows.Forms.TextBox());
-                this.ValueDataTextBox[i].Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                this.ValueDataTextBox[i].Location = new System.Drawing.Point(3, 20);
-                this.ValueDataTextBox[i].MaxLength = valueLength;
-                this.ValueDataTextBox[i].Name = "ValueDataTextBox";
-                this.ValueDataTextBox[i].Size = new System.Drawing.Size(GetLimitedSize(valueLength * (int)ValueDataTextBox[i].Font.SizeInPoints), 20);
-                this.ValueDataTextBox[i].TabIndex = i;
-                this.flowLayoutPanel1.Controls.Add(ValueDataTextBox[i]);
+                this._ValueDataTextBox.Add(new System.Windows.Forms.TextBox());
+                this._ValueDataTextBox[i].Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                this._ValueDataTextBox[i].Location = new System.Drawing.Point(3, 20);
+                this._ValueDataTextBox[i].MaxLength = valueLength;
+                this._ValueDataTextBox[i].Name = "ValueDataTextBox";
+                this._ValueDataTextBox[i].Size = new System.Drawing.Size(GetLimitedSize(valueLength * (int)_ValueDataTextBox[i].Font.SizeInPoints), 20);
+                this._ValueDataTextBox[i].TabIndex = i;
+                this._FlowLayoutPanel1.Controls.Add(_ValueDataTextBox[i]);
             }
             // 
             // OkButton
             // 
-            this.OkButton = new System.Windows.Forms.Button();
-            this.OkButton.Location = new System.Drawing.Point(this.Width - 100, this.Height - 100);
-            this.OkButton.Name = "OkButton";
-            this.OkButton.Size = new System.Drawing.Size(75, 25);
-            this.OkButton.TabIndex = promptList.Count + 1;
-            this.OkButton.Text = "Ok";
-            this.OkButton.UseVisualStyleBackColor = true;
-            this.OkButton.Click += new System.EventHandler(this.OkButton_Click);
-            this.AcceptButton = this.OkButton;
-            this.flowLayoutPanel1.Controls.Add(this.OkButton);
+            this._OkButton = new System.Windows.Forms.Button();
+            this._OkButton.Location = new System.Drawing.Point(this.Width - 100, this.Height - 100);
+            this._OkButton.Name = "OkButton";
+            this._OkButton.Size = new System.Drawing.Size(75, 25);
+            this._OkButton.TabIndex = _PromptList.Count + 1;
+            this._OkButton.Text = "Ok";
+            this._OkButton.UseVisualStyleBackColor = true;
+            this._OkButton.Click += new System.EventHandler(this.OkButton_Click);
+            this.AcceptButton = this._OkButton;
+            this._FlowLayoutPanel1.Controls.Add(this._OkButton);
 
-            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.Controls.Add(flowLayoutPanel1);
+            this._FlowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.Controls.Add(_FlowLayoutPanel1);
             this.ResumeLayout(false);
             this.PerformLayout();
         }

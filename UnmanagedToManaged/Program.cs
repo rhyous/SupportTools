@@ -1,33 +1,36 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using LANDesk.ManagementSuite.WinConsole;
 
 namespace UnmanagedToManaged
 {
     class Program
     {
-        private static string ip, name, mac;
-        private static UnmanagedNode un;
+        private static string _IP, _Name, _Mac;
+        private static UnmanagedNode _UnmanagedNode;
 
         static void Main(string[] args)
         {
             CheckArgs(args);
-            if ( !(ip.Equals("")) && !(null == ip) )
+            if (!(_IP.Equals("")) && null != _IP)
             {
-                un = new UnmanagedNode(ip, UnmanagedNode.UnmanagedNodeDataType.IPAddress);
+                _UnmanagedNode = new UnmanagedNode(_IP, UnmanagedNode.UnmanagedNodeDataType.IPAddress);
             }
-            else if (!(name.Equals("")) && !(null == name))
+            else if (!(_Name.Equals("")) && null != _Name)
             {
-                un = new UnmanagedNode(name, UnmanagedNode.UnmanagedNodeDataType.Nodename);
+                _UnmanagedNode = new UnmanagedNode(_Name, UnmanagedNode.UnmanagedNodeDataType.Nodename);
             }
-            else if (!(mac.Equals("")) && !(null == mac))
+            else if (!(_Mac.Equals("")) && null != _Mac)
             {
-                un = new UnmanagedNode(mac, UnmanagedNode.UnmanagedNodeDataType.PhysAddress);
+                _UnmanagedNode = new UnmanagedNode(_Mac, UnmanagedNode.UnmanagedNodeDataType.PhysAddress);
             }
 
             // Computer is an object from LANDesk.ManagementSuite.WinConsole
-            var c = Computer.Add(un.DeviceName, un.GroupName, un.IPAddress, un.DeviceName);
-            var i = c.ID;
+            // var c = 
+            Computer.Add(_UnmanagedNode.DeviceName, _UnmanagedNode.GroupName, _UnmanagedNode.IPAddress, _UnmanagedNode.DeviceName);
+            // var i = c.ID;
 
             // Todo: Check if the "Managed Printers" and "Managed Wireless Access Points" groups exist.
             // If not, create the appropriate one for the device.
@@ -35,46 +38,38 @@ namespace UnmanagedToManaged
             // INSERT INTO CustomGroupComputer (CustomGroup_Idn, Member_Idn) VALUES ({0}, {1})
         }
 
-        private static void CheckArgs(string[] args)
+        private static void CheckArgs(IEnumerable<string> args)
         {
-            for (var i = 0; i < args.Length; i++)
+            foreach (var splitArg in args.Select(t => t.Trim().ToLower().Split('=')))
             {
-                var splitArg = args[i].Trim().ToLower().Split('=');
                 try
                 {
                     switch (splitArg[0])
                     {
                         case "ip":
-                            ip = splitArg[1];
+                            _IP = splitArg[1];
                             break;
                         case "name":
-                            name = splitArg[1];
+                            _Name = splitArg[1];
                             break;
                         case "mac":
-                            mac = splitArg[1];
+                            _Mac = splitArg[1];
                             break;
                         default:
                             PrintArgs(87); // 87 is Microsoft's ERROR_INVALID_PARAMETER
                             break;
                     }
                 }
-                catch 
+                catch
                 {
                     PrintArgs(87); // 87 is Microsoft's ERROR_INVALID_PARAMETER
                 }
             }
 
-            if ( (   ip == "" || null == ip   ) &&
-                 ( name == "" || null == name ) && 
-                 (  mac == "" || null == mac  ) )
+            if (string.IsNullOrWhiteSpace(_IP) && string.IsNullOrWhiteSpace(_Name) && string.IsNullOrWhiteSpace(_Mac))
             {
                 PrintArgs(87); // 87 is Microsoft's ERROR_INVALID_PARAMETER
             }
-        }
-
-        private static void PrintArgs()
-        {
-            PrintArgs(0);
         }
 
         private static void PrintArgs(int inExitCode)

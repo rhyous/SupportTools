@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace UnmanagedToManaged
+﻿namespace UnmanagedToManaged
 {
     public abstract class BasicNode
     {

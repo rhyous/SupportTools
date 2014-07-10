@@ -49,7 +49,7 @@
                 </Label.Content>
             </Label>
         </Grid>
-        <LANDesk_Agent_Ping:LDPingResultsControl DataContext="{Binding LDPing}" Grid.Row="1" />
+        <view:LDPingResultsControl DataContext="{Binding LDPing}" Grid.Row="1" />
         <view:Spinner IsStarted="{Binding Path=IsPinging}" Height="128" Width="128" Grid.Row="1" Grid.Column="1"/>
     </Grid>
 </UserControl>

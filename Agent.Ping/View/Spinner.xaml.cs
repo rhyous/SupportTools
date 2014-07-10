@@ -23,7 +23,6 @@
  */
 
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media.Animation;
 
 namespace Rhyous.Agent.Ping.View
@@ -31,7 +30,7 @@ namespace Rhyous.Agent.Ping.View
     /// <summary>
     /// Interaction logic for Spinner.xaml
     /// </summary>
-    public partial class Spinner : UserControl
+    public partial class Spinner
     {
         public Spinner()
         {
@@ -59,7 +58,8 @@ namespace Rhyous.Agent.Ping.View
         static void IsSpinningChanged(DependencyObject property, DependencyPropertyChangedEventArgs args)
         {
             var spinner = property as Spinner;
-            spinner.IsStarted = (bool)args.NewValue;
+            if (spinner != null)
+                spinner.IsStarted = (bool)args.NewValue;
         }
 
         public static readonly DependencyProperty IsStartedProperty =

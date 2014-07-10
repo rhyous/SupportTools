@@ -22,14 +22,12 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-using System.Windows.Controls;
-
 namespace Rhyous.Agent.Ping.View
 {
     /// <summary>
     /// Interaction logic for LDPingView.xaml
     /// </summary>
-    public partial class LDPingView : UserControl
+    public partial class LDPingView
     {
         public LDPingView()
         {

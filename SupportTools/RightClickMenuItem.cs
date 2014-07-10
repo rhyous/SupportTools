@@ -32,7 +32,7 @@ namespace SupportTools
     class RightClickMenuItem : WinConsoleMenuItem
     {
         #region Member variables
-        private ContextMenuItem _MenuItem;
+        private readonly ContextMenuItem _MenuItem;
         #endregion
 
         #region Constructors
@@ -59,9 +59,10 @@ namespace SupportTools
         {
             get
             {
-                if (_MenuItem is MenuAction)
+                var item = _MenuItem as MenuAction;
+                if (item != null)
                 {
-                    var action = (MenuAction)_MenuItem;
+                    var action = item;
                     return action.Command;
                 }
                 return null;
@@ -72,18 +73,20 @@ namespace SupportTools
         {
             get
             {
-                if (_MenuItem is MenuAction)
+                var item = _MenuItem as MenuAction;
+                if (item != null)
                 {
-                    var action = (MenuAction)_MenuItem;
+                    var action = item;
                     return action.Parameters;
                 }
                 return null;
             }
             set
             {
-                if (_MenuItem is MenuAction)
+                var item = _MenuItem as MenuAction;
+                if (item != null)
                 {
-                    var action = (MenuAction)_MenuItem;
+                    var action = item;
                     action.Parameters = value;
                 }
             }
@@ -93,9 +96,10 @@ namespace SupportTools
         {
             get
             {
-                if (_MenuItem is MenuAction)
+                var item = _MenuItem as MenuAction;
+                if (item != null)
                 {
-                    var action = (MenuAction)_MenuItem;
+                    var action = item;
                     return action.ExecutionLocation;
                 }
                 return null;

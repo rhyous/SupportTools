@@ -12,8 +12,8 @@ namespace Rhyous.ServiceManager.Singletons
     [NotifyPropertyChangedClass]
     public class ServiceStore : IPersist
     {
-        public const string DEFAULT_FILE = "Services.xml";
-        const int REFRESH_TIME = 2000;
+        public const string DefaultFile = "Services.xml";
+        const int RefreshTime = 2000;
 
         internal ServiceStore()
         {
@@ -46,21 +46,21 @@ namespace Rhyous.ServiceManager.Singletons
         public void StartContinualRefresh()
         {
             var refresher = new ServiceRefresher();
-            refresher.EnableRefreshing(Services, REFRESH_TIME);
+            refresher.EnableRefreshing(Services, RefreshTime);
         }
 
         #region IPersist Members
         public static void CreateInstanceFromXml(string inXmlFile)
         {
-            if (Load(inXmlFile)
-             || Load(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), inXmlFile)))
+            var dir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? string.Empty;
+            if (Load(inXmlFile) || Load(Path.Combine(dir, inXmlFile)))
                 Instance.StartContinualRefresh();
         }
 
         [BackgroundWorkerAspect]
         public void Save()
         {
-            Serializer.SerializeToXML(Instance, DEFAULT_FILE);
+            Serializer.SerializeToXml(Instance, DefaultFile);
         }
 
         public void Load()
@@ -72,13 +72,13 @@ namespace Rhyous.ServiceManager.Singletons
         {
             if (File.Exists(path))
             {
-                var temp = Serializer.DeserializeFromXML<ServiceStore>(path);
+                var temp = Serializer.DeserializeFromXml<ServiceStore>(path);
                 if (_Instance == null)
                 { _Instance = temp; }
                 else
                 {
                     _Instance.Services = temp.Services;
-                    _Instance.Name = temp.Name; 
+                    _Instance.Name = temp.Name;
                 }
                 return true;
             }

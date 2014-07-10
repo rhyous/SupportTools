@@ -32,7 +32,6 @@
 //    <inventoryid>{58A6A666-8C80-B147-B1A1-31FEA80418DC}</inventoryid>
 //</pong>
 
-using System;
 using System.Xml.Serialization;
 
 namespace Rhyous.Agent.Ping.Model

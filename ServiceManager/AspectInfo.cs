@@ -1,7 +1,6 @@
-﻿
-using Common.Aspects;
+﻿using Rhyous.ServiceManager.Aspects;
 
 #if DEBUG
 [assembly: MethodTraceAspect(AttributePriority = 0)]
-namespace Rhyous { }
+namespace Rhyous.ServiceManager { }
 #endif

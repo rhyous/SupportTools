@@ -5,7 +5,7 @@ namespace MessagePresenter
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
-    public partial class App : Application
+    public partial class App
     {
         private void AppStartup(object sender, StartupEventArgs e)
         {

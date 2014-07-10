@@ -30,36 +30,34 @@ namespace SupportTools
 {
     public partial class DataPrompt : Form
     {
-        List<string> promptList;
+        private readonly List<string> _PromptList;
         //List<int> promptSizeList;
-        List<string> UserInput;
-        FlowLayoutPanel flowLayoutPanel1;
-        List<Label> PromptValueName;
-        List<TextBox> ValueDataTextBox;
-        Button OkButton;
+        private List<string> _UserInput;
+        private FlowLayoutPanel _FlowLayoutPanel1;
+        private List<Label> _PromptValueName;
+        private List<TextBox> _ValueDataTextBox;
+        private Button _OkButton;
 
         public DataPrompt(List<string> promptList)
         {
-            this.promptList = promptList;
+            _PromptList = promptList;
             InitializeComponent();
             CustomInitComponents();
         }
 
-        public List<string> getMessageText()
+        public List<string> GetMessageText()
         {
-            return UserInput;
+            return _UserInput;
         }
 
         private void OkButton_Click(object sender, EventArgs e)
         {
-            UserInput = new List<string>();
-            foreach (TextBox tb in ValueDataTextBox)
+            _UserInput = new List<string>();
+            foreach (TextBox tb in _ValueDataTextBox)
             {
-                    UserInput.Add(tb.Text); 
+                    _UserInput.Add(tb.Text); 
             }
             Close();
         }
-
-
     }
 }

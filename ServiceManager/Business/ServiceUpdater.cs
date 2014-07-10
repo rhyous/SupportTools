@@ -9,13 +9,15 @@ namespace Rhyous.ServiceManager.Business
         {
             var sc = ServiceManager.FindService(inService.ServiceName);
             inService.IsInstalled = (sc != null);
-            if (inService.IsInstalled)
+            if (!inService.IsInstalled) 
+                return;
+            if (sc != null)
             {
                 inService.DisplayName = sc.DisplayName;
                 inService.Status = sc.Status;
-                inService.UpdateDescription();
-                inService.UpdateStartupType();
             }
+            inService.UpdateDescription();
+            inService.UpdateStartupType();
         }
 
         public static void UpdateState(this Service inService)

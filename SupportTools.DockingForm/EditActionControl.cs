@@ -52,9 +52,10 @@ namespace SupportTools.DockingForm
         public void GetDataFromNode(ref MenuItemTreeNode inNode)
         {
             _Node = inNode;
-            if (_Node.Item is MenuAction)
+            var item = _Node.Item as MenuAction;
+            if (item != null)
             {
-                var action = (MenuAction)_Node.Item;
+                var action = item;
                 textBoxName.Text = action.Name;
                 checkBoxIsMultiselect.Checked = action.IsMultiSelect;
                 textBoxCommand.Text = action.Command;

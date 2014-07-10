@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.ServiceProcess;
 using Rhyous.ServiceManager.Aspects;
 using Rhyous.ServiceManager.Model;
@@ -23,7 +24,6 @@ namespace Rhyous.ServiceManager.Business
         public static void Start(this Service inService)
         {
             var sc = FindService(inService.ServiceName);
-            var st = sc.ServiceType;
             if (sc == null)
                 return;
             inService.UpdateService();
@@ -57,15 +57,7 @@ namespace Rhyous.ServiceManager.Business
 
         public static ServiceController FindService(string inServiceName)
         {
-            var services = ServiceController.GetServices();
-
-            foreach (ServiceController service in services)
-            {
-                if (service.ServiceName == inServiceName)
-                    return new ServiceController(inServiceName); ;
-            }
-
-            return null;
+            return ServiceController.GetServices().Any(service => service.ServiceName == inServiceName) ? new ServiceController(inServiceName) : null;
         }
     }
 }

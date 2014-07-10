@@ -21,19 +21,16 @@
  * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE 
  * POSSIBILITY OF SUCH DAMAGE.
  */
-
-using System.Windows.Controls;
-
-namespace Rhyous.Agent.Ping
+namespace Rhyous.Agent.Ping.View
 {
 	/// <summary>
 	/// Interaction logic for LDPingResultsControl.xaml
 	/// </summary>
-	public partial class LDPingResultsControl : UserControl
+	public partial class LDPingResultsControl
 	{
 		public LDPingResultsControl()
 		{
-			this.InitializeComponent();
+			InitializeComponent();
 		}
 	}
 }

@@ -262,7 +262,7 @@ namespace SupportTools
                 }
                 var myForm = new DataPrompt(allPrompts);
                 myForm.ShowDialog();
-                var tempStrList = myForm.getMessageText();
+                var tempStrList = myForm.GetMessageText();
 
                 if (tempStrList != null)
                 {

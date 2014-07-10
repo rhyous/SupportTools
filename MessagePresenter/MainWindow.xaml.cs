@@ -8,7 +8,7 @@ namespace MessagePresenter
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
         public MainWindow()
         {
@@ -69,7 +69,8 @@ namespace MessagePresenter
             for (var i = (int)e.Argument; i > -1; i--)
             {
                 Thread.Sleep(1000);
-                (sender as BackgroundWorker).ReportProgress(i);
+                var backgroundWorker = sender as BackgroundWorker;
+                if (backgroundWorker != null) backgroundWorker.ReportProgress(i);
             }
         }
 

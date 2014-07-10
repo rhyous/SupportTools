@@ -23,8 +23,7 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Xml;
+using System.Linq;
 using LANDesk.ManagementSuite.WinConsole;
 using SupportTools.ContextMenuXml;
 
@@ -32,9 +31,8 @@ namespace SupportTools
 {
     class MenuItemList
     {
-        private ComputerContextMenu _inComputerContextMenu;
-        private RightClickMenuItem[] _MenuItem;
-        private EventHandler _EventHandler;
+        private readonly RightClickMenuItem[] _MenuItem;
+        private readonly EventHandler _EventHandler;
 
         /*
          * MenuItemListFromXML expects a string containing the full path to an xml document as
@@ -42,40 +40,22 @@ namespace SupportTools
          */
         public MenuItemList(ComputerContextMenu inComputerContextMenu, Computer inComputer, EventHandler inEventHandler)
         {
-            _inComputerContextMenu = inComputerContextMenu;
             _EventHandler = inEventHandler;
             _MenuItem = GetSupportToolsMenuItemArrayFromContextMenuItem(inComputerContextMenu, inComputer);
         }
 
-        private int CountChildNodes(XmlNode inNode, bool bCountComments)
-        {
-            var retVal = 0;
-            foreach (XmlNode cn in inNode.ChildNodes)
-            {
-                if ((bCountComments == false) && (cn.NodeType == XmlNodeType.Comment))
-                {
-                    continue;
-                }
-                retVal++;
-            }
-            return retVal;
-        }
-
-        private int CountChildNodesIgnoreComments(XmlNode inNode)
-        {
-            return CountChildNodes(inNode, false);
-        }
-
         private RightClickMenuItem CreateSupportToolsMenuItemFromContextMenuItem(ContextMenuItem inItem, Computer inComputer, EventHandler eh)
         {
-            if (inItem is MenuGroup)
+            var item = inItem as MenuGroup;
+            if (item != null)
             {
-                return new RightClickMenuItem((MenuGroup)inItem, GetSupportToolsMenuItemArrayFromContextMenuItem((MenuGroup)inItem, inComputer));
+                return new RightClickMenuItem(item, GetSupportToolsMenuItemArrayFromContextMenuItem(item, inComputer));
             }
 
-            if (inItem is MenuAction)
+            var menuAction = inItem as MenuAction;
+            if (menuAction != null)
             {
-                var action = (MenuAction)inItem;
+                var action = menuAction;
                 return new RightClickMenuItem(action, eh, action.IsMultiSelect);
             }
 
@@ -84,22 +64,15 @@ namespace SupportTools
 
         private RightClickMenuItem[] GetSupportToolsMenuItemArrayFromContextMenuItem(MenuGroup inGroup, Computer inComputer)
         {
-            var ComputerOSType = inComputer.Type;
+            var preRetVal = inGroup.MenuItems.Select(item => CreateSupportToolsMenuItemFromContextMenuItem(item, inComputer, _EventHandler)).ToList();
 
-            var preRetVal = new List<RightClickMenuItem>();
-
-            foreach (ContextMenuItem item in inGroup.MenuItems)
-            {                
-                preRetVal.Add(CreateSupportToolsMenuItemFromContextMenuItem(item, inComputer, _EventHandler));
-            }
-
-            var RetVal = new RightClickMenuItem[preRetVal.Count];
+            var retVal = new RightClickMenuItem[preRetVal.Count];
             var i = 0;
             foreach (RightClickMenuItem stmi in preRetVal)
             {
-                RetVal[i++] = stmi;
+                retVal[i++] = stmi;
             }
-            return RetVal;
+            return retVal;
         }
 
         public RightClickMenuItem[] GetSupportToolsMenuItemArray()

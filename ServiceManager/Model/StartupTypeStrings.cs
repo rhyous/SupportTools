@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Rhyous.ServiceManager.Model
 {
@@ -19,7 +18,6 @@ namespace Rhyous.ServiceManager.Model
         public static StartupTypeStrings Instance
         {
             get { return _Instance ?? (_Instance = new StartupTypeStrings()); }
-            private set { _Instance = value; }
         } private static StartupTypeStrings _Instance;
 
         #endregion

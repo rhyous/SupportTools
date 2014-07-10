@@ -8,12 +8,12 @@
             return true;
         }
 
-        public void AddToDB()
+        public void AddToDb()
         {
 
         }
 
-        public void RemoveFromDB()
+        public void RemoveFromDb()
         {
 
         }

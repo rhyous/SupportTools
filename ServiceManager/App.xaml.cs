@@ -16,11 +16,10 @@ namespace Rhyous.ServiceManager
         {
             Instance = this;
             ColumnSettings.CreateInstanceFromXml();
-            ServiceStore.CreateInstanceFromXml(ServiceStore.DEFAULT_FILE);
+            ServiceStore.CreateInstanceFromXml(ServiceStore.DefaultFile);
 
             base.OnStartup(e);
-            var main = new MainWindow();
-            main.ServicesView.DataContext = new ServicesViewModel();
+            var main = new MainWindow {ServicesView = {DataContext = new ServicesViewModel()}};
             main.Show();
         }
     }

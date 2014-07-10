@@ -125,7 +125,6 @@
       <DependentUpon>EditGroupControl.cs</DependentUpon>
     </Compile>
     <Compile Include="MenuItemTreeNode.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="ContextMenuEditor.resx">
       <DependentUpon>ContextMenuEditor.cs</DependentUpon>

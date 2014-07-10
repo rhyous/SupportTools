@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
-using Common.Aspects;
+using Rhyous.ServiceManager.Aspects;
 
 namespace Rhyous.ServiceManager.Singletons
 {

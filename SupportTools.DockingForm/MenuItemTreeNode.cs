@@ -23,6 +23,7 @@
  */
 
 using System;
+using System.Linq;
 using System.Windows.Forms;
 using SupportTools.ContextMenuXml;
 
@@ -31,7 +32,7 @@ namespace SupportTools.DockingForm
     public class MenuItemTreeNode : TreeNode
     {
         #region Member Variables
-        ContextMenuItem _Item;
+        private readonly ContextMenuItem _Item;
         #endregion
 
         #region Constructors
@@ -91,14 +92,11 @@ namespace SupportTools.DockingForm
                 {
                     return MenuItemType.Action;
                 }
-                else if (_Item is MenuGroup)
+                if (_Item is MenuGroup)
                 {
                     return MenuItemType.Group;
                 }
-                else
-                {
-                    throw new Exception("Invalid type: " + _Item.GetType().ToString());
-                }
+                throw new Exception("Invalid type: " + _Item.GetType());
             }
         }
 
@@ -108,7 +106,7 @@ namespace SupportTools.DockingForm
             set
             {
                 _Item.IsModified = value;
-                GetContextMenuEditor().DisplayLabelChanges(value);                
+                GetContextMenuEditor().DisplayLabelChanges(value);
             }
         }
         #endregion
@@ -127,17 +125,17 @@ namespace SupportTools.DockingForm
 
         private void CreateMenuItems()
         {
-            if (_Item is MenuGroup)
+            var menuGroup = _Item as MenuGroup;
+            if (menuGroup != null)
             {
-                var group = (MenuGroup)_Item;
-                for (var i = 0; i < group.MenuItems.Count; i++)
+                var group = menuGroup;
+                foreach (var node in @group.MenuItems.Select(item => new MenuItemTreeNode(ref item)))
                 {
-                    var item = group.MenuItems[i];
-                    var node = new MenuItemTreeNode(ref item);
-                    this.Nodes.Add(node);
+                    Nodes.Add(node);
                 }
             }
         }
+
         #endregion
 
         #region Enums

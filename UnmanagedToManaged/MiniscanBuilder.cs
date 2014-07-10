@@ -1,18 +1,17 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using Microsoft.Win32;
 
 namespace UnmanagedToManaged
 {
     class MiniscanBuilder
     {
-        string DeviceName = "",
-               Type = "",
-               NICAddress = "",
-               IPAddress = "",
-               SubnetMask = "",
-               HostName = "",
-               OSDecription = "";
+        private readonly string _DeviceName = string.Empty,
+               _Type = string.Empty,
+               _NicAddress = string.Empty,
+               _IPAddress = string.Empty,
+               _SubnetMask = string.Empty,
+               _HostName = string.Empty,
+               _OSDecription = string.Empty;
 
 
         enum DeviceType
@@ -20,8 +19,6 @@ namespace UnmanagedToManaged
             Printer,
             WirelessAccessPoint
         }
-            
-
 
         public MiniscanBuilder()
         {
@@ -30,16 +27,16 @@ namespace UnmanagedToManaged
 
         public MiniscanBuilder(UnmanagedNode inUnmanagedNode)
         {
-           DeviceName = inUnmanagedNode.DeviceName;
-           NICAddress = inUnmanagedNode.MacAddress;
-           IPAddress = inUnmanagedNode.IPAddress;
-           SubnetMask = inUnmanagedNode.SubnetMask;
-           HostName = inUnmanagedNode.DeviceName;
-           OSDecription = inUnmanagedNode.OSDescription;
-           if ( inUnmanagedNode.TopGroupName.Equals("Printers" ) || inUnmanagedNode.GroupName.Equals("Wireless Access Points" ) )
-           {
-               Type = inUnmanagedNode.TopGroupName;  // Leave as "" if not from one of these two groups.
-           }
+            _DeviceName = inUnmanagedNode.DeviceName;
+            _NicAddress = inUnmanagedNode.MacAddress;
+            _IPAddress = inUnmanagedNode.IPAddress;
+            _SubnetMask = inUnmanagedNode.SubnetMask;
+            _HostName = inUnmanagedNode.DeviceName;
+            _OSDecription = inUnmanagedNode.OSDescription;
+            if (inUnmanagedNode.TopGroupName.Equals("Printers") || inUnmanagedNode.GroupName.Equals("Wireless Access Points"))
+            {
+                _Type = inUnmanagedNode.TopGroupName;  // Leave as "" if not from one of these two groups.
+            }
 
         }
 
@@ -63,51 +60,62 @@ namespace UnmanagedToManaged
         */
         private string GetLDMainPathFromReg()
         {
-            var FilePath = @"C:\Program Files\LANDesk\ManagementSuite\";
+            const string defaultFilePath = @"C:\Program Files\LANDesk\ManagementSuite\";
+
+            // Try 32 bit registry
             var key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\LANDesk\ManagementSuite\Setup");
-            return key.GetValue("LdmainPath", FilePath).ToString();
+            if (key != null)
+                return key.GetValue("LdmainPath", defaultFilePath).ToString();
+
+            // Try 64 bit registry
+            var localKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64);
+            key = localKey.OpenSubKey(@"SOFTWARE\LANDesk\ManagementSuite\Setup");
+            if (key != null)
+                return key.GetValue("LdmainPath", defaultFilePath).ToString();
+
+            return defaultFilePath;
         }
 
         public void WriteMiniscan()
         {
-            var path = GetLDMainPathFromReg() + @"ldscan\" + DeviceName + ".tmp";
-             
+            var path = GetLDMainPathFromReg() + @"ldscan\" + _DeviceName + ".tmp";
+
             if (!File.Exists(path))
             {
                 // Create a file to write to.
                 var sw = File.CreateText(path);
 
-                if (! Type.Equals(""))
-                { 
-                    sw.WriteLine("Type = {0}", Type); 
-                }
-                if (! NICAddress.Equals(""))
+                if (!_Type.Equals(""))
                 {
-                    sw.WriteLine("Network - NIC Address = {0}", NICAddress);
+                    sw.WriteLine("Type = {0}", _Type);
                 }
-                if (! IPAddress.Equals(""))
+                if (!_NicAddress.Equals(""))
                 {
-                    sw.WriteLine("Network - TCPIP - Address = {0}", IPAddress);
+                    sw.WriteLine("Network - NIC Address = {0}", _NicAddress);
                 }
-                if (! SubnetMask.Equals(""))
+                if (!_IPAddress.Equals(""))
                 {
-                    sw.WriteLine("Network - TCPIP - Subnet Mask = {0}", SubnetMask);
+                    sw.WriteLine("Network - TCPIP - Address = {0}", _IPAddress);
                 }
-                if (! DeviceName.Equals(""))
+                if (!_SubnetMask.Equals(""))
                 {
-                    sw.WriteLine("Device Name = {0}", DeviceName);
+                    sw.WriteLine("Network - TCPIP - Subnet Mask = {0}", _SubnetMask);
                 }
-                if (!OSDecription.Equals("") && !OSDecription.ToLower().Equals("unknown") && !(null == OSDecription) )
+                if (!_DeviceName.Equals(""))
                 {
-                    sw.WriteLine("OS - Name = {0}", OSDecription);
+                    sw.WriteLine("Device Name = {0}", _DeviceName);
                 }
-                if (! HostName.Equals(""))
+                if (!_OSDecription.Equals("") && !_OSDecription.ToLower().Equals("unknown") && !(null == _OSDecription))
                 {
-                    sw.WriteLine("Network - TCPIP - Host Name = {0}", HostName);
+                    sw.WriteLine("OS - Name = {0}", _OSDecription);
+                }
+                if (!_HostName.Equals(""))
+                {
+                    sw.WriteLine("Network - TCPIP - Host Name = {0}", _HostName);
                 }
                 sw.WriteLine("");
                 sw.Close();
-                var miniscanPath = GetLDMainPathFromReg() + @"ldscan\" + DeviceName + ".ims";
+                var miniscanPath = GetLDMainPathFromReg() + @"ldscan\" + _DeviceName + ".ims";
                 File.Move(path, miniscanPath);
             }
         }

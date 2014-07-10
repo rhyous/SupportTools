@@ -51,9 +51,10 @@ namespace SupportTools.DockingForm
         public void GetDataFromNode(ref MenuItemTreeNode inNode)
         {
             _Node = inNode;
-            if (_Node.Item is MenuGroup)
+            var item = _Node.Item as MenuGroup;
+            if (item != null)
             {
-                var group = (MenuGroup)_Node.Item;
+                var group = item;
                 textBoxName.Text = group.Name;
             }
         }
