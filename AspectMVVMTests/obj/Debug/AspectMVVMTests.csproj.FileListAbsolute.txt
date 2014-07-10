@@ -18,3 +18,5 @@ C:\Users\jbarneck\Documents\Projects\GIT\ldmsplugins\AspectMVVMTests\bin\Debug\P
 C:\Users\jbarneck\Documents\Projects\GIT\ldmsplugins\AspectMVVMTests\obj\Debug\AspectMVVMTests.csprojResolveAssemblyReference.cache
 C:\Users\jbarneck\Documents\Projects\GIT\ldmsplugins\AspectMVVMTests\obj\Debug\AspectMVVMTests.dll
 C:\Users\jbarneck\Documents\Projects\GIT\ldmsplugins\AspectMVVMTests\obj\Debug\AspectMVVMTests.pdb
+C:\Users\jbarneck\Documents\Projects\GIT\ldmsplugins\AspectMVVMTests\bin\Debug\AspectMVVMTests.pssym
+C:\Users\jbarneck\Documents\Projects\GIT\ldmsplugins\AspectMVVMTests\obj\Debug\AspectMVVMTests.dll.postsharp

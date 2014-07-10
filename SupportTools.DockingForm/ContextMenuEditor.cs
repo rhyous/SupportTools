@@ -23,7 +23,6 @@
  */
 
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using LANDesk.ManagementSuite.WinConsole.Tools;
@@ -35,8 +34,8 @@ namespace SupportTools.DockingForm
     public partial class ContextMenuEditor : ToolForm
     {
         ComputerContextMenu _ContextMenu;
-        string _XmlPath = @"SupportTools\SupportTools.xml";
-        string _LDMainPath;
+        private const string XmlPath = @"SupportTools\SupportTools.xml";
+        readonly string _LDMainPath;
 
         #region Constructor
         public ContextMenuEditor()
@@ -52,7 +51,7 @@ namespace SupportTools.DockingForm
 
         #region Functions
         private void CreateImageList()
-        {   
+        {
             treeViewContextMenu.ImageList = new ImageList();
             treeViewContextMenu.ImageList.Images.Add(Image.FromFile(_LDMainPath + @"\SupportTools\Images\Folder.png"));
             treeViewContextMenu.ImageList.Images.Add(Image.FromFile(_LDMainPath + @"\SupportTools\Images\SupportTools.png"));
@@ -60,7 +59,7 @@ namespace SupportTools.DockingForm
 
         private void ReadXml()
         {
-            _ContextMenu = Serializer.DeserializeFromXML<ComputerContextMenu>(_LDMainPath + @"\" + _XmlPath);
+            _ContextMenu = Serializer.DeserializeFromXML<ComputerContextMenu>(_LDMainPath + @"\" + XmlPath);
             _ContextMenu.OrderByType();
             ContextMenuItem item = _ContextMenu;
             item.Name = "Computer context menu";
@@ -71,20 +70,9 @@ namespace SupportTools.DockingForm
 
         private void WriteXml()
         {
-            Serializer.SerializeToXML<MenuGroup>(_ContextMenu, _LDMainPath + @"\" + _XmlPath);
+            Serializer.SerializeToXML<MenuGroup>(_ContextMenu, _LDMainPath + @"\" + XmlPath);
             DisplayLabelChanges(false);
         }
-
-        private void CreateMenuItems(List<ContextMenuItem> inMenuItems, TreeNode inParent)
-        {
-            for (var i = 0; i < inMenuItems.Count; i++)
-            {
-                var item = inMenuItems[i];
-                var node = new MenuItemTreeNode(ref item);
-                inParent.Nodes.Add(node);
-            }
-        }
-
 
         private void SetAddRemoveGroupButtonStates(bool inState)
         {
@@ -110,7 +98,7 @@ namespace SupportTools.DockingForm
         {
             const string filePath = @"C:\Program Files\LANDesk\ManagementSuite\";
             var key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\LANDesk\ManagementSuite\Setup");
-            return key.GetValue("LdmainPath", filePath).ToString();
+            return key == null ? null : key.GetValue("LdmainPath", filePath).ToString();
         }
         #endregion
 
@@ -120,11 +108,12 @@ namespace SupportTools.DockingForm
             if (treeViewContextMenu.SelectedNode is MenuItemTreeNode)
             {
                 var node = (MenuItemTreeNode)treeViewContextMenu.SelectedNode;
-                if (node.Item is MenuGroup)
+                var menuGroup = node.Item as MenuGroup;
+                if (menuGroup != null)
                 {
                     // Add to XML object
-                    var group = (MenuGroup)node.Item;
-                    ContextMenuItem newGroup = new MenuGroup("<Enter name>",group);
+                    var group = menuGroup;
+                    ContextMenuItem newGroup = new MenuGroup("<Enter name>", group);
                     group.MenuItems.Add(newGroup);
 
                     // Add to TreeView
@@ -135,28 +124,26 @@ namespace SupportTools.DockingForm
             }
             DisplayLabelChanges(true);
         }
-        
+
         private void toolStripButtonRemoveItem_Click(object sender, EventArgs e)
         {
-            if (treeViewContextMenu.SelectedNode is MenuItemTreeNode)
+            var selectedNode = treeViewContextMenu.SelectedNode as MenuItemTreeNode;
+            if (selectedNode != null)
             {
                 // Cast node and parent node
-                if (treeViewContextMenu.SelectedNode is MenuItemTreeNode
-                    && treeViewContextMenu.SelectedNode is MenuItemTreeNode)
+                var node = selectedNode;
+                var parentNode = (MenuItemTreeNode)node.Parent;
+
+                // Remove from XML object
+                var item = parentNode.Item as MenuGroup;
+                if (item != null)
                 {
-                    var node = (MenuItemTreeNode)treeViewContextMenu.SelectedNode;
-                    var parentNode = (MenuItemTreeNode)node.Parent;
-
-                    // Remove from XML object
-                    if (parentNode.Item is MenuGroup)
-                    {
-                        var group = (MenuGroup)parentNode.Item;
-                        group.MenuItems.Remove(node.Item);
-                    }
-
-                    // Remove from TreeView
-                    node.Remove();
+                    var group = item;
+                    group.MenuItems.Remove(node.Item);
                 }
+
+                // Remove from TreeView
+                node.Remove();
             }
             DisplayLabelChanges(true);
         }
@@ -166,10 +153,11 @@ namespace SupportTools.DockingForm
             if (treeViewContextMenu.SelectedNode is MenuItemTreeNode)
             {
                 var node = (MenuItemTreeNode)treeViewContextMenu.SelectedNode;
-                if (node.Item is MenuGroup)
+                var menuGroup = node.Item as MenuGroup;
+                if (menuGroup != null)
                 {
                     // Add to XML object
-                    var group = (MenuGroup)node.Item;
+                    var group = menuGroup;
                     ContextMenuItem newAction = new MenuAction("<Enter name>", group);
                     group.MenuItems.Add(newAction);
                     // Add to TreeView
@@ -179,11 +167,6 @@ namespace SupportTools.DockingForm
                 }
             }
             DisplayLabelChanges(true);
-        }
-
-        private void toolStripButtonRemoveAction_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void toolStripButtonRefresh_Click(object sender, EventArgs e)
@@ -200,27 +183,31 @@ namespace SupportTools.DockingForm
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            this.groupBoxEditMenuItem.Controls.Clear();
+            groupBoxEditMenuItem.Controls.Clear();
             var tree = (TreeView)sender;
 
             if (tree.SelectedNode == tree.TopNode)
             {
                 toolStripButtonDelete.Enabled = false;
             }
-            else if (tree.SelectedNode is MenuItemTreeNode)
+            else
             {
-                var node = (MenuItemTreeNode)tree.SelectedNode;
-                if (node.ItemType == MenuItemTreeNode.MenuItemType.Group)
+                var selectedNode = tree.SelectedNode as MenuItemTreeNode;
+                if (selectedNode != null)
                 {
-                    var editGroupControl = new EditGroupControl(ref node);
-                    this.groupBoxEditMenuItem.Controls.Add(editGroupControl);
-                    SetAddRemoveGroupButtonStates(true);
-                }
-                if (node.ItemType == MenuItemTreeNode.MenuItemType.Action)
-                {
-                    var userControl1 = new EditActionControl(ref node);
-                    this.groupBoxEditMenuItem.Controls.Add(userControl1);
-                    SetAddRemoveGroupButtonStates(false);
+                    var node = selectedNode;
+                    if (node.ItemType == MenuItemTreeNode.MenuItemType.Group)
+                    {
+                        var editGroupControl = new EditGroupControl(ref node);
+                        groupBoxEditMenuItem.Controls.Add(editGroupControl);
+                        SetAddRemoveGroupButtonStates(true);
+                    }
+                    if (node.ItemType == MenuItemTreeNode.MenuItemType.Action)
+                    {
+                        var userControl1 = new EditActionControl(ref node);
+                        groupBoxEditMenuItem.Controls.Add(userControl1);
+                        SetAddRemoveGroupButtonStates(false);
+                    }
                 }
             }
         }
