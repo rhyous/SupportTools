@@ -6,7 +6,7 @@ namespace Rhyous.ServiceManager.Business
     {
         public static void StartServices(this ServiceCollection inServiceCollection)
         {
-            foreach (var service in inServiceCollection)
+            foreach (Service service in inServiceCollection)
             {
                 service.Start();
             }
@@ -14,7 +14,7 @@ namespace Rhyous.ServiceManager.Business
 
         public static void StopServices(this ServiceCollection inServiceCollection)
         {
-            foreach (var service in inServiceCollection)
+            foreach (Service service in inServiceCollection)
             {
                 service.Stop();
             }

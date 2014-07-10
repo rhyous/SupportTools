@@ -66,19 +66,19 @@ namespace UnmanagedToManaged
         */
         private String GetLDMainPathFromReg()
         {
-            string FilePath = @"C:\Program Files\LANDesk\ManagementSuite\";
-            RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\LANDesk\ManagementSuite\Setup");
+            var FilePath = @"C:\Program Files\LANDesk\ManagementSuite\";
+            var key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\LANDesk\ManagementSuite\Setup");
             return key.GetValue("LdmainPath", FilePath).ToString();
         }
 
         public void WriteMiniscan()
         {
-            String path = GetLDMainPathFromReg() + @"ldscan\" + DeviceName + ".tmp";
+            var path = GetLDMainPathFromReg() + @"ldscan\" + DeviceName + ".tmp";
              
             if (!File.Exists(path))
             {
                 // Create a file to write to.
-                StreamWriter sw = File.CreateText(path);
+                var sw = File.CreateText(path);
 
                 if (! Type.Equals(""))
                 { 
@@ -110,7 +110,7 @@ namespace UnmanagedToManaged
                 }
                 sw.WriteLine("");
                 sw.Close();
-                String miniscanPath = GetLDMainPathFromReg() + @"ldscan\" + DeviceName + ".ims";
+                var miniscanPath = GetLDMainPathFromReg() + @"ldscan\" + DeviceName + ".ims";
                 File.Move(path, miniscanPath);
             }
         }

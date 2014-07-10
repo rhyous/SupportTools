@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Net;
 using System.Threading;
 using System.Windows;
 
@@ -23,7 +24,7 @@ namespace MessagePresenter
             }
             else
             {
-                WebBrowserMessage.NavigateToString(System.Net.WebUtility.HtmlDecode(ArgsHandler.Instance["html"]));
+                WebBrowserMessage.NavigateToString(WebUtility.HtmlDecode(ArgsHandler.Instance["html"]));
             }
 
             if (!string.IsNullOrEmpty(ArgsHandler.Instance["title"]))
@@ -37,15 +38,15 @@ namespace MessagePresenter
 
         private void MessageLoaded(object sender, RoutedEventArgs e)
         {
-            string strTimeout = ArgsHandler.Instance["timeout"];
+            var strTimeout = ArgsHandler.Instance["timeout"];
             if (string.IsNullOrEmpty(strTimeout))
                 return;
 
-            int timeout = int.Parse(strTimeout);
+            var timeout = int.Parse(strTimeout);
             if (timeout < 1)
                 return;
 
-            BackgroundWorker worker = new BackgroundWorker();
+            var worker = new BackgroundWorker();
             worker.DoWork += worker_DoWork;
             worker.ProgressChanged += worker_ProgressChanged;
             worker.WorkerReportsProgress = true;
@@ -55,7 +56,7 @@ namespace MessagePresenter
 
         void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            App.Current.Shutdown();
+            Application.Current.Shutdown();
         }
 
         void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -65,7 +66,7 @@ namespace MessagePresenter
 
         void worker_DoWork(object sender, DoWorkEventArgs e)
         {
-            for (int i = (int)e.Argument; i > -1; i--)
+            for (var i = (int)e.Argument; i > -1; i--)
             {
                 Thread.Sleep(1000);
                 (sender as BackgroundWorker).ReportProgress(i);
@@ -74,7 +75,7 @@ namespace MessagePresenter
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            App.Current.Shutdown();
+            Application.Current.Shutdown();
         }
 
 

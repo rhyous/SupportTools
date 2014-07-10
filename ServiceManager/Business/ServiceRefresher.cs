@@ -30,7 +30,7 @@ namespace Rhyous.ServiceManager.Business
         {
             while (RefreshEnabled)
             {
-                foreach (var service in inServices)
+                foreach (Service service in inServices)
                 {
                     service.UpdateService();
                 }

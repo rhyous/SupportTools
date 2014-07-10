@@ -21,14 +21,14 @@ namespace Rhyous.ServiceManager.Business
 
         public static void UpdateState(this Service inService)
         {
-            ServiceController sc = ServiceManager.FindService(inService.ServiceName);
+            var sc = ServiceManager.FindService(inService.ServiceName);
             if (sc == null) return;
             inService.Status = sc.Status;
         }
 
         public static void UpdateDescription(this Service inService)
         {
-            RegistryKey key = Registry.LocalMachine;
+            var key = Registry.LocalMachine;
             key = key.OpenSubKey(@"SYSTEM\CurrentControlSet\services\" + inService.ServiceName);
             if (key != null)
             {
@@ -38,11 +38,11 @@ namespace Rhyous.ServiceManager.Business
 
         public static void UpdateStartupType(this Service inService)
         {
-            RegistryKey key = Registry.LocalMachine;
+            var key = Registry.LocalMachine;
             key = key.OpenSubKey(@"SYSTEM\CurrentControlSet\services\" + inService.ServiceName);
             if (key != null)
             {
-                StartupType type = (StartupType)key.GetValue("Start");
+                var type = (StartupType)key.GetValue("Start");
                 inService.StartupType = type;
             }
         }

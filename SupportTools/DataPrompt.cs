@@ -33,10 +33,10 @@ namespace SupportTools
         List<string> promptList;
         //List<int> promptSizeList;
         List<string> UserInput;
-        System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        List<System.Windows.Forms.Label> PromptValueName;
-        List<System.Windows.Forms.TextBox> ValueDataTextBox;
-        System.Windows.Forms.Button OkButton;
+        FlowLayoutPanel flowLayoutPanel1;
+        List<Label> PromptValueName;
+        List<TextBox> ValueDataTextBox;
+        Button OkButton;
 
         public DataPrompt(List<string> promptList)
         {
@@ -53,7 +53,7 @@ namespace SupportTools
         private void OkButton_Click(object sender, EventArgs e)
         {
             UserInput = new List<string>();
-            foreach (System.Windows.Forms.TextBox tb in ValueDataTextBox)
+            foreach (TextBox tb in ValueDataTextBox)
             {
                     UserInput.Add(tb.Text); 
             }

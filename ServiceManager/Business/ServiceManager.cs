@@ -13,7 +13,7 @@ namespace Rhyous.ServiceManager.Business
 
         public static Service GetService(String inServiceName)
         {
-            var service = new Service() { ServiceName = inServiceName };
+            var service = new Service { ServiceName = inServiceName };
             service.UpdateService();
             return service;
         }
@@ -22,8 +22,8 @@ namespace Rhyous.ServiceManager.Business
         [ExceptionAspect(ExceptionType = typeof(TimeoutException), Message = "TimeoutException starting service.")]
         public static void Start(this Service inService)
         {
-            ServiceController sc = FindService(inService.ServiceName);
-            ServiceType st = sc.ServiceType;
+            var sc = FindService(inService.ServiceName);
+            var st = sc.ServiceType;
             if (sc == null)
                 return;
             inService.UpdateService();
@@ -39,7 +39,7 @@ namespace Rhyous.ServiceManager.Business
         [ExceptionAspect(ExceptionType = typeof(TimeoutException), Message = "TimeoutException stopping service.")]
         public static void Stop(this Service inService, bool inShouldRestart = false)
         {
-            ServiceController sc = FindService(inService.ServiceName);
+            var sc = FindService(inService.ServiceName);
 
             if (sc == null)
                 return;
@@ -57,7 +57,7 @@ namespace Rhyous.ServiceManager.Business
 
         public static ServiceController FindService(String inServiceName)
         {
-            ServiceController[] services = ServiceController.GetServices();
+            var services = ServiceController.GetServices();
 
             foreach (ServiceController service in services)
             {

@@ -37,14 +37,14 @@ namespace SupportTools.DockingForm
         public EditActionControl()
         {
             InitializeComponent();
-            this.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Dock = DockStyle.Fill;
         }
 
         public EditActionControl(ref MenuItemTreeNode inNode)
         {
             _Node = inNode;
             InitializeComponent();
-            this.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Dock = DockStyle.Fill;
             GetDataFromNode(ref inNode);
         }
         #endregion
@@ -55,7 +55,7 @@ namespace SupportTools.DockingForm
             _Node = inNode;
             if (_Node.Item is MenuAction)
             {
-                MenuAction action = (MenuAction)_Node.Item;
+                var action = (MenuAction)_Node.Item;
                 textBoxName.Text = action.Name;
                 checkBoxIsMultiselect.Checked = action.IsMultiSelect;
                 textBoxCommand.Text = action.Command;
@@ -78,7 +78,7 @@ namespace SupportTools.DockingForm
 
         private void checkBoxIsMultiselect_CheckedChanged(object sender, EventArgs e)
         {
-            MenuAction action = (MenuAction)_Node.Item;
+            var action = (MenuAction)_Node.Item;
             if (action.IsMultiSelect == checkBoxIsMultiselect.Checked)
             {
                 return;
@@ -89,7 +89,7 @@ namespace SupportTools.DockingForm
 
         private void textBoxCommand_TextChanged(object sender, EventArgs e)
         {
-            MenuAction action = (MenuAction)_Node.Item;
+            var action = (MenuAction)_Node.Item;
             if (null != action.Command && action.Command.Equals(textBoxCommand.Text))
             {
                 return;
@@ -100,7 +100,7 @@ namespace SupportTools.DockingForm
 
         private void textBoxParameters_TextChanged(object sender, EventArgs e)
         {
-            MenuAction action = (MenuAction)_Node.Item;
+            var action = (MenuAction)_Node.Item;
             if (null != action.Parameters && action.Parameters.Equals(textBoxParameters.Text))
             {
                 return;
@@ -111,7 +111,7 @@ namespace SupportTools.DockingForm
 
         private void comboBoxLocation_SelectedIndexChanged(object sender, EventArgs e)
         {
-            MenuAction action = (MenuAction)_Node.Item;
+            var action = (MenuAction)_Node.Item;
             if (null != action.ExecutionLocation && action.ExecutionLocation.Equals(comboBoxLocation.SelectedItem.ToString()))
             {
                 return;

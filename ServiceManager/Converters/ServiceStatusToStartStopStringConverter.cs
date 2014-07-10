@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.ServiceProcess;
 using System.Windows.Data;
 
@@ -8,7 +9,7 @@ namespace Rhyous.ServiceManager.Converters
     {
         #region IValueConverter Members
 
-        public object Convert(object value, System.Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value.Equals(ServiceControllerStatus.Stopped))
                 return "Start";
@@ -17,7 +18,7 @@ namespace Rhyous.ServiceManager.Converters
             return "Wait";
         }
 
-        public object ConvertBack(object value, System.Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
         }

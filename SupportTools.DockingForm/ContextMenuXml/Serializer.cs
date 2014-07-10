@@ -33,7 +33,7 @@ namespace SupportTools.ContextMenuXml
         #region Functions        
         public static void SerializeToXML<T>(T t, String inFilename)
         {
-            XmlSerializer serializer = new XmlSerializer(t.GetType());
+            var serializer = new XmlSerializer(t.GetType());
             TextWriter textWriter = new StreamWriter(inFilename);
             serializer.Serialize(textWriter, t);
             textWriter.Close();
@@ -41,18 +41,18 @@ namespace SupportTools.ContextMenuXml
 
         public static T DeserializeFromXML<T>(String inFilename)
         {
-            XmlSerializer deserializer = new XmlSerializer(typeof(T));
+            var deserializer = new XmlSerializer(typeof(T));
             TextReader textReader = new StreamReader(inFilename);
-            T retVal = (T)deserializer.Deserialize(textReader);
+            var retVal = (T)deserializer.Deserialize(textReader);
             textReader.Close();
             return retVal;
         }
 
         public static T DeserializeFromXML<T>(String inSnippetOrFile, bool isString)
         {
-            XmlSerializer deserializer = new XmlSerializer(typeof(T));
-            TextReader textReader = isString ? (TextReader)new StringReader(inSnippetOrFile) : (TextReader)new StreamReader(inSnippetOrFile);
-            T retVal = (T)deserializer.Deserialize(textReader);
+            var deserializer = new XmlSerializer(typeof(T));
+            var textReader = isString ? new StringReader(inSnippetOrFile) : (TextReader)new StreamReader(inSnippetOrFile);
+            var retVal = (T)deserializer.Deserialize(textReader);
             textReader.Close();
             return retVal;
         }

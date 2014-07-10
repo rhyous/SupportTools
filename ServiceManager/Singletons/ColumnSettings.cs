@@ -92,13 +92,13 @@ namespace Rhyous.ServiceManager.Singletons
         [BackgroundWorkerAspect]
         public void Save()
         {
-            String fullpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "Service Manager", "Settings", "ColumnSettings.xml");
+            var fullpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "Service Manager", "Settings", "ColumnSettings.xml");
             Serializer.SerializeToXML(Instance, fullpath);
         }
 
         public static void CreateInstanceFromXml()
         {
-            String fullpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "Service Manager", "Settings", "ColumnSettings.xml");
+            var fullpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "Service Manager", "Settings", "ColumnSettings.xml");
             Instance = File.Exists(fullpath) ? Serializer.DeserializeFromXML<ColumnSettings>(fullpath) : new ColumnSettings();
         }
     }

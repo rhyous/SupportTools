@@ -12,7 +12,7 @@ namespace Rhyous.ServiceManager.Aspects
     {
         public override void OnInvoke(MethodInterceptionArgs args)
         {
-            BackgroundWorker bw = new BackgroundWorker();
+            var bw = new BackgroundWorker();
             bw.DoWork += (sender, e) => args.Proceed();
             bw.RunWorkerAsync();
         }

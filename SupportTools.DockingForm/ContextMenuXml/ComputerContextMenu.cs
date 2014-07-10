@@ -37,9 +37,6 @@ namespace SupportTools.ContextMenuXml
         /*
 		 * The default constructor
  		 */
-        public ComputerContextMenu()
-        {
-        }
 
         #endregion
 

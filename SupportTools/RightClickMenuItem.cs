@@ -24,12 +24,12 @@
 
 using System;
 using System.Windows.Forms;
-
+using LANDesk.ManagementSuite.WinConsole;
 using SupportTools.ContextMenuXml;
 
 namespace SupportTools
 {
-    class RightClickMenuItem : LANDesk.ManagementSuite.WinConsole.WinConsoleMenuItem
+    class RightClickMenuItem : WinConsoleMenuItem
     {
         #region Member variables
         private ContextMenuItem _MenuItem;
@@ -61,13 +61,10 @@ namespace SupportTools
             {
                 if (_MenuItem is MenuAction)
                 {
-                    MenuAction action = (MenuAction)_MenuItem;
+                    var action = (MenuAction)_MenuItem;
                     return action.Command;
                 }
-                else
-                {
-                    return null;
-                }
+                return null;
             }
         }
 
@@ -77,7 +74,7 @@ namespace SupportTools
             {
                 if (_MenuItem is MenuAction)
                 {
-                    MenuAction action = (MenuAction)_MenuItem;
+                    var action = (MenuAction)_MenuItem;
                     return action.Parameters;
                 }
                 return null;
@@ -86,13 +83,11 @@ namespace SupportTools
             {
                 if (_MenuItem is MenuAction)
                 {
-                    MenuAction action = (MenuAction)_MenuItem;
+                    var action = (MenuAction)_MenuItem;
                     action.Parameters = value;
                 }
             }
-
         }
-
 
         public String ExecutionLocation
         {
@@ -100,13 +95,10 @@ namespace SupportTools
             {
                 if (_MenuItem is MenuAction)
                 {
-                    MenuAction action = (MenuAction)_MenuItem;
+                    var action = (MenuAction)_MenuItem;
                     return action.ExecutionLocation;
                 }
-                else
-                {
-                    return null;
-                }
+                return null;
             }
         }
         #endregion

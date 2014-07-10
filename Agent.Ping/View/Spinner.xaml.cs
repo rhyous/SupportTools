@@ -44,7 +44,7 @@ namespace Rhyous.Agent.Ping.View
             set
             {
                 SetValue(IsStartedProperty, value);
-                Storyboard spinner = (Storyboard)FindResource("BlackSpinnerStoryBoard");
+                var spinner = (Storyboard)FindResource("BlackSpinnerStoryBoard");
                 if (value)
                 {
                     spinner.Begin();
@@ -58,12 +58,12 @@ namespace Rhyous.Agent.Ping.View
 
         static void IsSpinningChanged(DependencyObject property, DependencyPropertyChangedEventArgs args)
         {
-            Spinner spinner = property as Spinner;
+            var spinner = property as Spinner;
             spinner.IsStarted = (bool)args.NewValue;
         }
 
         public static readonly DependencyProperty IsStartedProperty =
-            DependencyProperty.Register("IsStarted", typeof(bool), typeof(Spinner), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, new PropertyChangedCallback(IsSpinningChanged)));
+            DependencyProperty.Register("IsStarted", typeof(bool), typeof(Spinner), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, IsSpinningChanged));
 
     }
 }

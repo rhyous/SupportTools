@@ -38,10 +38,10 @@ namespace Rhyous.Agent.Ping
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            App.Args = e.Args;
+            Args = e.Args;
             base.OnStartup(e);
-            MainWindowViewModel viewmodel = new MainWindowViewModel();
-            MainWindow main = new MainWindow();
+            var viewmodel = new MainWindowViewModel();
+            var main = new MainWindow();
             main.DataContext = viewmodel;
             main.Show();
         }

@@ -18,20 +18,20 @@ namespace UnmanagedToManaged
             CheckArgs(args);
             if ( !(ip.Equals("")) && !(null == ip) )
             {
-                un = new UnmanagedNode(ip, UnmanagedNode.UnmanagedNodeDataType.IPADDRESS);
+                un = new UnmanagedNode(ip, UnmanagedNode.UnmanagedNodeDataType.IPAddress);
             }
             else if (!(name.Equals("")) && !(null == name))
             {
-                un = new UnmanagedNode(name, UnmanagedNode.UnmanagedNodeDataType.NODENAME);
+                un = new UnmanagedNode(name, UnmanagedNode.UnmanagedNodeDataType.Nodename);
             }
             else if (!(mac.Equals("")) && !(null == mac))
             {
-                un = new UnmanagedNode(mac, UnmanagedNode.UnmanagedNodeDataType.PHYSADDRESS);
+                un = new UnmanagedNode(mac, UnmanagedNode.UnmanagedNodeDataType.PhysAddress);
             }
 
             // Computer is an object from LANDesk.ManagementSuite.WinConsole
-            Computer c = Computer.Add(un.DeviceName, un.GroupName, un.IPAddress, un.DeviceName);
-            int i = c.ID;
+            var c = Computer.Add(un.DeviceName, un.GroupName, un.IPAddress, un.DeviceName);
+            var i = c.ID;
 
             // Todo: Check if the "Managed Printers" and "Managed Wireless Access Points" groups exist.
             // If not, create the appropriate one for the device.
@@ -41,9 +41,9 @@ namespace UnmanagedToManaged
 
         private static void CheckArgs(String[] args)
         {
-            for (int i = 0; i < args.Length; i++)
+            for (var i = 0; i < args.Length; i++)
             {
-                string[] splitArg = args[i].Trim().ToLower().Split('=');
+                var splitArg = args[i].Trim().ToLower().Split('=');
                 try
                 {
                     switch (splitArg[0])
@@ -83,7 +83,7 @@ namespace UnmanagedToManaged
 
         private static void PrintArgs(int inExitCode)
         {
-            Process p = Process.GetCurrentProcess();
+            var p = Process.GetCurrentProcess();
             Console.WriteLine("");
             Console.WriteLine("  Usage:");
             Console.WriteLine("  " + p.ProcessName + ".exe ip=<address> name=<Name> mac=<Mac Address>");

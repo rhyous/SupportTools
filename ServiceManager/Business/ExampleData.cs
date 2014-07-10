@@ -9,7 +9,7 @@ namespace Rhyous.ServiceManager.Business
         public ExampleData()
         {
             Services = new ServiceCollection();
-            Service s1 = new Service()
+            var s1 = new Service
             {
                 DisplayName = "SQL Active Directory Helper Service",
                 ServiceName = "MSSQLServerADHelper100"
@@ -17,7 +17,7 @@ namespace Rhyous.ServiceManager.Business
             s1.UpdateService();
             Services.Add(s1);
 
-            Service s2 = new Service()
+            var s2 = new Service
             {
                 DisplayName = "SQL Server (SQLEXPRESS)",
                 ServiceName = "MSSQL$SQLEXPRESS"
@@ -25,7 +25,7 @@ namespace Rhyous.ServiceManager.Business
             s2.UpdateService();
             Services.Add(s2);
 
-            Service s3 = new Service()
+            var s3 = new Service
             {
                 DisplayName = "SQL Server Agent (SQLEXPRESS)",
                 ServiceName = "SQLAgent$SQLEXPRESS"
@@ -33,7 +33,7 @@ namespace Rhyous.ServiceManager.Business
             s3.UpdateService();
             Services.Add(s3);
 
-            Service s4 = new Service()
+            var s4 = new Service
             {
                 DisplayName = "SQL Server Browser",
                 ServiceName = "SQLBrowser"
@@ -41,7 +41,7 @@ namespace Rhyous.ServiceManager.Business
             s4.UpdateService();
             Services.Add(s4);
 
-            Service s5 = new Service()
+            var s5 = new Service
             {
                 DisplayName = "SQL Server VSS Writer",
                 ServiceName = "SQLWriter"

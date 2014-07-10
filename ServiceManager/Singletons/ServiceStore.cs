@@ -65,14 +65,14 @@ namespace Rhyous.ServiceManager.Singletons
 
         public void Load()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         private static bool Load(String path)
         {
             if (File.Exists(path))
             {
-                ServiceStore temp = Serializer.DeserializeFromXML<ServiceStore>(path);
+                var temp = Serializer.DeserializeFromXML<ServiceStore>(path);
                 if (_Instance == null)
                 { _Instance = temp; }
                 else

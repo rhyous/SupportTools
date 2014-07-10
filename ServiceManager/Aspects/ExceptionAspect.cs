@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using PostSharp.Aspects;
 using Rhyous.ServiceManager.Singletons;
 using PostSharp.Aspects.Dependencies;
@@ -16,7 +17,7 @@ namespace Rhyous.ServiceManager.Aspects
 
         public override void OnException(MethodExecutionArgs args)
         {
-            string msg = DateTime.Now + ": " + Message + Environment.NewLine;
+            var msg = DateTime.Now + ": " + Message + Environment.NewLine;
             msg += string.Format("{0}: Error running {1}. {2}", DateTime.Now, args.Method.Name, args.Exception.Message);
             msg += Environment.NewLine;
             msg += args.Exception.StackTrace;
@@ -24,7 +25,7 @@ namespace Rhyous.ServiceManager.Aspects
             args.FlowBehavior = FlowBehavior.Continue;
         }
 
-        public override Type GetExceptionType(System.Reflection.MethodBase targetMethod)
+        public override Type GetExceptionType(MethodBase targetMethod)
         {
             return ExceptionType;
         }

@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using System.Windows;
+using Microsoft.Win32;
 using Rhyous.ServiceManager.Aspects;
 using Rhyous.ServiceManager.Singletons;
 
@@ -14,13 +15,13 @@ namespace Rhyous.ServiceManager.View
             InitializeComponent();
         }
 
-        private void ExitClick(object sender, System.Windows.RoutedEventArgs e)
+        private void ExitClick(object sender, RoutedEventArgs e)
         {
             App.Instance.Shutdown(0);
         }
 
         [ExceptionAspect]
-        private void OpenClick(object sender, System.Windows.RoutedEventArgs e)
+        private void OpenClick(object sender, RoutedEventArgs e)
         {
             var dlg = new OpenFileDialog { DefaultExt = ".xml", Filter = "XML |*.xml" };
 

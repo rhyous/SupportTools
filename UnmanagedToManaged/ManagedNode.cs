@@ -7,10 +7,6 @@ namespace UnmanagedToManaged
 {
     class ManagedNode : BasicNode
     {
-        public ManagedNode()
-        {
-        }
-
         public bool IsDeviceInDB()
         {
             // TODO: Iimplement this for real

@@ -98,7 +98,7 @@ namespace SupportTools.ContextMenuXml
         #endregion
 
         #region Properties
-        [XmlAttribute()]
+        [XmlAttribute]
         public String Name
         {
             get { return _Name; }
@@ -111,14 +111,14 @@ namespace SupportTools.ContextMenuXml
             set { _Filter = value; }
         }
 
-        [XmlIgnore()]
+        [XmlIgnore]
         public ContextMenuItem Parent
         {
             get { return _Parent; }
             set { _Parent = value; }
         }
 
-        [XmlIgnore()]
+        [XmlIgnore]
         public bool IsModified
         {
             get { return _IsModified; }

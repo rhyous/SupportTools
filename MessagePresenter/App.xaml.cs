@@ -16,7 +16,7 @@ namespace MessagePresenter
                 return;
             }
 
-            MainWindow mw = new MainWindow();
+            var mw = new MainWindow();
             mw.Show();
         }
 

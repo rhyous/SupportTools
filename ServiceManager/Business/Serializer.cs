@@ -31,19 +31,19 @@ namespace Rhyous.ServiceManager.Business
 
             if (!File.Exists(outFileName))
             {
-                String dir = Path.GetDirectoryName(outFileName);
+                var dir = Path.GetDirectoryName(outFileName);
                 if (!Directory.Exists(dir) && !string.IsNullOrWhiteSpace(dir))
                     Directory.CreateDirectory(dir);
             }
 
-            XmlSerializerNamespaces ns = inNameSpaces;
+            var ns = inNameSpaces;
             if (ns == null)
             {
                 ns = new XmlSerializerNamespaces();
                 ns.Add("", "");
             }
-            XmlSerializer serializer = new XmlSerializer(t.GetType());
-            TextWriter textWriter = (TextWriter)new StreamWriter(outFileName);
+            var serializer = new XmlSerializer(t.GetType());
+            TextWriter textWriter = new StreamWriter(outFileName);
             serializer.Serialize(textWriter, t, ns);
             textWriter.Close();
             Unlock(outFileName);
@@ -57,14 +57,14 @@ namespace Rhyous.ServiceManager.Business
         /// <param name="outString">The string that will be passed the XML.</param>
         public static String SerializeToXML<T>(T t, XmlSerializerNamespaces inNameSpaces = null)
         {
-            XmlSerializerNamespaces ns = inNameSpaces;
+            var ns = inNameSpaces;
             if (ns == null)
             {
                 ns = new XmlSerializerNamespaces();
                 ns.Add("", "");
             }
-            XmlSerializer serializer = new XmlSerializer(t.GetType());
-            TextWriter textWriter = (TextWriter)new StringWriter();
+            var serializer = new XmlSerializer(t.GetType());
+            TextWriter textWriter = new StringWriter();
             serializer.Serialize(textWriter, t, ns);
             return textWriter.ToString();
         }
@@ -85,19 +85,16 @@ namespace Rhyous.ServiceManager.Business
             // File should exist by now.
             if (File.Exists(inFilename))
             {
-                XmlSerializer deserializer = new XmlSerializer(typeof(T));
-                TextReader textReader = (TextReader)new StreamReader(inFilename);
-                XmlTextReader reader = new XmlTextReader(textReader);
+                var deserializer = new XmlSerializer(typeof(T));
+                TextReader textReader = new StreamReader(inFilename);
+                var reader = new XmlTextReader(textReader);
                 try { reader.Read(); }
                 catch { }
-                T retVal = (T)deserializer.Deserialize(reader);
+                var retVal = (T)deserializer.Deserialize(reader);
                 textReader.Close();
                 return retVal;
             }
-            else
-            {
-                throw new FileNotFoundException(inFilename);
-            }
+            throw new FileNotFoundException(inFilename);
         }
 
         /// <summary>
@@ -108,9 +105,9 @@ namespace Rhyous.ServiceManager.Business
         /// <returns>The object that was deserialized from xml.</returns>
         public static T DeserializeFromXML<T>(ref String inString)
         {
-            XmlSerializer deserializer = new XmlSerializer(typeof(T));
-            TextReader textReader = (TextReader)new StringReader(inString);
-            T retVal = (T)deserializer.Deserialize(textReader);
+            var deserializer = new XmlSerializer(typeof(T));
+            TextReader textReader = new StringReader(inString);
+            var retVal = (T)deserializer.Deserialize(textReader);
             textReader.Close();
             return retVal;
         }
@@ -153,7 +150,7 @@ namespace Rhyous.ServiceManager.Business
 
         private static void WaitForUnlock(String inFileName)
         {
-            int i = 0;
+            var i = 0;
             while (LockTable[inFileName])
             {
                 Thread.Sleep(100);

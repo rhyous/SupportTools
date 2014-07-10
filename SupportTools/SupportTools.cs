@@ -71,7 +71,7 @@ namespace SupportTools
             var contextMenu = Serializer.DeserializeFromXML<ComputerContextMenu>(_XmlFileName);
             var milfx = new MenuItemList(contextMenu, (Computer)inSender, _EventHandler);
             _MenuItems = milfx.GetSupportToolsMenuItemArray();
-            foreach (var t in _MenuItems)
+            foreach (RightClickMenuItem t in _MenuItems)
             {
                 inMenu.Add(WinConsoleMenuItem.Separator);
                 inMenu.Add(t);

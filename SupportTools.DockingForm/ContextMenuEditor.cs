@@ -65,9 +65,9 @@ namespace SupportTools.DockingForm
         {
             _ContextMenu = Serializer.DeserializeFromXML<ComputerContextMenu>(_LDMainPath + @"\" + _XmlPath);
             _ContextMenu.OrderByType();
-            ContextMenuItem item = (ContextMenuItem)_ContextMenu;
+            ContextMenuItem item = _ContextMenu;
             item.Name = "Computer context menu";
-            MenuItemTreeNode node = new MenuItemTreeNode(ref item);
+            var node = new MenuItemTreeNode(ref item);
             treeViewContextMenu.Nodes.Add(node);
             DisplayLabelChanges(false);
         }
@@ -80,10 +80,10 @@ namespace SupportTools.DockingForm
 
         private void CreateMenuItems(List<ContextMenuItem> inMenuItems, TreeNode inParent)
         {
-            for (int i = 0; i < inMenuItems.Count; i++)
+            for (var i = 0; i < inMenuItems.Count; i++)
             {
-                ContextMenuItem item = inMenuItems[i];
-                MenuItemTreeNode node = new MenuItemTreeNode(ref item);
+                var item = inMenuItems[i];
+                var node = new MenuItemTreeNode(ref item);
                 inParent.Nodes.Add(node);
             }
         }
@@ -111,8 +111,8 @@ namespace SupportTools.DockingForm
 
         private String GetLDMainPathFromReg()
         {
-            string FilePath = @"C:\Program Files\LANDesk\ManagementSuite\";
-            RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\LANDesk\ManagementSuite\Setup");
+            var FilePath = @"C:\Program Files\LANDesk\ManagementSuite\";
+            var key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\LANDesk\ManagementSuite\Setup");
             return key.GetValue("LdmainPath", FilePath).ToString();
         }
         #endregion
@@ -122,16 +122,16 @@ namespace SupportTools.DockingForm
         {
             if (treeViewContextMenu.SelectedNode is MenuItemTreeNode)
             {
-                MenuItemTreeNode node = (MenuItemTreeNode)treeViewContextMenu.SelectedNode;
+                var node = (MenuItemTreeNode)treeViewContextMenu.SelectedNode;
                 if (node.Item is MenuGroup)
                 {
                     // Add to XML object
-                    MenuGroup group = (MenuGroup)node.Item;
+                    var group = (MenuGroup)node.Item;
                     ContextMenuItem newGroup = new MenuGroup("<Enter name>",group);
                     group.MenuItems.Add(newGroup);
 
                     // Add to TreeView
-                    MenuItemTreeNode newNode = new MenuItemTreeNode(ref newGroup);
+                    var newNode = new MenuItemTreeNode(ref newGroup);
                     node.Nodes.Add(newNode);
                     treeViewContextMenu.SelectedNode = newNode;
                 }
@@ -147,13 +147,13 @@ namespace SupportTools.DockingForm
                 if (treeViewContextMenu.SelectedNode is MenuItemTreeNode
                     && treeViewContextMenu.SelectedNode is MenuItemTreeNode)
                 {
-                    MenuItemTreeNode node = (MenuItemTreeNode)treeViewContextMenu.SelectedNode;
-                    MenuItemTreeNode parentNode = (MenuItemTreeNode)node.Parent;
+                    var node = (MenuItemTreeNode)treeViewContextMenu.SelectedNode;
+                    var parentNode = (MenuItemTreeNode)node.Parent;
 
                     // Remove from XML object
                     if (parentNode.Item is MenuGroup)
                     {
-                        MenuGroup group = (MenuGroup)parentNode.Item;
+                        var group = (MenuGroup)parentNode.Item;
                         group.MenuItems.Remove(node.Item);
                     }
 
@@ -168,15 +168,15 @@ namespace SupportTools.DockingForm
         {
             if (treeViewContextMenu.SelectedNode is MenuItemTreeNode)
             {
-                MenuItemTreeNode node = (MenuItemTreeNode)treeViewContextMenu.SelectedNode;
+                var node = (MenuItemTreeNode)treeViewContextMenu.SelectedNode;
                 if (node.Item is MenuGroup)
                 {
                     // Add to XML object
-                    MenuGroup group = (MenuGroup)node.Item;
+                    var group = (MenuGroup)node.Item;
                     ContextMenuItem newAction = new MenuAction("<Enter name>", group);
                     group.MenuItems.Add(newAction);
                     // Add to TreeView
-                    MenuItemTreeNode newNode = new MenuItemTreeNode(ref newAction);
+                    var newNode = new MenuItemTreeNode(ref newAction);
                     node.Nodes.Add(newNode);
                     treeViewContextMenu.SelectedNode = newNode;
                 }
@@ -204,7 +204,7 @@ namespace SupportTools.DockingForm
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
             this.groupBoxEditMenuItem.Controls.Clear();
-            TreeView tree = (TreeView)sender;
+            var tree = (TreeView)sender;
 
             if (tree.SelectedNode == tree.TopNode)
             {
@@ -212,16 +212,16 @@ namespace SupportTools.DockingForm
             }
             else if (tree.SelectedNode is MenuItemTreeNode)
             {
-                MenuItemTreeNode node = (MenuItemTreeNode)tree.SelectedNode;
+                var node = (MenuItemTreeNode)tree.SelectedNode;
                 if (node.ItemType == MenuItemTreeNode.MenuItemType.Group)
                 {
-                    EditGroupControl editGroupControl = new EditGroupControl(ref node);
+                    var editGroupControl = new EditGroupControl(ref node);
                     this.groupBoxEditMenuItem.Controls.Add(editGroupControl);
                     SetAddRemoveGroupButtonStates(true);
                 }
                 if (node.ItemType == MenuItemTreeNode.MenuItemType.Action)
                 {
-                    EditActionControl userControl1 = new EditActionControl(ref node);
+                    var userControl1 = new EditActionControl(ref node);
                     this.groupBoxEditMenuItem.Controls.Add(userControl1);
                     SetAddRemoveGroupButtonStates(false);
                 }

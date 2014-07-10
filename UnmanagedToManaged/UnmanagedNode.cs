@@ -1,26 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using LANDesk.ManagementSuite.Database;
+using System;
 using System.Data;
-using System.Text;
-using LANDesk.ManagementSuite.Database;
-using LANDesk.ManagementSuite.WinConsole;
-using LANDesk.ManagementSuite.Information.DatabaseInformationWebReference;
 
 namespace UnmanagedToManaged
 {
     class UnmanagedNode : BasicNode
     {
-        private int UNMANAGEDNODES_IDN, 
-                    DEVICEGROUPINFO_IDN;
+        private int _UnmanagednodesIdn, 
+                    _DevicegroupinfoIdn;
 
-        private String mGroupName,
-                       mTopGroupName;
+        private String _GroupName,
+                       _TopGroupName;
 
         public enum UnmanagedNodeDataType
         {
-            NODENAME,
-            IPADDRESS,
-            PHYSADDRESS
+            Nodename,
+            IPAddress,
+            PhysAddress
         }
 
         public UnmanagedNode(String[] inArgs)
@@ -31,10 +27,10 @@ namespace UnmanagedToManaged
         public UnmanagedNode(String inData, UnmanagedNodeDataType inDataType)
         {
 
-            if (inDataType == UnmanagedNodeDataType.IPADDRESS)
+            if (inDataType == UnmanagedNodeDataType.IPAddress)
             {
-                mIPAddressPadded = PadIPAddress(inData);
-                GetUnmanagedDataFromDB(mIPAddressPadded, inDataType);
+                IPAddressPadded = PadIPAddress(inData);
+                GetUnmanagedDataFromDB(IPAddressPadded, inDataType);
             }
             else
             {
@@ -47,17 +43,17 @@ namespace UnmanagedToManaged
         {
             if (DeviceName.Equals(""))
             {
-                if (! mIPAddress.Equals("") ) 
+                if (! IPAddress.Equals("") ) 
                 {
-                    DeviceName = mIPAddress;
+                    DeviceName = IPAddress;
                 } 
-                else if ( mTopGroupName.Equals("Printers") || mTopGroupName.Equals("Wireless Access Points") )
+                else if ( _TopGroupName.Equals("Printers") || _TopGroupName.Equals("Wireless Access Points") )
                 {
-                    DeviceName = mTopGroupName.Remove(mTopGroupName.Length - 1);
+                    DeviceName = _TopGroupName.Remove(_TopGroupName.Length - 1);
                 } 
-                else if (! mMacAddress.Equals(""))
+                else if (! MacAddress.Equals(""))
                 {
-                    DeviceName = mMacAddress;
+                    DeviceName = MacAddress;
                 }
 
             }
@@ -65,27 +61,27 @@ namespace UnmanagedToManaged
 
         private void GetUnmanagedDataFromDB(String inData, UnmanagedNodeDataType inDataType)
         {
-            LanDeskDatabase database = LanDeskDatabase.Get();;
+            var database = LanDeskDatabase.Get();
             if (!LanDeskDatabase.IsOpen)
             {
                 
             }
 			try
 			{
-                String Data = inData;
-                String DataType = inDataType.ToString();
-                string sqltext = string.Format(@"Select UNMANAGEDNODES_IDN, UnmanagedNodes.DEVICEGROUPINFO_IDN, NODENAME, IPADDRESS, SUBNETMASK, PHYSADDRESS, OSNAME, GroupName from UnmanagedNodes, DeviceGroupInfo where UnmanagedNodes.DEVICEGROUPINFO_IDN = DeviceGroupInfo.DEVICEGROUPINFO_IDN AND {0}='{1}'", DataType, Data);
-				DataRow row = database.ExecuteRow(sqltext);
-                UNMANAGEDNODES_IDN = (int)row["UNMANAGEDNODES_IDN"];
-                DEVICEGROUPINFO_IDN = (int)row["DEVICEGROUPINFO_IDN"];
-                mDeviceName = (string)row["NODENAME"];
-                mIPAddressPadded = (string)row["IPADDRESS"];
-                mIPAddress = RemoveIPAddressPadding(mIPAddressPadded);
-                mSubnetMask = (string)row["SUBNETMASK"];
-                mMacAddress = (string)row["PHYSADDRESS"];
-                mOSDescription = (string)row["OSNAME"];
-                mGroupName = (string)row["GROUPNAME"];
-                mTopGroupName = GetTopGroupName(DEVICEGROUPINFO_IDN);
+                var Data = inData;
+                var DataType = inDataType.ToString();
+                var sqltext = string.Format(@"Select UNMANAGEDNODES_IDN, UnmanagedNodes.DEVICEGROUPINFO_IDN, NODENAME, IPADDRESS, SUBNETMASK, PHYSADDRESS, OSNAME, GroupName from UnmanagedNodes, DeviceGroupInfo where UnmanagedNodes.DEVICEGROUPINFO_IDN = DeviceGroupInfo.DEVICEGROUPINFO_IDN AND {0}='{1}'", DataType, Data);
+				var row = database.ExecuteRow(sqltext);
+                _UnmanagednodesIdn = (int)row["UNMANAGEDNODES_IDN"];
+                _DevicegroupinfoIdn = (int)row["DEVICEGROUPINFO_IDN"];
+                DeviceName = (string)row["NODENAME"];
+                IPAddressPadded = (string)row["IPADDRESS"];
+                IPAddress = RemoveIPAddressPadding(IPAddressPadded);
+                SubnetMask = (string)row["SUBNETMASK"];
+                MacAddress = (string)row["PHYSADDRESS"];
+                OSDescription = (string)row["OSNAME"];
+                _GroupName = (string)row["GROUPNAME"];
+                _TopGroupName = GetTopGroupName(_DevicegroupinfoIdn);
 			}
 			catch
 			{
@@ -93,22 +89,22 @@ namespace UnmanagedToManaged
 	    	}
         }
 
-        public void DeleteFromDB()
+        public void DeleteFromDb()
         {
-            LanDeskDatabase database = LanDeskDatabase.Get();
+            var database = LanDeskDatabase.Get();
             try
             {
                 string sqltext;
-                if ( !(UNMANAGEDNODES_IDN == 0) )
+                if ( _UnmanagednodesIdn != 0 )
                 {
-                    sqltext = string.Format(@"Delete from UnmanagedNodes WHERE UNMANAGEDNODES_IDN=" + UNMANAGEDNODES_IDN);
+                    sqltext = string.Format(@"Delete from UnmanagedNodes WHERE UNMANAGEDNODES_IDN=" + _UnmanagednodesIdn);
                 } 
                 else 
                 {
                     sqltext = string.Format(@"Delete from UnmanagedNodes WHERE {0}='{1}' and {2}='{3}' and {4}='{5}'", 
-                                               UnmanagedNodeDataType.IPADDRESS.ToString(), mIPAddress,
-                                               UnmanagedNodeDataType.NODENAME.ToString(), mDeviceName,
-                                               UnmanagedNodeDataType.PHYSADDRESS.ToString(), mMacAddress);
+                                               UnmanagedNodeDataType.IPAddress, IPAddress,
+                                               UnmanagedNodeDataType.Nodename, DeviceName,
+                                               UnmanagedNodeDataType.PhysAddress, MacAddress);
                 }
                 database.ExecuteRow(sqltext);
             }
@@ -122,9 +118,9 @@ namespace UnmanagedToManaged
 
         private String GetTopGroupName(int DEVICEGROUPINFO_IDN)
         {
-            String RetVal = "";
-            LanDeskDatabase database = LanDeskDatabase.Get();
-            string sqltext = @"SELECT GROUPID,GROUPNAME FROM DEVICEGROUPINFO WHERE DEVICEGROUPINFO_IDN=" + DEVICEGROUPINFO_IDN;
+            var RetVal = "";
+            var database = LanDeskDatabase.Get();
+            var sqltext = @"SELECT GROUPID,GROUPNAME FROM DEVICEGROUPINFO WHERE DEVICEGROUPINFO_IDN=" + DEVICEGROUPINFO_IDN;
             DataRow row;
             String tmpStr;
             try
@@ -137,7 +133,7 @@ namespace UnmanagedToManaged
                     tmpStr = tmpStr.Substring(0, tmpStr.Length - 3);
                     sqltext = string.Format(@"SELECT DEVICEGROUPINFO_IDN FROM DEVICEGROUPINFO WHERE GROUPID='{0}'", tmpStr);
                     row = database.ExecuteRow(sqltext);
-                    int tmpInt = (int)row["DEVICEGROUPINFO_IDN"];
+                    var tmpInt = (int)row["DEVICEGROUPINFO_IDN"];
                     RetVal = GetTopGroupName(tmpInt);
                 }
             }
@@ -150,13 +146,13 @@ namespace UnmanagedToManaged
 
         public string GroupName
         {
-            get { return this.mGroupName; }
-            set { this.mGroupName = value; }
+            get { return _GroupName; }
+            set { _GroupName = value; }
         }
         public string TopGroupName
         {
-            get { return this.mTopGroupName; }
-            set { this.mTopGroupName = value; }
+            get { return _TopGroupName; }
+            set { _TopGroupName = value; }
         }
 
 

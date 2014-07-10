@@ -50,7 +50,7 @@ namespace SupportTools
 
         private int CountChildNodes(XmlNode inNode, bool bCountComments)
         {
-            int retVal = 0;
+            var retVal = 0;
             foreach (XmlNode cn in inNode.ChildNodes)
             {
                 if ((bCountComments == false) && (cn.NodeType == XmlNodeType.Comment))
@@ -76,7 +76,7 @@ namespace SupportTools
 
             if (inItem is MenuAction)
             {
-                MenuAction action = (MenuAction)inItem;
+                var action = (MenuAction)inItem;
                 return new RightClickMenuItem(action, eh, action.IsMultiSelect);
             }
 
@@ -85,17 +85,17 @@ namespace SupportTools
 
         private RightClickMenuItem[] GetSupportToolsMenuItemArrayFromContextMenuItem(MenuGroup inGroup, Computer inComputer)
         {
-            String ComputerOSType = inComputer.Type;
+            var ComputerOSType = inComputer.Type;
 
-            List<RightClickMenuItem> preRetVal = new List<RightClickMenuItem>();
+            var preRetVal = new List<RightClickMenuItem>();
 
             foreach (ContextMenuItem item in inGroup.MenuItems)
             {                
                 preRetVal.Add(CreateSupportToolsMenuItemFromContextMenuItem(item, inComputer, _EventHandler));
             }
 
-            RightClickMenuItem[] RetVal = new RightClickMenuItem[preRetVal.Count];
-            int i = 0;
+            var RetVal = new RightClickMenuItem[preRetVal.Count];
+            var i = 0;
             foreach (RightClickMenuItem stmi in preRetVal)
             {
                 RetVal[i++] = stmi;

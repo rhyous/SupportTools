@@ -36,8 +36,8 @@ namespace Rhyous.Agent.Ping.Business
         #region Functions
         public static LDPing AgentPing(String inIPAddress)
         {
-            String AgentPath = String.Format(_LDPingTemplatePath, inIPAddress);
-            String xml = string.Empty;
+            var AgentPath = String.Format(_LDPingTemplatePath, inIPAddress);
+            var xml = string.Empty;
 
             try
             {

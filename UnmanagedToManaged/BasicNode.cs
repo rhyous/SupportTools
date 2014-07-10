@@ -1,29 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using LANDesk.ManagementSuite.WinConsole;
 
 namespace UnmanagedToManaged
 {
     public abstract class BasicNode
     {
-        protected String mDeviceName = "",
-                       mIPAddress = "",
-                       mIPAddressPadded = "",
-                       mSubnetMask = "",
-                       mOSDescription = "",
-                       mMacAddress = "";
+        private string _DeviceName = "",
+                       _IPAddress = "",
+                       _IPAddressPadded = "",
+                       _SubnetMask = "",
+                       _OSDescription = "",
+                       _MacAddress = "";
 
 
-        public BasicNode()
+        protected BasicNode()
         {
         }
 
-        public BasicNode(String inDeviceName, String inIPAddress, String inSubnetMask, String inOSDescription, String inMacAddress)
+        protected BasicNode(String inDeviceName, String inIPAddress, String inSubnetMask, String inOSDescription, String inMacAddress)
         {
             DeviceName = inDeviceName;
-            IPAddress = RemoveIPAddressPadding(inIPAddress);;
+            IPAddress = RemoveIPAddressPadding(inIPAddress);
             IPAddressPadded = PadIPAddress(inIPAddress);
             SubnetMask = inSubnetMask;
             OSDescription = inOSDescription;
@@ -32,81 +28,74 @@ namespace UnmanagedToManaged
 
         public string DeviceName
         {
-            get { return this.mDeviceName; }
-            set { this.mDeviceName = value; }
+            get { return _DeviceName; }
+            set { _DeviceName = value; }
         }
 
         public string IPAddress
         {
-            get { return this.mIPAddress; }
-            set { this.mIPAddress = value; }
+            get { return _IPAddress; }
+            set { _IPAddress = value; }
         }
 
         public string IPAddressPadded
         {
-            get { return this.mIPAddressPadded; }
-            set { this.mIPAddressPadded = value; }
+            get { return _IPAddressPadded; }
+            set { _IPAddressPadded = value; }
         }
 
         public string SubnetMask
         {
-            get { return this.mSubnetMask; }
-            set { this.mSubnetMask = value; }
+            get { return _SubnetMask; }
+            set { _SubnetMask = value; }
         }
 
         public string OSDescription
         {
-            get { return this.mOSDescription; }
-            set { this.mOSDescription = value; }
+            get { return _OSDescription; }
+            set { _OSDescription = value; }
         }
 
         public string MacAddress
         {
-            get { return this.mMacAddress; }
-            set { this.mMacAddress = value; }
+            get { return _MacAddress; }
+            set { _MacAddress = value; }
         }
 
 
         protected String PadIPAddress(String inIPAddress)
         {
-            String RetVal = inIPAddress.Trim();
-            String[] IPOctet = inIPAddress.Split('.');
-            for (int i = 0; i < IPOctet.Length; i++)
+            var ipOctet = inIPAddress.Split('.');
+            for (var i = 0; i < ipOctet.Length; i++)
             {
-                if (IPOctet[i].Length == 3)
+                if (ipOctet[i].Length == 3)
                 {
-                    continue;
                 }
-                else if (IPOctet[i].Length == 2)
+                if (ipOctet[i].Length == 2)
                 {
-                    IPOctet[i] = "0" + IPOctet[i];
+                    ipOctet[i] = "0" + ipOctet[i];
                 }
-                else if (IPOctet[i].Length == 1)
+                else if (ipOctet[i].Length == 1)
                 {
-                    IPOctet[i] = "00" + IPOctet[i];
+                    ipOctet[i] = "00" + ipOctet[i];
                 }
             }
-            RetVal = IPOctet[0] + "." + IPOctet[1] + "." + IPOctet[2] + "." + IPOctet[3];
-            return RetVal;
+            var retVal = ipOctet[0] + "." + ipOctet[1] + "." + ipOctet[2] + "." + ipOctet[3];
+            return retVal;
         }
 
         protected String RemoveIPAddressPadding(String inIPAddress)
         {
-            String RetVal = inIPAddress.Trim();
-            String[] IPOctet = inIPAddress.Split('.');
-            for (int i = 0; i < IPOctet.Length; i++)
+            var ipOctet = inIPAddress.Split('.');
+            for (var i = 0; i < ipOctet.Length; i++)
             {
-                while (IPOctet[i].Length > 1 && IPOctet[i].StartsWith("0"))
+                while (ipOctet[i].Length > 1 && ipOctet[i].StartsWith("0"))
                 {
-                    IPOctet[i] = IPOctet[i].Substring(1, (IPOctet[i].Length - 1));
+                    ipOctet[i] = ipOctet[i].Substring(1, (ipOctet[i].Length - 1));
                 }
             }
-            RetVal = IPOctet[0] + "." + IPOctet[1] + "." + IPOctet[2] + "." + IPOctet[3];
-            return RetVal;
+            var retVal = ipOctet[0] + "." + ipOctet[1] + "." + ipOctet[2] + "." + ipOctet[3];
+            return retVal;
         }
-
     }
-
-
-
 }

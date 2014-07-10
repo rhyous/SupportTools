@@ -29,7 +29,7 @@ using SupportTools.ContextMenuXml;
 
 namespace SupportTools.DockingForm
 {
-    public class MenuItemTreeNode : System.Windows.Forms.TreeNode
+    public class MenuItemTreeNode : TreeNode
     {
         #region Member Variables
         ContextMenuItem _Item;
@@ -117,7 +117,7 @@ namespace SupportTools.DockingForm
         #region Functions
         private ContextMenuEditor GetContextMenuEditor()
         {
-            Control temp = TreeView.Parent;
+            var temp = TreeView.Parent;
             while (!(temp is ContextMenuEditor))
             {
                 temp = temp.Parent;
@@ -130,11 +130,11 @@ namespace SupportTools.DockingForm
         {
             if (_Item is MenuGroup)
             {
-                MenuGroup group = (MenuGroup)_Item;
-                for (int i = 0; i < group.MenuItems.Count; i++)
+                var group = (MenuGroup)_Item;
+                for (var i = 0; i < group.MenuItems.Count; i++)
                 {
-                    ContextMenuItem item = group.MenuItems[i];
-                    MenuItemTreeNode node = new MenuItemTreeNode(ref item);
+                    var item = group.MenuItems[i];
+                    var node = new MenuItemTreeNode(ref item);
                     this.Nodes.Add(node);
                 }
             }

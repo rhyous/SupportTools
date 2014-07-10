@@ -12,16 +12,16 @@ namespace Rhyous.Agent.Ping.Business
     {
         public static string GetPageAsString(Uri address)
         {
-            string result = "";
+            var result = "";
 
             // Create the web request  
-            HttpWebRequest request = WebRequest.Create(address) as HttpWebRequest;
+            var request = WebRequest.Create(address) as HttpWebRequest;
 
             // Get response  
-            using (HttpWebResponse response = request.GetResponse() as HttpWebResponse)
+            using (var response = request.GetResponse() as HttpWebResponse)
             {
                 // Get the response stream  
-                using (StreamReader reader = new StreamReader(response.GetResponseStream()))
+                using (var reader = new StreamReader(response.GetResponseStream()))
                 {
                     // Read the whole contents and return as a string  
                     result = reader.ReadToEnd();

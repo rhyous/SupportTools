@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 
 namespace Rhyous.ServiceManager.Model
 {
-    [Serializable()]
+    [Serializable]
     [XmlRoot("Services")]
     public class ServiceCollection : ObservableCollection<Service>
     {

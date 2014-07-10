@@ -70,7 +70,7 @@ namespace SupportTools.ContextMenuXml
         #region Functions
         public void OrderByType()
         {
-            List<ContextMenuItem> items = new List<ContextMenuItem>(_MenuItems.Count);
+            var items = new List<ContextMenuItem>(_MenuItems.Count);
             foreach (MenuGroup group in _MenuItems.OfType<MenuGroup>())
             {
                 items.Add(group);

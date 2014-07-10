@@ -42,18 +42,18 @@ namespace Rhyous.Agent.Ping.Business
         public static void SerializeToXML<T>(T t, String outFilename, XmlSerializerNamespaces inNameSpaces = null)
         {
             // Make sure the directory exists
-            string directory = Path.GetDirectoryName(outFilename);
+            var directory = Path.GetDirectoryName(outFilename);
             if (!String.IsNullOrEmpty(directory) && !Directory.Exists(directory))
                 Directory.CreateDirectory(directory);
 
-            XmlSerializerNamespaces ns = inNameSpaces;
+            var ns = inNameSpaces;
             if (ns == null)
             {
                 ns = new XmlSerializerNamespaces();
                 ns.Add("", "");
             }
-            XmlSerializer serializer = new XmlSerializer(t.GetType());
-            TextWriter textWriter = (TextWriter)new StreamWriter(outFilename);
+            var serializer = new XmlSerializer(t.GetType());
+            TextWriter textWriter = new StreamWriter(outFilename);
             serializer.Serialize(textWriter, t, ns);
             textWriter.Close();
         }
@@ -66,14 +66,14 @@ namespace Rhyous.Agent.Ping.Business
         /// <param name="outString">The string that will be passed the XML.</param>
         public static String SerializeToXML<T>(T t, XmlSerializerNamespaces inNameSpaces = null)
         {
-            XmlSerializerNamespaces ns = inNameSpaces;
+            var ns = inNameSpaces;
             if (ns == null)
             {
                 ns = new XmlSerializerNamespaces();
                 ns.Add("", "");
             }
-            XmlSerializer serializer = new XmlSerializer(t.GetType());
-            TextWriter textWriter = (TextWriter)new StringWriter();
+            var serializer = new XmlSerializer(t.GetType());
+            TextWriter textWriter = new StringWriter();
             serializer.Serialize(textWriter, t, ns);
             return textWriter.ToString();
         }
@@ -94,19 +94,16 @@ namespace Rhyous.Agent.Ping.Business
             // File should exist by now.
             if (File.Exists(inFilename))  
             {
-                XmlSerializer deserializer = new XmlSerializer(typeof(T));
-                TextReader textReader = (TextReader)new StreamReader(inFilename);
-                XmlTextReader reader = new XmlTextReader(textReader);
+                var deserializer = new XmlSerializer(typeof(T));
+                TextReader textReader = new StreamReader(inFilename);
+                var reader = new XmlTextReader(textReader);
                 try { reader.Read(); }
                 catch { }
-                T retVal = (T)deserializer.Deserialize(reader);
+                var retVal = (T)deserializer.Deserialize(reader);
                 textReader.Close();
                 return retVal;
             }
-            else
-            {
-                throw new FileNotFoundException(inFilename);
-            }
+            throw new FileNotFoundException(inFilename);
         }
 
         /// <summary>
@@ -117,9 +114,9 @@ namespace Rhyous.Agent.Ping.Business
         /// <returns>The object that was deserialized from xml.</returns>
         public static T DeserializeFromXML<T>(ref String inString)
         {
-            XmlSerializer deserializer = new XmlSerializer(typeof(T));
-            TextReader textReader = (TextReader)new StringReader(inString);
-            T retVal = (T)deserializer.Deserialize(textReader);
+            var deserializer = new XmlSerializer(typeof(T));
+            TextReader textReader = new StringReader(inString);
+            var retVal = (T)deserializer.Deserialize(textReader);
             textReader.Close();
             return retVal;
         }

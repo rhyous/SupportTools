@@ -23,6 +23,7 @@
  */
 
 using System;
+using System.Globalization;
 using System.Windows.Data;
 
 namespace Rhyous.Agent.Ping.Converters
@@ -30,15 +31,14 @@ namespace Rhyous.Agent.Ping.Converters
     class StringToBoolConverter : IValueConverter
     {
 
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (String.IsNullOrEmpty(value.ToString()))
                 return false;
-            else
-                return true;
+            return true;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             // We cannot convert back
             throw new NotImplementedException();

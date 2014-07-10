@@ -35,7 +35,7 @@ namespace SupportTools.ContextMenuXml
         private String _Parameters;
         private String _ExecutionLocation = "Console"; // Allowed options are Client or Console.
         private bool _IsMultiSelect;
-        private readonly String[] _ExecutionLocationOptions = new String[] { "Console", "Client" };
+        private readonly String[] _ExecutionLocationOptions = { "Console", "Client" };
         #endregion
 
         #region Constructors

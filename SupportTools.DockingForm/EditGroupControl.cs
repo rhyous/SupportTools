@@ -37,13 +37,13 @@ namespace SupportTools.DockingForm
         public EditGroupControl()
         {
             InitializeComponent();
-            this.Dock = System.Windows.Forms.DockStyle.Fill;            
+            this.Dock = DockStyle.Fill;            
         }
 
         public EditGroupControl(ref MenuItemTreeNode inNode)
         {
             InitializeComponent();
-            this.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Dock = DockStyle.Fill;
             GetDataFromNode(ref inNode);
         }
         #endregion
@@ -54,7 +54,7 @@ namespace SupportTools.DockingForm
             _Node = inNode;
             if (_Node.Item is MenuGroup)
             {
-                MenuGroup group = (MenuGroup)_Node.Item;
+                var group = (MenuGroup)_Node.Item;
                 textBoxName.Text = group.Name;
             }
         }

@@ -29,8 +29,8 @@ namespace Common.Aspects
 
         private static String GetTabs()
         {
-            string tabs = string.Empty;
-            for (int i = 0; i < _TabCount; i++)
+            var tabs = string.Empty;
+            for (var i = 0; i < _TabCount; i++)
             {
                 tabs += "\t";
             }
