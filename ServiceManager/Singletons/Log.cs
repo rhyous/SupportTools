@@ -19,7 +19,7 @@ namespace Rhyous.ServiceManager.Singletons
             Extension = ".log";
         }
 
-        public String FileName
+        public string FileName
         {
             get
             {
@@ -36,18 +36,18 @@ namespace Rhyous.ServiceManager.Singletons
                 while (File.Exists(FileName))
                     _LogId++;
             }
-        } private String _FileName;
+        } private string _FileName;
 
-        public String FilePath { get; set; }
+        public string FilePath { get; set; }
 
-        public String Extension { get; set; }
+        public string Extension { get; set; }
 
-        public static void WriteLine(String inLogMessage)
+        public static void WriteLine(string inLogMessage)
         {
             Instance.Write(inLogMessage + Environment.NewLine);
         }
 
-        public void Write(String inMessage)
+        public void Write(string inMessage)
         {
             lock (Instance)
             {

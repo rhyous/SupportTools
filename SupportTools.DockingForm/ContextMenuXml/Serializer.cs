@@ -31,7 +31,7 @@ namespace SupportTools.ContextMenuXml
     public static class Serializer
     {
         #region Functions        
-        public static void SerializeToXML<T>(T t, String inFilename)
+        public static void SerializeToXML<T>(T t, string inFilename)
         {
             var serializer = new XmlSerializer(t.GetType());
             TextWriter textWriter = new StreamWriter(inFilename);
@@ -39,7 +39,7 @@ namespace SupportTools.ContextMenuXml
             textWriter.Close();
         }
 
-        public static T DeserializeFromXML<T>(String inFilename)
+        public static T DeserializeFromXML<T>(string inFilename)
         {
             var deserializer = new XmlSerializer(typeof(T));
             TextReader textReader = new StreamReader(inFilename);
@@ -48,7 +48,7 @@ namespace SupportTools.ContextMenuXml
             return retVal;
         }
 
-        public static T DeserializeFromXML<T>(String inSnippetOrFile, bool isString)
+        public static T DeserializeFromXML<T>(string inSnippetOrFile, bool isString)
         {
             var deserializer = new XmlSerializer(typeof(T));
             var textReader = isString ? new StringReader(inSnippetOrFile) : (TextReader)new StreamReader(inSnippetOrFile);

@@ -55,7 +55,7 @@ namespace SupportTools
         /// </summary>
         public bool HasExecuted { get; set; }
 
-        public String Command
+        public string Command
         {
             get
             {
@@ -68,7 +68,7 @@ namespace SupportTools
             }
         }
 
-        public String Parameters
+        public string Parameters
         {
             get
             {
@@ -89,7 +89,7 @@ namespace SupportTools
             }
         }
 
-        public String ExecutionLocation
+        public string ExecutionLocation
         {
             get
             {

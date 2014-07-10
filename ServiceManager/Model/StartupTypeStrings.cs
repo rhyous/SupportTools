@@ -29,7 +29,7 @@ namespace Rhyous.ServiceManager.Model
         /// <summary>
         /// Must match the order of the StartupType enum
         /// </summary>
-        private List<String> _List = new List<string> { "Unknown", "Automatic (Delayed Start)", "Automatic", "Manual", "Disabled" };
+        private List<string> _List = new List<string> { "Unknown", "Automatic (Delayed Start)", "Automatic", "Manual", "Disabled" };
 
         #endregion
 
@@ -48,21 +48,21 @@ namespace Rhyous.ServiceManager.Model
 
         #region Properties
 
-        public String Unknown { get; private set; }
+        public string Unknown { get; private set; }
 
-        public String AutomaticDelayed { get; private set; }
+        public string AutomaticDelayed { get; private set; }
 
-        public String Automatic { get; private set; }
+        public string Automatic { get; private set; }
 
-        public String Manual { get; private set; }
+        public string Manual { get; private set; }
 
-        public String Disabled { get; private set; }
+        public string Disabled { get; private set; }
 
         #endregion
 
         #region Methods
 
-        public String GetStartupTypeString(StartupType inStartupType)
+        public string GetStartupTypeString(StartupType inStartupType)
         {
             return _List[(int)inStartupType];
         }

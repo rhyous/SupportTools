@@ -24,12 +24,12 @@
 
 using System;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.Threading;
 using System.Windows.Input;
+using AspectMVVM;
 using Rhyous.Agent.Ping.Business;
 using Rhyous.Agent.Ping.Model;
-using AspectMVVM;
-using System.Threading;
-using System.Diagnostics;
 
 namespace Rhyous.Agent.Ping.ViewModel
 {
@@ -61,14 +61,14 @@ namespace Rhyous.Agent.Ping.ViewModel
         public LDPing LDPing { get; set; }
 
         [NotifyPropertyChanged]
-        public String IPAddress { get; set; }
+        public string IPAddress { get; set; }
 
         [NotifyPropertyChanged]
         public string ConnectionResult { get; set; }
 
         public bool CanPing
         {
-            get { return !String.IsNullOrEmpty(IPAddress) && !IsPinging; }
+            get { return !string.IsNullOrEmpty(IPAddress) && !IsPinging; }
         }
 
         [NotifyPropertyChanged("CanPing", "PingCommand", "IsPinging")]

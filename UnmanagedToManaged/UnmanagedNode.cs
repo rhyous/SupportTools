@@ -1,6 +1,6 @@
-﻿using LANDesk.ManagementSuite.Database;
-using System;
+﻿using System;
 using System.Data;
+using LANDesk.ManagementSuite.Database;
 
 namespace UnmanagedToManaged
 {
@@ -9,7 +9,7 @@ namespace UnmanagedToManaged
         private int _UnmanagednodesIdn, 
                     _DevicegroupinfoIdn;
 
-        private String _GroupName,
+        private string _GroupName,
                        _TopGroupName;
 
         public enum UnmanagedNodeDataType
@@ -19,12 +19,12 @@ namespace UnmanagedToManaged
             PhysAddress
         }
 
-        public UnmanagedNode(String[] inArgs)
+        public UnmanagedNode(string[] inArgs)
         : base(inArgs[0], inArgs[1], inArgs[2], inArgs[3], inArgs[4])
         {
         }
 
-        public UnmanagedNode(String inData, UnmanagedNodeDataType inDataType)
+        public UnmanagedNode(string inData, UnmanagedNodeDataType inDataType)
         {
 
             if (inDataType == UnmanagedNodeDataType.IPAddress)
@@ -59,7 +59,7 @@ namespace UnmanagedToManaged
             }
         }
 
-        private void GetUnmanagedDataFromDB(String inData, UnmanagedNodeDataType inDataType)
+        private void GetUnmanagedDataFromDB(string inData, UnmanagedNodeDataType inDataType)
         {
             var database = LanDeskDatabase.Get();
             if (!LanDeskDatabase.IsOpen)
@@ -116,13 +116,13 @@ namespace UnmanagedToManaged
 
 
 
-        private String GetTopGroupName(int DEVICEGROUPINFO_IDN)
+        private string GetTopGroupName(int DEVICEGROUPINFO_IDN)
         {
             var RetVal = "";
             var database = LanDeskDatabase.Get();
             var sqltext = @"SELECT GROUPID,GROUPNAME FROM DEVICEGROUPINFO WHERE DEVICEGROUPINFO_IDN=" + DEVICEGROUPINFO_IDN;
             DataRow row;
-            String tmpStr;
+            string tmpStr;
             try
             {
                 row = database.ExecuteRow(sqltext);

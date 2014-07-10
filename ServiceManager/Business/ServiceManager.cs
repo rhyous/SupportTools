@@ -11,7 +11,7 @@ namespace Rhyous.ServiceManager.Business
     {
         public static TimeSpan TimeOut = TimeSpan.FromMilliseconds(25000);
 
-        public static Service GetService(String inServiceName)
+        public static Service GetService(string inServiceName)
         {
             var service = new Service { ServiceName = inServiceName };
             service.UpdateService();
@@ -55,7 +55,7 @@ namespace Rhyous.ServiceManager.Business
                 inService.Start();
         }
 
-        public static ServiceController FindService(String inServiceName)
+        public static ServiceController FindService(string inServiceName)
         {
             var services = ServiceController.GetServices();
 

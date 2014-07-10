@@ -26,11 +26,8 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-
-using Microsoft.Win32;
-
 using LANDesk.ManagementSuite.WinConsole.Tools;
-
+using Microsoft.Win32;
 using SupportTools.ContextMenuXml;
 
 namespace SupportTools.DockingForm
@@ -38,8 +35,8 @@ namespace SupportTools.DockingForm
     public partial class ContextMenuEditor : ToolForm
     {
         ComputerContextMenu _ContextMenu;
-        String _XmlPath = @"SupportTools\SupportTools.xml";
-        String _LDMainPath;
+        string _XmlPath = @"SupportTools\SupportTools.xml";
+        string _LDMainPath;
 
         #region Constructor
         public ContextMenuEditor()
@@ -109,7 +106,7 @@ namespace SupportTools.DockingForm
             treeViewContextMenu.Nodes[0].Expand();
         }
 
-        private String GetLDMainPathFromReg()
+        private string GetLDMainPathFromReg()
         {
             var FilePath = @"C:\Program Files\LANDesk\ManagementSuite\";
             var key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\LANDesk\ManagementSuite\Setup");

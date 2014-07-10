@@ -45,12 +45,12 @@ namespace SupportTools.ContextMenuXml
         }
 
 
-        public MenuGroup(String inName, ContextMenuItem inParent)
+        public MenuGroup(string inName, ContextMenuItem inParent)
             : base(inName, inParent)
         {
         }
 
-        public MenuGroup(String inName, MenuGroup inParent)
+        public MenuGroup(string inName, MenuGroup inParent)
             : base(inName, inParent)
         {
         }

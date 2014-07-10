@@ -1,11 +1,11 @@
 ﻿using System;
 using System.IO;
-using AspectMVVM;
-using Rhyous.ServiceManager.Aspects;
-using Rhyous.ServiceManager.Model;
-using Rhyous.ServiceManager.Business;
 using System.Reflection;
 using System.Xml.Serialization;
+using AspectMVVM;
+using Rhyous.ServiceManager.Aspects;
+using Rhyous.ServiceManager.Business;
+using Rhyous.ServiceManager.Model;
 
 namespace Rhyous.ServiceManager.Singletons
 {
@@ -68,7 +68,7 @@ namespace Rhyous.ServiceManager.Singletons
             throw new NotImplementedException();
         }
 
-        private static bool Load(String path)
+        private static bool Load(string path)
         {
             if (File.Exists(path))
             {

@@ -24,7 +24,6 @@
 
 using System;
 using System.Windows.Forms;
-
 using SupportTools.ContextMenuXml;
 
 namespace SupportTools.DockingForm

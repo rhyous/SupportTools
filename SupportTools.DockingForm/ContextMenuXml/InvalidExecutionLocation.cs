@@ -36,7 +36,7 @@ namespace SupportTools.ContextMenuXml
         ///      Client
         /// </summary>
         /// <param name="inExecutionLocation">The invalid execution location.</param>
-        public InvalidExecutionLocation(String inExecutionLocation) : base("Invalid execution location: " + inExecutionLocation)
+        public InvalidExecutionLocation(string inExecutionLocation) : base("Invalid execution location: " + inExecutionLocation)
         {
         }
 

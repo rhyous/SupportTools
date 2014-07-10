@@ -26,7 +26,6 @@ using System;
 using System.Collections.Generic;
 using System.Xml;
 using LANDesk.ManagementSuite.WinConsole;
-
 using SupportTools.ContextMenuXml;
 
 namespace SupportTools
@@ -38,7 +37,7 @@ namespace SupportTools
         private EventHandler _EventHandler;
 
         /*
-         * MenuItemListFromXML expects a String containing the full path to an xml document as
+         * MenuItemListFromXML expects a string containing the full path to an xml document as
          * its only parameter.
          */
         public MenuItemList(ComputerContextMenu inComputerContextMenu, Computer inComputer, EventHandler inEventHandler)

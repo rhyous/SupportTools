@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Reflection;
 using PostSharp.Aspects;
-using Rhyous.ServiceManager.Singletons;
 using PostSharp.Aspects.Dependencies;
+using Rhyous.ServiceManager.Singletons;
 
 namespace Rhyous.ServiceManager.Aspects
 {
@@ -11,7 +11,7 @@ namespace Rhyous.ServiceManager.Aspects
     [ProvideAspectRole(StandardRoles.ExceptionHandling)]
     public class ExceptionAspect : OnExceptionAspect
     {
-        public String Message { get; set; }
+        public string Message { get; set; }
 
         public Type ExceptionType { get; set; }
 

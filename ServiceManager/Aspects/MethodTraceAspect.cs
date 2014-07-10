@@ -1,7 +1,7 @@
 ﻿using System;
 using PostSharp.Aspects;
-using Rhyous.ServiceManager.Singletons;
 using PostSharp.Aspects.Dependencies;
+using Rhyous.ServiceManager.Singletons;
 
 namespace Common.Aspects
 {
@@ -27,7 +27,7 @@ namespace Common.Aspects
             Log.WriteLine(GetTabs() + "Method completed: " + args.Method.Name);
         }
 
-        private static String GetTabs()
+        private static string GetTabs()
         {
             var tabs = string.Empty;
             for (var i = 0; i < _TabCount; i++)

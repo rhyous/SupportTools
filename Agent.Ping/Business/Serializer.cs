@@ -39,11 +39,11 @@ namespace Rhyous.Agent.Ping.Business
         /// <typeparam name="T">The object type to serialize.</typeparam>
         /// <param name="t">The instance of the object.</param>
         /// <param name="outFilename">The file name. It can be a full path.</param>
-        public static void SerializeToXML<T>(T t, String outFilename, XmlSerializerNamespaces inNameSpaces = null)
+        public static void SerializeToXML<T>(T t, string outFilename, XmlSerializerNamespaces inNameSpaces = null)
         {
             // Make sure the directory exists
             var directory = Path.GetDirectoryName(outFilename);
-            if (!String.IsNullOrEmpty(directory) && !Directory.Exists(directory))
+            if (!string.IsNullOrEmpty(directory) && !Directory.Exists(directory))
                 Directory.CreateDirectory(directory);
 
             var ns = inNameSpaces;
@@ -64,7 +64,7 @@ namespace Rhyous.Agent.Ping.Business
         /// <typeparam name="T">The object type to serialize.</typeparam>
         /// <param name="t">The instance of the object.</param>
         /// <param name="outString">The string that will be passed the XML.</param>
-        public static String SerializeToXML<T>(T t, XmlSerializerNamespaces inNameSpaces = null)
+        public static string SerializeToXML<T>(T t, XmlSerializerNamespaces inNameSpaces = null)
         {
             var ns = inNameSpaces;
             if (ns == null)
@@ -84,7 +84,7 @@ namespace Rhyous.Agent.Ping.Business
         /// <typeparam name="T">The object type to serialize.</typeparam>
         /// <param name="inFilename">The file or full path to the file.</param>
         /// <returns>The object that was deserialized from xml.</returns>
-        public static T DeserializeFromXML<T>(String inFilename)
+        public static T DeserializeFromXML<T>(string inFilename)
         {
             // Wait 1 second if file doesn't exist, in case we are waiting on a
             // separate thread and beat it here.
@@ -112,7 +112,7 @@ namespace Rhyous.Agent.Ping.Business
         /// <typeparam name="T">The object type to serialize.</typeparam>
         /// <param name="inString">The string containing the XML.</param>
         /// <returns>The object that was deserialized from xml.</returns>
-        public static T DeserializeFromXML<T>(ref String inString)
+        public static T DeserializeFromXML<T>(ref string inString)
         {
             var deserializer = new XmlSerializer(typeof(T));
             TextReader textReader = new StringReader(inString);

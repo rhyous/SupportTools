@@ -55,10 +55,10 @@ namespace Rhyous.ServiceManager.ViewModel
         {
             IsWorking = true;
             var args = inArgs as Object[];
-            if (args.Length == 2)
+            if (args != null && args.Length == 2)
             {
                 var service = args[0] as Service;
-                var action = args[1] as String;
+                var action = args[1] as string;
 
                 if (action == "Start")
                 {
@@ -87,7 +87,7 @@ namespace Rhyous.ServiceManager.ViewModel
         private void StartStopAllServices(object inStatus)
         {
             IsWorking = true;
-            var status = inStatus as String;
+            var status = inStatus as string;
             switch (status)
             {
                 case "Start":

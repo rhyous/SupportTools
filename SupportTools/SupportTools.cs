@@ -28,14 +28,13 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Web;
 using System.Windows.Forms;
-using LANDesk.ManagementSuite.WinConsole.Tools;
-using Microsoft.Win32;
-
 using LANDesk.ManagementSuite.UserManagement.Business;
 using LANDesk.ManagementSuite.WinConsole;
+using LANDesk.ManagementSuite.WinConsole.Tools;
+using Microsoft.Win32;
 using SupportTools.ContextMenuXml;
-using System.Web;
 
 namespace SupportTools
 {
@@ -43,8 +42,8 @@ namespace SupportTools
     {
         static bool _IsHandlerAdded;
         RightClickMenuItem[] _MenuItems;
-        readonly String _LDMainPath;
-        readonly String _XmlFileName;
+        readonly string _LDMainPath;
+        readonly string _XmlFileName;
         readonly EventHandler _EventHandler;
 
         public SupportTools()
@@ -158,7 +157,7 @@ namespace SupportTools
             stMenuItem.HasExecuted = true;
         }
 
-        private String GetConsoleExeProcessUser()
+        private string GetConsoleExeProcessUser()
         {
             var username = "";
             var userdomain = "";
@@ -181,7 +180,7 @@ namespace SupportTools
             return userdomain + @"\" + username;
         }
 
-        private String GetLDMainPathFromReg()
+        private string GetLDMainPathFromReg()
         {
             const string defaultFilePath = @"C:\Program Files\LANDesk\ManagementSuite\";
 
@@ -232,9 +231,9 @@ namespace SupportTools
             //Process.Start(command, parameter);
         }
 
-        private string CheckForPrompt(String inParameter)
+        private string CheckForPrompt(string inParameter)
         {
-            if (String.IsNullOrEmpty(inParameter))
+            if (string.IsNullOrEmpty(inParameter))
                 return string.Empty;
 
             if (inParameter.ToLower().Contains("%prompt"))
@@ -267,7 +266,7 @@ namespace SupportTools
 
                 if (tempStrList != null)
                 {
-                    if (tempStrList.Any(String.IsNullOrEmpty))
+                    if (tempStrList.Any(string.IsNullOrEmpty))
                     {
                         return "Cancel action!";
                     }
@@ -287,7 +286,7 @@ namespace SupportTools
          *  This is not for environment variables, this is for special variables such as
          *  %DTMDIR% or %ldmain%, which both should resolve to the ManagementSuite directory.
          */
-        private string ResolveCommandPathVars(String inCommand)
+        private string ResolveCommandPathVars(string inCommand)
         {
             // Make it all lowercase cause I don't want to worry about case
             // when checking if the command path contains these variables.

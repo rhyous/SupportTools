@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
 
 namespace MessagePresenter
 {
@@ -17,7 +14,7 @@ namespace MessagePresenter
         {
         }
 
-        public String[] Args
+        public string[] Args
         {
             get { return _Args; }
             set
@@ -25,7 +22,7 @@ namespace MessagePresenter
                 _Args = value;
                 ParseArgs(_Args);
             }
-        } private String[] _Args;
+        } private string[] _Args;
 
         private Dictionary<string, string> PropertyValueArgs
         {

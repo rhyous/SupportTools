@@ -24,7 +24,6 @@
 
 using System;
 using System.Windows.Forms;
-
 using SupportTools.ContextMenuXml;
 
 namespace SupportTools.DockingForm
@@ -64,7 +63,7 @@ namespace SupportTools.DockingForm
         #endregion
 
         #region Properties
-        new public String Text
+        new public string Text
         {
             get { return base.Text; }
             set

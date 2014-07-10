@@ -42,17 +42,17 @@ namespace Rhyous.Agent.Ping.Model
     {
         #region Properties
         [XmlElement("name")]
-        public String ComputerName { get; set; }
+        public string ComputerName { get; set; }
         [XmlElement("osversion")]
         public OSVersion OSVersion { get; set; }
         [XmlElement("inventoryid")]
-        public String Guid { get; set; }
+        public string Guid { get; set; }
         #endregion
     }
 
     public class OSVersion
     {
         [XmlElement("platform")]
-        public String Platform { get; set; }
+        public string Platform { get; set; }
     }
 }

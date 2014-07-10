@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-
 using LANDesk.ManagementSuite.WinConsole;
 
 namespace UnmanagedToManaged
 {
     class Program
     {
-        private static String ip, name, mac;
+        private static string ip, name, mac;
         private static UnmanagedNode un;
 
         static void Main(string[] args)
@@ -39,7 +35,7 @@ namespace UnmanagedToManaged
             // INSERT INTO CustomGroupComputer (CustomGroup_Idn, Member_Idn) VALUES ({0}, {1})
         }
 
-        private static void CheckArgs(String[] args)
+        private static void CheckArgs(string[] args)
         {
             for (var i = 0; i < args.Length; i++)
             {

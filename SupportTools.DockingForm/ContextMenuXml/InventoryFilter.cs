@@ -32,9 +32,9 @@ namespace SupportTools.ContextMenuXml
     public class InventoryFilter
     {
         #region Member Variables
-        String _InventoryProperty;
-        List<String> _BlockedValues = new List<string>();
-        List<String> _AllowedValues = new List<string>();
+        string _InventoryProperty;
+        List<string> _BlockedValues = new List<string>();
+        List<string> _AllowedValues = new List<string>();
         #endregion
 
         #region Constructors
@@ -46,12 +46,12 @@ namespace SupportTools.ContextMenuXml
         {
         }
 
-        public InventoryFilter(String inInventoryProperty)
+        public InventoryFilter(string inInventoryProperty)
         {
             _InventoryProperty = inInventoryProperty;
         }
 
-        public InventoryFilter(String inInventoryProperty, List<String> inAllowedValues, List<String> inBlockedValues)
+        public InventoryFilter(string inInventoryProperty, List<string> inAllowedValues, List<string> inBlockedValues)
         {
             _InventoryProperty = inInventoryProperty;
             _AllowedValues = inAllowedValues;
@@ -61,21 +61,21 @@ namespace SupportTools.ContextMenuXml
         #endregion
 
         #region Properties
-        public String InventoryProperty
+        public string InventoryProperty
         {
             get { return _InventoryProperty; }
             set { _InventoryProperty = value; }
         }
 
         [XmlElement("BlockedValue")]
-        public List<String> BlockedValues
+        public List<string> BlockedValues
         {
             get { return _BlockedValues; }
             set { _BlockedValues = value; }
         }
 
         [XmlElement("AllowedValue")]
-        public List<String> AllowedValues
+        public List<string> AllowedValues
         {
             get { return _AllowedValues; }
             set { _AllowedValues = value; }

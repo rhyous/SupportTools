@@ -33,7 +33,7 @@ namespace Rhyous.Agent.Ping.Converters
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (String.IsNullOrEmpty(value.ToString()))
+            if (string.IsNullOrEmpty(value.ToString()))
                 return false;
             return true;
         }

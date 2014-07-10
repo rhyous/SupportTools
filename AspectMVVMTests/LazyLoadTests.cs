@@ -1,6 +1,6 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using AspectMVVMTests.TestOjbects;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace AspectMVVMTests
 {

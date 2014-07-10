@@ -16,7 +16,7 @@ namespace UnmanagedToManaged
         {
         }
 
-        protected BasicNode(String inDeviceName, String inIPAddress, String inSubnetMask, String inOSDescription, String inMacAddress)
+        protected BasicNode(string inDeviceName, string inIPAddress, string inSubnetMask, string inOSDescription, string inMacAddress)
         {
             DeviceName = inDeviceName;
             IPAddress = RemoveIPAddressPadding(inIPAddress);
@@ -63,7 +63,7 @@ namespace UnmanagedToManaged
         }
 
 
-        protected String PadIPAddress(String inIPAddress)
+        protected string PadIPAddress(string inIPAddress)
         {
             var ipOctet = inIPAddress.Split('.');
             for (var i = 0; i < ipOctet.Length; i++)
@@ -84,7 +84,7 @@ namespace UnmanagedToManaged
             return retVal;
         }
 
-        protected String RemoveIPAddressPadding(String inIPAddress)
+        protected string RemoveIPAddressPadding(string inIPAddress)
         {
             var ipOctet = inIPAddress.Split('.');
             for (var i = 0; i < ipOctet.Length; i++)

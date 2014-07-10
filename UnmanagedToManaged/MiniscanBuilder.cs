@@ -1,9 +1,6 @@
-﻿using Microsoft.Win32;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.IO;
-using System.Linq;
-using System.Text;
+using Microsoft.Win32;
 
 namespace UnmanagedToManaged
 {
@@ -64,7 +61,7 @@ namespace UnmanagedToManaged
             Network - TCPIP - Host Name = XP
 
         */
-        private String GetLDMainPathFromReg()
+        private string GetLDMainPathFromReg()
         {
             var FilePath = @"C:\Program Files\LANDesk\ManagementSuite\";
             var key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\LANDesk\ManagementSuite\Setup");

@@ -22,9 +22,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-using System.Collections.Generic;
 using AspectMVVM;
-using System.ComponentModel;
 
 namespace Rhyous.Agent.Ping.ViewModel
 {

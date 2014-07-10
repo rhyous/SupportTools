@@ -34,7 +34,7 @@ namespace Rhyous.Agent.Ping
     /// </summary>
     public partial class App : Application
     {
-        public static String[] Args;
+        public static string[] Args;
 
         protected override void OnStartup(StartupEventArgs e)
         {

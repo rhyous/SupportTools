@@ -1,5 +1,4 @@
-﻿using System.ServiceProcess;
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
 using Rhyous.ServiceManager.Model;
 
 namespace Rhyous.ServiceManager.Business

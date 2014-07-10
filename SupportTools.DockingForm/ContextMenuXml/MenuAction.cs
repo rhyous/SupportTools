@@ -31,11 +31,11 @@ namespace SupportTools.ContextMenuXml
     public class MenuAction : ContextMenuItem
     {
         #region Member Variables
-        private String _Command;
-        private String _Parameters;
-        private String _ExecutionLocation = "Console"; // Allowed options are Client or Console.
+        private string _Command;
+        private string _Parameters;
+        private string _ExecutionLocation = "Console"; // Allowed options are Client or Console.
         private bool _IsMultiSelect;
-        private readonly String[] _ExecutionLocationOptions = { "Console", "Client" };
+        private readonly string[] _ExecutionLocationOptions = { "Console", "Client" };
         #endregion
 
         #region Constructors
@@ -47,13 +47,13 @@ namespace SupportTools.ContextMenuXml
         {
         }
 
-        public MenuAction(String inName, ContextMenuItem inParent)
+        public MenuAction(string inName, ContextMenuItem inParent)
             : base(inName, inParent)
         {
 
         }
 
-        public MenuAction(String inName, String inCommand, String inParameters, ContextMenuItem inParent)
+        public MenuAction(string inName, string inCommand, string inParameters, ContextMenuItem inParent)
             : base(inName, inParent)
         {
             _Command = inCommand;
@@ -63,19 +63,19 @@ namespace SupportTools.ContextMenuXml
         #endregion
 
         #region Properties
-        public String Command
+        public string Command
         {
             get { return _Command; }
             set { _Command = value; }
         }
 
-        public String Parameters
+        public string Parameters
         {
             get { return _Parameters; }
             set { _Parameters = value; }
         }
 
-        public String ExecutionLocation
+        public string ExecutionLocation
         {
             get { return _ExecutionLocation; }
             set 
@@ -89,7 +89,7 @@ namespace SupportTools.ContextMenuXml
                         return;
                     }
                 }
-                if (String.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value))
                 {
                     _ExecutionLocation = value;
                     return;

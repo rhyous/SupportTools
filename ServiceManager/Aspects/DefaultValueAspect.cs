@@ -1,7 +1,7 @@
 ﻿using System;
 using PostSharp.Aspects;
-using PostSharp.Extensibility;
 using PostSharp.Aspects.Dependencies;
+using PostSharp.Extensibility;
 
 namespace Rhyous.ServiceManager.Aspects
 {

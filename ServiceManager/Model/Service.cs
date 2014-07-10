@@ -18,17 +18,17 @@ namespace Rhyous.ServiceManager.Model
 
         #region Serialized Properties
         [NotifyPropertyChanged]
-        public String ServiceName { get; set; }
+        public string ServiceName { get; set; }
         #endregion
 
         #region Properties Ignored by Serialization
         [NotifyPropertyChanged]
         [XmlIgnore]
-        public String DisplayName { get; set; }
+        public string DisplayName { get; set; }
 
         [XmlIgnore]
         [NotifyPropertyChanged]
-        public String Description { get; set; }
+        public string Description { get; set; }
 
         [XmlIgnore]
         [NotifyPropertyChanged]

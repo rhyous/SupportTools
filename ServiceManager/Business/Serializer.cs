@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Xml.Serialization;
-using System.Xml;
 using System.Threading;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace Rhyous.ServiceManager.Business
 {
     public static class Serializer
     {
-        private static Dictionary<String, bool> LockTable = new Dictionary<string, bool>();
+        private static Dictionary<string, bool> LockTable = new Dictionary<string, bool>();
 
         #region Serialization Functions
         /// <summary>
@@ -18,7 +18,7 @@ namespace Rhyous.ServiceManager.Business
         /// <typeparam name="T">The object type to serialize.</typeparam>
         /// <param name="t">The instance of the object.</param>
         /// <param name="outFileName">The file name. It can be a full path.</param>
-        public static void SerializeToXML<T>(T t, String outFileName, XmlSerializerNamespaces inNameSpaces = null) where T : class
+        public static void SerializeToXML<T>(T t, string outFileName, XmlSerializerNamespaces inNameSpaces = null) where T : class
         {
             if (IsLocked(outFileName))
             {
@@ -55,7 +55,7 @@ namespace Rhyous.ServiceManager.Business
         /// <typeparam name="T">The object type to serialize.</typeparam>
         /// <param name="t">The instance of the object.</param>
         /// <param name="outString">The string that will be passed the XML.</param>
-        public static String SerializeToXML<T>(T t, XmlSerializerNamespaces inNameSpaces = null)
+        public static string SerializeToXML<T>(T t, XmlSerializerNamespaces inNameSpaces = null)
         {
             var ns = inNameSpaces;
             if (ns == null)
@@ -75,7 +75,7 @@ namespace Rhyous.ServiceManager.Business
         /// <typeparam name="T">The object type to serialize.</typeparam>
         /// <param name="inFilename">The file or full path to the file.</param>
         /// <returns>The object that was deserialized from xml.</returns>
-        public static T DeserializeFromXML<T>(String inFilename)
+        public static T DeserializeFromXML<T>(string inFilename)
         {
             // Wait 1 second if file doesn't exist, in case we are waiting on a
             // separate thread and beat it here.
@@ -103,7 +103,7 @@ namespace Rhyous.ServiceManager.Business
         /// <typeparam name="T">The object type to serialize.</typeparam>
         /// <param name="inString">The string containing the XML.</param>
         /// <returns>The object that was deserialized from xml.</returns>
-        public static T DeserializeFromXML<T>(ref String inString)
+        public static T DeserializeFromXML<T>(ref string inString)
         {
             var deserializer = new XmlSerializer(typeof(T));
             TextReader textReader = new StringReader(inString);
@@ -127,7 +127,7 @@ namespace Rhyous.ServiceManager.Business
             }
         }
 
-        private static void Unlock(String inFileName)
+        private static void Unlock(string inFileName)
         {
             if (LockTable.ContainsKey(inFileName))
             {
@@ -139,7 +139,7 @@ namespace Rhyous.ServiceManager.Business
             }
         }
 
-        private static bool IsLocked(String inFileName)
+        private static bool IsLocked(string inFileName)
         {
             if (LockTable.ContainsKey(inFileName))
             {
@@ -148,7 +148,7 @@ namespace Rhyous.ServiceManager.Business
             return false;
         }
 
-        private static void WaitForUnlock(String inFileName)
+        private static void WaitForUnlock(string inFileName)
         {
             var i = 0;
             while (LockTable[inFileName])

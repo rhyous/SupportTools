@@ -23,7 +23,6 @@
  */
 
 using System;
-using System.Collections.Generic;
 using System.Xml.Serialization;
 
 namespace SupportTools.ContextMenuXml
@@ -64,7 +63,7 @@ namespace SupportTools.ContextMenuXml
         //</MenuItem>
 
         #region Member Variables
-        private String _Name;
+        private string _Name;
         private InventoryFilter _Filter;
         private ContextMenuItem _Parent;
         private bool _IsModified;
@@ -83,13 +82,13 @@ namespace SupportTools.ContextMenuXml
         {
         }
 
-        public ContextMenuItem(String inName, ContextMenuItem inParent)
+        public ContextMenuItem(string inName, ContextMenuItem inParent)
         {
             _Name = inName;
             _Parent = inParent;
         }
 
-        public ContextMenuItem(String inName, InventoryFilter inFilter, ContextMenuItem inParent)
+        public ContextMenuItem(string inName, InventoryFilter inFilter, ContextMenuItem inParent)
         {
             _Name = inName;
             _Filter = inFilter;
@@ -99,7 +98,7 @@ namespace SupportTools.ContextMenuXml
 
         #region Properties
         [XmlAttribute]
-        public String Name
+        public string Name
         {
             get { return _Name; }
             set { _Name = value; }

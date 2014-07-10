@@ -34,9 +34,9 @@ namespace Rhyous.Agent.Ping.Business
         #endregion
 
         #region Functions
-        public static LDPing AgentPing(String inIPAddress)
+        public static LDPing AgentPing(string inIPAddress)
         {
-            var AgentPath = String.Format(_LDPingTemplatePath, inIPAddress);
+            var AgentPath = string.Format(_LDPingTemplatePath, inIPAddress);
             var xml = string.Empty;
 
             try
@@ -49,7 +49,7 @@ namespace Rhyous.Agent.Ping.Business
             }
 
 
-            if (String.IsNullOrEmpty(xml))
+            if (string.IsNullOrEmpty(xml))
             {
                 return null;
             }
