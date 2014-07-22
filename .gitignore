@@ -2,6 +2,8 @@
 /Agent.Ping/obj
 /AspectMVVM/bin
 /AspectMVVM/obj
+/AspectMVVMTests/bin
+/AspectMVVMTests/obj
 /MessagePresenter/bin
 /MessagePresenter/obj
 /NSIS/obj
