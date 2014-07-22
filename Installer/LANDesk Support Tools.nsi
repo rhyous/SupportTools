@@ -104,7 +104,6 @@ Section "Support Tools" SEC0001
     File ManagementSuite\Tools\LDGatherLogs.xml
     File ManagementSuite\Tools\LDSupportGatewayRC.xml
     File ManagementSuite\Tools\LocalSystemCommandPrompt.xml
-    File ManagementSuite\Tools\SupportToolsServiceManager.xml
     File ManagementSuite\Tools\Zenmap.xml
 
     WriteRegStr HKLM "${REGKEY}\Components" "Support Tools" 1
@@ -130,7 +129,6 @@ Section "Device Support Tools" SEC0002
     # Exes
     File ManagementSuite\SupportTools\LDDebugLogEnabler.exe
     File ManagementSuite\SupportTools\LDErrorTranslator.exe
-    File ManagementSuite\SupportTools\ldmg.landesk.com.exe
     File ManagementSuite\SupportTools\PAExec.exe
     File ManagementSuite\SupportTools\RemoteRegedit.exe
     File ManagementSuite\SupportTools\Rhyous.Agent.Ping.exe
@@ -244,7 +242,6 @@ Section /o "-un.Device Support Tools" UNSEC0002
     # Exes
     Delete /REBOOTOK $INSTDIR\SupportTools\LDDebugLogEnabler.exe
     Delete /REBOOTOK $INSTDIR\SupportTools\LDErrorTranslator.exe
-    Delete /REBOOTOK $INSTDIR\SupportTools\ldmg.landesk.com.exe
     Delete /REBOOTOK $INSTDIR\SupportTools\PAExec.exe
     Delete /REBOOTOK $INSTDIR\SupportTools\RemoteRegedit.exe
     Delete /REBOOTOK $INSTDIR\SupportTools\Rhyous.Agent.Ping.exe

@@ -78,7 +78,5 @@ namespace MessagePresenter
         {
             Application.Current.Shutdown();
         }
-
-
     }
 }

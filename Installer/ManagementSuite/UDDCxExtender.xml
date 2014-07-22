@@ -22,7 +22,7 @@
 	</Menu>
 	<Menu>			
 		<Text>LD Ping</Text>
-		<Command>SupportTools\LANDesk.Agent.Ping.exe</Command>
+		<Command>SupportTools\Rhyous.Agent.Ping.exe</Command>
 		<Parameter>%"Computer"."Network"."TCPIP"."Address"%</Parameter>
 	</Menu>	
 	<Menu>			

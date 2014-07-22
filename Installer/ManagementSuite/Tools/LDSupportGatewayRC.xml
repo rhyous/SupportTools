@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ToolInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<_toolBoxText>LANDesk Support Remote Control</_toolBoxText>
-	<_className>Standalone Process</_className>
-	<_assemblyPath>SupportTools\LDSupportRC.exe</_assemblyPath>
+	<_className>URL</_className>
+	<_assemblyPath>http://remote.landesk.com/client/index.php</_assemblyPath>
 	<_bitmapPath></_bitmapPath>
 	<_showInToolsMenu>true</_showInToolsMenu>
 	<_showInToolBox>true</_showInToolBox>

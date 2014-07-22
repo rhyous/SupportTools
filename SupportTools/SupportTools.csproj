@@ -142,6 +142,8 @@
       <DependentUpon>DataPrompt.cs</DependentUpon>
     </Compile>
     <Compile Include="MenuItemList.cs" />
+    <Compile Include="PromptHandler.cs" />
+    <Compile Include="SpecialPathResolver.cs" />
     <Compile Include="SupportTools.cs">
       <SubType>Form</SubType>
     </Compile>

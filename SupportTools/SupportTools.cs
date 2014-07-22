@@ -22,19 +22,14 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text.RegularExpressions;
-using System.Web;
-using System.Windows.Forms;
 using LANDesk.ManagementSuite.UserManagement.Business;
 using LANDesk.ManagementSuite.WinConsole;
 using LANDesk.ManagementSuite.WinConsole.Tools;
-using Microsoft.Win32;
 using SupportTools.ContextMenuXml;
+using System;
+using System.Collections;
+using System.Diagnostics;
+using System.Windows.Forms;
 
 namespace SupportTools
 {
@@ -42,14 +37,12 @@ namespace SupportTools
     {
         static bool _IsHandlerAdded;
         RightClickMenuItem[] _MenuItems;
-        readonly string _LDMainPath;
         readonly string _XmlFileName;
         readonly EventHandler _EventHandler;
 
         public SupportTools()
         {
-            _LDMainPath = GetLDMainPathFromReg();
-            _XmlFileName = _LDMainPath + @"SupportTools\SupportTools.xml";
+            _XmlFileName = SpecialPathResolver.Instance.LDMainPath + @"SupportTools\SupportTools.xml";
             if (_IsHandlerAdded == false)
             {
                 Computer.AddingContextMenus += Computer_AddSupportToolsMenuHandler;
@@ -98,7 +91,6 @@ namespace SupportTools
 
             Trace.WriteLine("GetUserRights Return " + bRet + " for " + Process.GetCurrentProcess().StartInfo.UserName);
             return bRet;
-
         }
 
         private void HandleRightClickSelectMenuItem(object inSender, EventArgs inEventArgs)
@@ -111,7 +103,7 @@ namespace SupportTools
             if (stMenuItem.HasExecuted)
                 return;
 
-            stMenuItem.Parameters = CheckForPrompt(stMenuItem.Parameters);
+            stMenuItem.Parameters = PromptHandler.CheckForPrompt(stMenuItem.Parameters);
             if (stMenuItem.Parameters.Equals("Cancel action!"))
             {
                 return;
@@ -180,24 +172,6 @@ namespace SupportTools
             return userdomain + @"\" + username;
         }
 
-        private string GetLDMainPathFromReg()
-        {
-            const string defaultFilePath = @"C:\Program Files\LANDesk\ManagementSuite\";
-
-            // Try 32 bit registry
-            var key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\LANDesk\ManagementSuite\Setup");
-            if (key != null)
-                return key.GetValue("LdmainPath", defaultFilePath).ToString();
-
-            // Try 64 bit registry
-            var localKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64);
-            key = localKey.OpenSubKey(@"SOFTWARE\LANDesk\ManagementSuite\Setup");
-            if (key != null)
-                return key.GetValue("LdmainPath", defaultFilePath).ToString();
-
-            return defaultFilePath;
-        }
-
         private void ExecuteOnCore(RightClickMenuItem inMenuItem, Computer inComputer)
         {
             // Change this when we add the ability to execute on Core from a remote console
@@ -206,106 +180,28 @@ namespace SupportTools
 
         private void ExecuteOnConsole(RightClickMenuItem inMenuItem, Computer inComputer)
         {
-            var parameters = CheckForPrompt(inMenuItem.Parameters);
+            var parameters = PromptHandler.CheckForPrompt(inMenuItem.Parameters);
             if (parameters.Equals("Cancel action!"))
             {
                 return;
             }
-            ExecuteItem(BnfResolver.ResolveBnf(ResolveCommandPathVars(inMenuItem.Command), inComputer.ID), BnfResolver.ResolveBnf(parameters, inComputer.ID));
+            ExecuteItem(BnfResolver.ResolveBnf(SpecialPathResolver.Instance.ResolveCommandPathVars(inMenuItem.Command), inComputer.ID), BnfResolver.ResolveBnf(parameters, inComputer.ID));
         }
 
 
         private void ExecuteOnClient(RightClickMenuItem inMenuItem, Computer inComputer)
         {
-            ShutdownRebootForm.Go(inComputer, ShutdownReboot.CommandType.remoteexec, ResolveCommandPathVars(inMenuItem.Command), BnfResolver.ResolveBnf(inMenuItem.Parameters, inComputer.ID));
+            ShutdownRebootForm.Go(inComputer, ShutdownReboot.CommandType.remoteexec, SpecialPathResolver.Instance.ResolveCommandPathVars(inMenuItem.Command), BnfResolver.ResolveBnf(inMenuItem.Parameters, inComputer.ID));
         }
 
         private void ExecuteItem(string inCommand, string inParameter)
         {
             var startInfo = new ProcessStartInfo(inCommand, inParameter)
             {
-                WorkingDirectory = _LDMainPath,
+                WorkingDirectory = SpecialPathResolver.Instance.LDMainPath,
                 CreateNoWindow = true
             };
             Process.Start(startInfo);
-            //Process.Start(command, parameter);
-        }
-
-        private string CheckForPrompt(string inParameter)
-        {
-            if (string.IsNullOrEmpty(inParameter))
-                return string.Empty;
-
-            if (inParameter.ToLower().Contains("%prompt"))
-            {
-                // Make sure that %prompt:Name of value to get% is replaced regardless of whether it is upper case
-                // or lower case.  We do this by remove %Promp% and in any case and replacing
-                // it with %prompt% all lowercase, without affecting the case of other parameters,
-                // because some commands have case sensitive parameters.
-                var allPrompts = new List<string>();
-                var matchposition = new List<int>();
-
-
-                // Create a new Regex object and define the regular expression.
-                var r = new Regex("%prompt:([^%]*%)");
-                // Use the Matches method to find all matches in the input string.
-                var mc = r.Matches(inParameter);
-                // Loop through the match collection to retrieve all 
-                // matches and positions.
-                for (var i = 0; i < mc.Count; i++)
-                {
-                    // Add the match string to the string array.   
-                    allPrompts.Add(mc[i].Value.Substring("%prompt:".Length, mc[i].Length - "%prompt:".Length - 1));
-                    // Record the character position where the match was found.
-                    matchposition.Add(mc[i].Index);
-
-                }
-                var myForm = new DataPrompt(allPrompts);
-                myForm.ShowDialog();
-                var tempStrList = myForm.GetMessageText();
-
-                if (tempStrList != null)
-                {
-                    if (tempStrList.Any(string.IsNullOrEmpty))
-                    {
-                        return "Cancel action!";
-                    }
-                    //Replace each prompt in the parameter with the userinput value.
-                    var szNewParameter = inParameter;
-                    for (var i = 0; i < allPrompts.Count; i++)
-                    {
-                        szNewParameter = szNewParameter.Replace(mc[i].Value, "\"" + HttpUtility.HtmlEncode(tempStrList[i]) + "\"");
-                    }
-                    return szNewParameter;
-                }
-            }
-            return inParameter;
-        }
-
-        /*
-         *  This is not for environment variables, this is for special variables such as
-         *  %DTMDIR% or %ldmain%, which both should resolve to the ManagementSuite directory.
-         */
-        private string ResolveCommandPathVars(string inCommand)
-        {
-            // Make it all lowercase cause I don't want to worry about case
-            // when checking if the command path contains these variables.
-            inCommand = inCommand.ToLower();
-
-            // I choose %ldmain% because that is more current and recognized
-            // terminology for the managemementsuite folder.
-            if (inCommand.Contains("%ldmain%"))
-            {
-                return inCommand.Replace("%ldmain%", _LDMainPath);
-            }
-
-            // %dtmdir% is what custom scripts uses so I added it too but it no longer
-            // makes sense as dtmdir is old terminology.
-            if (inCommand.Contains("%dtmdir%"))
-            {
-                return inCommand.Replace("%dtmdir%", _LDMainPath);
-            }
-            return inCommand;
         }
     }
 }
