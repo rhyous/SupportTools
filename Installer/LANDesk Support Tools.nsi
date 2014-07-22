@@ -97,7 +97,7 @@ SectionEnd
 Section "Support Tools" SEC0001
     SetOutPath $INSTDIR\Tools
     SetOverwrite on
-    File ManagementSuite\Tools\DebugLogEnabler.xml
+    #File ManagementSuite\Tools\DebugLogEnabler.xml
     File ManagementSuite\Tools\ErrorTranslator.xml
     File ManagementSuite\Tools\LDCommunity.xml
     File ManagementSuite\Tools\LDDiscover.xml
@@ -127,7 +127,7 @@ Section "Device Support Tools" SEC0002
 	SetOutPath $INSTDIR\SupportTools
     SetOverwrite on
     # Exes
-    File ManagementSuite\SupportTools\LDDebugLogEnabler.exe
+    #File ManagementSuite\SupportTools\LDDebugLogEnabler.exe
     File ManagementSuite\SupportTools\LDErrorTranslator.exe
     File ManagementSuite\SupportTools\PAExec.exe
     File ManagementSuite\SupportTools\RemoteRegedit.exe
@@ -240,7 +240,7 @@ Section /o "-un.Device Support Tools" UNSEC0002
     RmDir $INSTDIR\LDLogon\SupportTools
     
     # Exes
-    Delete /REBOOTOK $INSTDIR\SupportTools\LDDebugLogEnabler.exe
+    #Delete /REBOOTOK $INSTDIR\SupportTools\LDDebugLogEnabler.exe
     Delete /REBOOTOK $INSTDIR\SupportTools\LDErrorTranslator.exe
     Delete /REBOOTOK $INSTDIR\SupportTools\PAExec.exe
     Delete /REBOOTOK $INSTDIR\SupportTools\RemoteRegedit.exe
@@ -278,7 +278,7 @@ Section /o "-un.Support Tools" UNSEC0001
     Delete /REBOOTOK $INSTDIR\Tools\LDDiscover.xml
     Delete /REBOOTOK $INSTDIR\Tools\LDCommunity.xml
     Delete /REBOOTOK $INSTDIR\Tools\ErrorTranslator.xml
-    Delete /REBOOTOK $INSTDIR\Tools\DebugLogEnabler.xml
+    #Delete /REBOOTOK $INSTDIR\Tools\DebugLogEnabler.xml
     RmDir $INSTDIR\Tools
     
     DeleteRegValue HKLM "${REGKEY}\Components" "Support Tools"
