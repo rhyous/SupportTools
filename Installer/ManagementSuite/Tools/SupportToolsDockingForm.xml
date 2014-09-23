@@ -2,7 +2,7 @@
 <ToolInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <_toolBoxText>Computer Right-Click Menu Editor</_toolBoxText>
   <_className>SupportTools.DockingForm.ContextMenuEditor</_className>
-  <_assemblyPath>SupportTools\SupportTools.DockingForm</_assemblyPath>
+  <_assemblyPath>SupportTools.DockingForm</_assemblyPath>
   <_bitmapPath>SupportTools\Images\SupportTools.png</_bitmapPath>
   <_showInToolsMenu>true</_showInToolsMenu>
   <_showInToolBox>true</_showInToolBox>
