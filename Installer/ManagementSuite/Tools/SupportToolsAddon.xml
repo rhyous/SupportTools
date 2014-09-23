@@ -3,7 +3,7 @@
       <_toolBoxText>Support Tools</_toolBoxText>
       <_className>SupportTools.SupportTools</_className>
       <_assemblyPath>SupportTools</_assemblyPath>
-      <_bitmapPath>resources\tools\bmps\script.bmp</_bitmapPath>
+      <_bitmapPath>SupportTools\Images\SupportTools.png</_bitmapPath>
       <_showInToolsMenu>false</_showInToolsMenu>
       <_showInToolBox>false</_showInToolBox>
       <_extendComputerContextMenu>true</_extendComputerContextMenu>
