@@ -35,6 +35,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessagePresenter", "Message
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspectMVVMTests", "AspectMVVMTests\AspectMVVMTests.csproj", "{6F6675B4-6C07-483D-849A-E2681441A910}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Key", "Key", "{6D95E31B-BA56-4B25-8A92-1BD38AECFF0E}"
+	ProjectSection(SolutionItems) = preProject
+		Key\Rhyous.pfx = Key\Rhyous.pfx
+		Key\Rhyous.pk = Key\Rhyous.pk
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

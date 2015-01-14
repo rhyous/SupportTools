@@ -7,9 +7,9 @@ SetCompressor lzma
 
 # General Symbol Definitions
 !define ProjName "Support Tools for LDMS"
-!define ProjVersion "Beta_9.6.0"
+!define ProjVersion "Beta_9.6.1"
 !define REGKEY "SOFTWARE\${ProjName}"
-!define VERSION 9.6.0
+!define VERSION 9.6.1
 !define COMPANY "Rhyous (Jared Barneck)"
 !define URL "http://www.rhyous.com/programming-development/landesk-add-ons/landesk-support-tools/"
 
