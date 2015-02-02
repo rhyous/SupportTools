@@ -206,6 +206,14 @@ Section /o "Agent ini" SEC0005
     ExecWait '"$INSTDIR\CreateClientConfiguration.exe" /rebuild'
 SectionEnd
 
+Section /o "Core Token" SEC0006
+    SetOutPath $INSTDIR
+    SetOverwrite on
+    # Coredbutil.exe xml
+    File ManagementSuite\Rhyous.xml
+    ExecWait '"$INSTDIR\CoreDbUtil.exe" /xml=filename.xml /buildcomponents'
+SectionEnd
+
 # Macro for selecting uninstaller sections
 !macro SELECT_UNSECTION SECTION_NAME UNSECTION_ID
     Push $R0
@@ -312,6 +320,10 @@ SectionEnd
 Section -un.post UNSEC0005
     Delete /REBOOTOK $INSTDIR\LDLogon\SupportTools.ini
     DeleteRegValue HKLM "SOFTWARE\LANDESK\ManagementSuite\Stamping\Files" "SupportTools"
+SectionEnd
+
+Section -un.post UNSEC0006
+    Delete /REBOOTOK $INSTDIR\Rhyous.xml
 SectionEnd
 
 # Installer functions
