@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema type="tables" version="9.60.1.0">
+    <table name="TrustedToken">
+        <values unique="Token">
+            <value Rights="3" Token="566fe0d84f491d6f"/>
+        </values>
+    </table>
+</schema>
