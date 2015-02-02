@@ -15,6 +15,9 @@ SetCompressor lzma
 
 # Global Variables
 VAR /GLOBAL LDMAIN
+VAR /GLOBAL ISCORE
+VAR /GLOBAL ISCONSOLE
+VAR /GLOBAL TOKENINSTALLED
 VAR /GLOBAL PrevVersion
 
 ;MUI Header Configuration
@@ -101,7 +104,7 @@ Section "Support Tools" SEC0001
     File ManagementSuite\Tools\ErrorTranslator.xml
     File ManagementSuite\Tools\LDCommunity.xml
     File ManagementSuite\Tools\LDDiscover.xml
-    File ManagementSuite\Tools\LDGatherLogs.xml
+    #File ManagementSuite\Tools\LDGatherLogs.xml
     File ManagementSuite\Tools\LDSupportGatewayRC.xml
     File ManagementSuite\Tools\LocalSystemCommandPrompt.xml
     File ManagementSuite\Tools\Zenmap.xml
@@ -206,32 +209,66 @@ Section /o "Agent ini" SEC0005
     ExecWait '"$INSTDIR\CreateClientConfiguration.exe" /rebuild'
 SectionEnd
 
-Section /o "Core Token" SEC0006
+Section /o "Trusted Token" SEC0006
     SetOutPath $INSTDIR
     SetOverwrite on
     # Coredbutil.exe xml
     File ManagementSuite\Rhyous.xml
-    ExecWait '"$INSTDIR\CoreDbUtil.exe" /xml=filename.xml /buildcomponents'
+    ExecWait '"$INSTDIR\CoreDbUtil.exe" /xml=Rhyous.xml /buildcomponents'
+    
+    WriteRegStr HKLM "${REGKEY}\Components" "Trusted Token" 1
 SectionEnd
 
 # Macro for selecting uninstaller sections
 !macro SELECT_UNSECTION SECTION_NAME UNSECTION_ID
+    #MessageBox MB_OKCANCEL "${SECTION_NAME} ${UNSECTION_ID}"
     Push $R0
     ReadRegStr $R0 HKLM "${REGKEY}\Components" "${SECTION_NAME}"
+    #MessageBox MB_OKCANCEL "$R0"
     StrCmp $R0 1 0 next${UNSECTION_ID}
-    !insertmacro SelectSection "${UNSECTION_ID}"
+    !insertmacro SelectSection ${UNSECTION_ID}
     GoTo done${UNSECTION_ID}
+    
     next${UNSECTION_ID}:
-    !insertmacro UnselectSection "${UNSECTION_ID}"
+        #MessageBox MB_OKCANCEL "Next"
+        !insertmacro UnselectSection ${UNSECTION_ID}
+    
     done${UNSECTION_ID}:
-    Pop $R0
+        #MessageBox MB_OKCANCEL "Done"
+        Pop $R0
 !macroend
 
 # Uninstaller sections
-Section /o "-un.UDD Support Tools" UNSEC0003
-    Delete /REBOOTOK $INSTDIR\UDDCxExtender.xml
-    Delete /REBOOTOK $INSTDIR\UnmanagedToManaged.exe
-    DeleteRegValue HKLM "${REGKEY}\Components" "UDD Support Tools"
+Section /o -un.Main UNSEC0000
+    ;Don't delete GatherLogs.cfg
+    ;Delete /REBOOTOK $INSTDIR\Utilities\GatherLogs\GatherLogs.cfg
+    Delete /REBOOTOK $INSTDIR\SupportTools\README.txt
+    Delete /REBOOTOK $INSTDIR\SupportTools\LICENSE.txt
+    Delete /REBOOTOK  $INSTDIR\SupportTools\Images\Folder.png
+    Delete /REBOOTOK  $INSTDIR\SupportTools\Images\SupportTools.png
+    
+    RmDir /REBOOTOK $INSTDIR\SupportTools\Images
+    RmDir /REBOOTOK $INSTDIR\SupportTools
+
+    DeleteRegValue HKLM "${REGKEY}\Components" "Support Tools"
+    DeleteRegValue HKLM SOFTWARE\LANDesk\ManagementSuite\Setup\Version\Patches "LANDesk Support Tools"
+SectionEnd
+
+Section /o "-un.Support Tools" UNSEC0001
+    Delete /REBOOTOK $INSTDIR\Tools\Zenmap.xml
+    Delete /REBOOTOK $INSTDIR\Tools\LDValidate.xml
+    Delete /REBOOTOK $INSTDIR\Tools\LDSupportGatewayRC.xml
+    Delete /REBOOTOK $INSTDIR\Tools\LocalSystemCommandPrompt
+    Delete /REBOOTOK $INSTDIR\Tools\SupportToolsServiceManager.xml
+    Delete /REBOOTOK $INSTDIR\Tools\LDSelfServicePortal.xml
+    #Delete /REBOOTOK $INSTDIR\Tools\LDGatherLogs.xml
+    Delete /REBOOTOK $INSTDIR\Tools\LDDiscover.xml
+    Delete /REBOOTOK $INSTDIR\Tools\LDCommunity.xml
+    Delete /REBOOTOK $INSTDIR\Tools\ErrorTranslator.xml
+    #Delete /REBOOTOK $INSTDIR\Tools\DebugLogEnabler.xml
+    RmDir $INSTDIR\Tools
+    
+    DeleteRegValue HKLM "${REGKEY}\Components" "Support Tools"
 SectionEnd
 
 Section /o "-un.Device Support Tools" UNSEC0002
@@ -275,36 +312,10 @@ Section /o "-un.Device Support Tools" UNSEC0002
     DeleteRegValue HKLM "${REGKEY}\Components" "Device Support Tools"
 SectionEnd
 
-Section /o "-un.Support Tools" UNSEC0001
-    Delete /REBOOTOK $INSTDIR\Tools\Zenmap.xml
-    Delete /REBOOTOK $INSTDIR\Tools\LDValidate.xml
-    Delete /REBOOTOK $INSTDIR\Tools\LDSupportGatewayRC.xml
-    Delete /REBOOTOK $INSTDIR\Tools\LocalSystemCommandPrompt
-    Delete /REBOOTOK $INSTDIR\Tools\SupportToolsServiceManager.xml
-    Delete /REBOOTOK $INSTDIR\Tools\LDSelfServicePortal.xml
-    Delete /REBOOTOK $INSTDIR\Tools\LDGatherLogs.xml
-    Delete /REBOOTOK $INSTDIR\Tools\LDDiscover.xml
-    Delete /REBOOTOK $INSTDIR\Tools\LDCommunity.xml
-    Delete /REBOOTOK $INSTDIR\Tools\ErrorTranslator.xml
-    #Delete /REBOOTOK $INSTDIR\Tools\DebugLogEnabler.xml
-    RmDir $INSTDIR\Tools
-    
-    DeleteRegValue HKLM "${REGKEY}\Components" "Support Tools"
-SectionEnd
-
-Section /o -un.Main UNSEC0000
-    ;Don't delete GatherLogs.cfg
-    ;Delete /REBOOTOK $INSTDIR\Utilities\GatherLogs\GatherLogs.cfg
-    Delete /REBOOTOK $INSTDIR\SupportTools\README.txt
-    Delete /REBOOTOK $INSTDIR\SupportTools\LICENSE.txt
-    Delete /REBOOTOK  $INSTDIR\SupportTools\Images\Folder.png
-    Delete /REBOOTOK  $INSTDIR\SupportTools\Images\SupportTools.png
-    
-    RmDir /REBOOTOK $INSTDIR\SupportTools\Images
-    RmDir /REBOOTOK $INSTDIR\SupportTools
-
-    DeleteRegValue HKLM "${REGKEY}\Components" "Support Tools"
-    DeleteRegValue HKLM SOFTWARE\LANDesk\ManagementSuite\Setup\Version\Patches "LANDesk Support Tools"
+Section /o "-un.UDD Support Tools" UNSEC0003
+    Delete /REBOOTOK $INSTDIR\UDDCxExtender.xml
+    Delete /REBOOTOK $INSTDIR\UnmanagedToManaged.exe
+    DeleteRegValue HKLM "${REGKEY}\Components" "UDD Support Tools"
 SectionEnd
 
 Section -un.post UNSEC0004
@@ -322,22 +333,31 @@ Section -un.post UNSEC0005
     DeleteRegValue HKLM "SOFTWARE\LANDESK\ManagementSuite\Stamping\Files" "SupportTools"
 SectionEnd
 
-Section -un.post UNSEC0006
+Section /o "-un.Trusted Token" UNSEC0006
     Delete /REBOOTOK $INSTDIR\Rhyous.xml
+    DeleteRegValue HKLM "${REGKEY}\Components" "Trusted Token"
+    DeleteRegKey /IfEmpty HKLM "${REGKEY}\Components"
+    DeleteRegKey /IfEmpty HKLM "${REGKEY}"
 SectionEnd
-
 # Installer functions
 Function .onInit
     InitPluginsDir
     !insertmacro MUI_LANGDLL_DISPLAY
     SetRegView 64
     ReadRegStr $LDMAIN HKLM SOFTWARE\LANDesk\ManagementSuite\Setup "LDMainPath"
-    StrCmp $LDMAIN "" 0 defaultdir
+    ReadRegStr $ISCORE HKLM SOFTWARE\LANDesk\LANDeskSoftware\Features "Core"
+    ReadRegStr $ISCONSOLE HKLM SOFTWARE\LANDesk\LANDeskSoftware\Features "Console"
+    ReadRegStr $TOKENINSTALLED HKLM "SOFTWARE\Support Tools for LDMS\Components" "Trusted Token"
+    StrCmp $ISCORE "1" ISCORE
+    StrCmp $ISCONSOLE "1" defaultdir
         MessageBox MB_YESNO $(NoCoreConsole) /SD IDYES IDNO donotinstall
             StrCpy $LDMAIN "$PROGRAMFILES64\LANDesk\Managementsuite"
             Goto next
         donotinstall:
             Quit
+        ISCORE:
+            StrCmp $TOKENINSTALLED 1 defaultdir
+            !insertmacro SelectSection ${SEC0006} 
         defaultdir:
             StrCpy $LDMAIN "$LDMAIN" -1
     next:
@@ -371,7 +391,10 @@ FunctionEnd
 
 # Uninstaller functions
 Function un.onInit
+    #MessageBox MB_OKCANCEL "Starting Uninstall"
+    SetRegView 64
     ReadRegStr $INSTDIR HKLM "${REGKEY}" Path
+    #MessageBox MB_OKCANCEL $INSTDIR
     StrCmp $INSTDIR "" 0 +2
         StrCpy $INSTDIR  $EXEPATH
     !insertmacro MUI_UNGETLANGUAGE
@@ -379,6 +402,7 @@ Function un.onInit
     !insertmacro SELECT_UNSECTION "Support Tools" ${UNSEC0001}
     !insertmacro SELECT_UNSECTION "Device Support Tools" ${UNSEC0002}
     !insertmacro SELECT_UNSECTION "UDD Support Tools" ${UNSEC0003}
+    !insertmacro SELECT_UNSECTION "Trusted Token" ${UNSEC0006}
 FunctionEnd
 
 # Section Descriptions
