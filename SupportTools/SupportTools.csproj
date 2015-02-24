@@ -111,15 +111,12 @@
   <ItemGroup>
     <Reference Include="Interop.IDALLib">
       <HintPath>..\Dependencies\Interop.IDALLib.dll</HintPath>
+      <HintPath>$(LDMS_HOME)\Interop.IDALLib.dll</HintPath>
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
     <Reference Include="LANDesk.ManagementSuite.Database">
       <HintPath>$(LDMS_HOME)\LANDesk.ManagementSuite.Database.dll</HintPath>
       <HintPath>..\Dependencies\LANDesk.ManagementSuite.Database.dll</HintPath>
-    </Reference>
-    <Reference Include="LANDesk.ManagementSuite.RBA">
-      <HintPath>$(LDMS_HOME)\LANDesk.ManagementSuite.RBA.dll</HintPath>
-      <HintPath>..\Dependencies\LANDesk.ManagementSuite.RBA.dll</HintPath>
     </Reference>
     <Reference Include="LANDesk.ManagementSuite.WinConsole">
       <HintPath>$(LDMS_HOME)\LANDesk.ManagementSuite.WinConsole.dll</HintPath>
@@ -132,14 +129,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml.Linq">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Data.DataSetExtensions">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
     <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
     <Reference Include="UserManagement.Business, Version=9.0.2.84, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>$(LDMS_HOME)\UserManagement.Business.dll</HintPath>
