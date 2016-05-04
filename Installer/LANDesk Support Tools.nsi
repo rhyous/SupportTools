@@ -139,6 +139,7 @@ Section "Device Support Tools" SEC0002
     File ManagementSuite\SupportTools\ssh.exe
     File ManagementSuite\SupportTools\who.vbs
     File ManagementSuite\SupportTools\winscp.exe
+    File ManagementSuite\SupportTools\winscp.ini
     
     # Dlls
     File ManagementSuite\SupportTools\AspectMVVM.dll
@@ -294,6 +295,7 @@ Section /o "-un.Device Support Tools" UNSEC0002
     Delete /REBOOTOK $INSTDIR\SupportTools\ssh.exe
     Delete /REBOOTOK $INSTDIR\SupportTools\who.vbs
     Delete /REBOOTOK $INSTDIR\SupportTools\winscp.exe
+    Delete /REBOOTOK $INSTDIR\SupportTools\winscp.ini
     # Dlls
     
     # Dlls
