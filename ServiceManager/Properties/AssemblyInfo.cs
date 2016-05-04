@@ -50,8 +50,8 @@ using System.Windows;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("9.6.1.2")]
-[assembly: AssemblyFileVersion("9.6.1.2")]
+[assembly: AssemblyVersion("10.0.0.1")]
+[assembly: AssemblyFileVersion("10.0.0.1")]
 
 [assembly: InternalsVisibleTo("AspectMVVM,PublicKey=" +
                               "002400000480000094000000060200000024000052534131000400000100010009321c9dc95531" +

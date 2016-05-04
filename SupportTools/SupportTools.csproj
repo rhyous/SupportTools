@@ -118,6 +118,9 @@
       <HintPath>$(LDMS_HOME)\LANDesk.ManagementSuite.Database.dll</HintPath>
       <HintPath>..\Dependencies\LANDesk.ManagementSuite.Database.dll</HintPath>
     </Reference>
+    <Reference Include="LANDesk.ManagementSuite.StyledForm">
+      <HintPath>..\Dependencies\LANDesk.ManagementSuite.StyledForm.dll</HintPath>
+    </Reference>
     <Reference Include="LANDesk.ManagementSuite.WinConsole">
       <HintPath>$(LDMS_HOME)\LANDesk.ManagementSuite.WinConsole.dll</HintPath>
       <HintPath>..\Dependencies\LANDesk.ManagementSuite.WinConsole.dll</HintPath>
@@ -139,6 +142,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>$(LDMS_HOME)\UserManagement.Common.dll</HintPath>
       <HintPath>..\Dependencies\UserManagement.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="VIBlend.WinForms.Controls">
+      <HintPath>..\Dependencies\VIBlend.WinForms.Controls.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
