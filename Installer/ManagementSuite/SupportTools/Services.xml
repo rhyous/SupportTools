@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ServiceStore Name="LANDesk and Related Services">
+    <Services>
+        <Service>
+            <ServiceName>Agent_Portal</ServiceName>
+        </Service>
+        <Service>
+            <ServiceName>ApmTcs</ServiceName>
+        </Service>
+        <Service>
+            <ServiceName>ASFProxyService</ServiceName>
+        </Service>
+        <Service>
+            <ServiceName>CBA8</ServiceName>
+        </Service>
+        <Service>
+            <ServiceName>CBA8Alert</ServiceName>
+        </Service>
+        <Service>
+            <ServiceName>CMPPortalService</ServiceName>
+        </Service>
+        <Service>
+            <ServiceName>CoreSyncService</ServiceName>
+        </Service>
+        <Service>
+            <ServiceName>Intel PDS</ServiceName>
+        </Service>
+        <Service>
+            <ServiceName>Intel Scheduler</ServiceName>
+        </Service>
+        <Service>
+            <ServiceName>IPMI_Redirection</ServiceName>
+        </Service>
+        <Service>
+            <ServiceName>LANDesk Inventory Server</ServiceName>
+        </Service>
+        <Service>
+            <ServiceName>LANDesk InventorySync Service</ServiceName>
+        </Service>
+        <Service>
+            <ServiceName>LANDesk(r) Usage Service</ServiceName>
+        </Service>
+        <Service>
+            <ServiceName>LDCsaSocksSvc</ServiceName>
+        </Service>
+        <Service>
+            <ServiceName>LDGSB</ServiceName>
+        </Service>
+        <Service>
+            <ServiceName>LSM_SNMP</ServiceName>
+        </Service>
+        <Service>
+            <ServiceName>Managed Planet Barcode Core</ServiceName>
+        </Service>
+        <Service>
+            <ServiceName>Managed Planet Discovery Core</ServiceName>
+        </Service>
+        <Service>
+            <ServiceName>Managed Planet Rapid Deployment</ServiceName>
+        </Service>
+        <Service>
+            <ServiceName>Managed Planet Software Manager</ServiceName>
+        </Service>
+        <Service>
+            <ServiceName>MobilityCommandsService</ServiceName>
+        </Service>
+        <Service>
+            <ServiceName>MPCore</ServiceName>
+        </Service>
+        <Service><!-- SQL Express installed by LDMS -->
+            <ServiceName>MSSQL$LDMSDATA</ServiceName>
+        </Service>
+        <Service><!-- Standard SQL Server -->
+            <ServiceName>MSSQLSERVER</ServiceName>
+        </Service>
+        <Service>
+            <ServiceName>SQLBrowser</ServiceName>
+        </Service>
+        <Service>
+            <ServiceName>SQLSERVERAGENT</ServiceName>
+        </Service>
+        <Service>
+            <ServiceName>SQLWriter</ServiceName>
+        </Service>
+        <Service><-- IIS -->
+            <ServiceName>W3SVC</ServiceName>
+        </Service>
+    </Services>
+</ServiceStore>
