@@ -82,7 +82,7 @@
         <Service>
             <ServiceName>SQLWriter</ServiceName>
         </Service>
-        <Service>
+        <Service><-- IIS -->
             <ServiceName>W3SVC</ServiceName>
         </Service>
     </Services>
