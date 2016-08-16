@@ -86,6 +86,9 @@
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>..\Key\Rhyous.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>Always</RunPostBuildEvent>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Net" />
@@ -151,7 +154,10 @@
     </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>copy /Y "$(TargetPath)" "$(SolutionDir)Installer\ManagementSuite\LDLogon\SupportTools"</PostBuildEvent>
+    <PostBuildEvent>SET copyToDir="$(SolutionDir)Installer\ManagementSuite\LDLogon\SupportTools"
+ECHO %25copyToDir%25
+IF NOT EXIST %25copyToDir%25 MKDIR %25copyToDir%25
+copy /Y "$(TargetPath)" %25copyToDir%25</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
