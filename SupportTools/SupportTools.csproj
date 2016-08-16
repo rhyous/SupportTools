@@ -111,7 +111,7 @@
   <ItemGroup>
     <Reference Include="Interop.IDALLib">
       <HintPath>..\Dependencies\Interop.IDALLib.dll</HintPath>
-      <HintPath>$(LDMS_HOME)\Interop.IDALLib.dll</HintPath>
+      <HintPath>..\Dependencies\Interop.IDALLib.dll</HintPath>
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
     <Reference Include="LANDesk.ManagementSuite.Database">
